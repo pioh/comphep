@@ -1,0 +1,15 @@
+2 10 60
+   The Breit-Wigner propagator is used for the s-channel 
+virtual particles. The next level menu defines the
+prescription for substitution of the Breit-Wigner
+propagator to the amplitude. The 'fixed width' or 'running
+width' prescriptions generally speaking do not respect the 
+U(1) gauge invariance of the amplitude ('Gauge invariance OFF')
+for some classes of processes (e.g. the reactions with the
+t-channel photon exchange). Their implementation can result
+in a nonunitary energy behaviour of the cross section. 
+The 'overall' prescription respects the U(1) gauge invariance 
+('gauge invariance ON') but suppresses the amplitude in the 
+vicinity of p^2=m^2.
+   See the Manual for details.
+

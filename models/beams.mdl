@@ -1,0 +1,26 @@
+
+ Beams 
+ Name     |> Mass    <|> Content                <|> Structure Functions              <|
+p1        |0.938      |u,d,U,D,G                 |PDF:cteq6l1(proton):4:58             
+P1        |0.938      |u,d,U,D,G                 |PDF:cteq6l1(anti-proton):4:58        
+p         |0.938      |u,d,U,D,s,c,S,C,G         |PDF:cteq6l1(proton):4:58             
+P         |0.938      |u,d,U,D,s,c,S,C,G         |PDF:cteq6l1(anti-proton):4:58        
+pb        |0.938      |u,d,U,D,s,c,S,C,b,B,G     |PDF:cteq6l1(proton):4:58             
+Pb        |0.938      |u,d,U,D,s,c,S,C,b,B,G     |PDF:cteq6l1(anti-proton):4:58        
+ph        |0.938      |u#,d#,U#,D#,G             |PDF:cteq6l1(proton):4:58             
+Ph        |0.938      |u#,d#,U#,D#,G             |PDF:cteq6l1(anti-proton):4:58        
+pbh       |0.938      |u#,d#,U#,D#,b,B,G         |PDF:cteq6l1(proton):4:58             
+Pbh       |0.938      |u#,d#,U#,D#,b,B,G         |PDF:cteq6l1(anti-proton):4:58        
+pq        |0.938      |q#,Q#,G                   |PDF:cteq6l1(proton):4:58             
+Pq        |0.938      |q#,Q#,G                   |PDF:cteq6l1(anti-proton):4:58        
+ebeam     |0.000511   |e                         |ISR(100 Beamstr.:OFF)                
+Ebeam     |0.000511   |E                         |ISR(100 Beamstr.:OFF)                
+gamL      |0.0        |A                         |Laser photons                        
+gamE      |0.0        |A                         |WWA (m=0.000511 Ch=-1 Q=100)         
+p1-noPDF  |0.938      |u,d,U,D,G                 |OFF                                  
+p-noPDF   |0.938      |u,d,U,D,s,c,S,C,G         |OFF                                  
+pb-noPDF  |0.938      |u,d,U,D,s,c,S,C,b,B,G     |OFF                                  
+ph-noPDF  |0.938      |u#,d#,U#,D#,G             |OFF                                  
+phb-noPDF |0.938      |u#,d#,U#,D#,b,B,G         |OFF                                  
+pq-noPDF  |0.938      |q#,Q#,G                   |OFF                                  
+=======================================================================================

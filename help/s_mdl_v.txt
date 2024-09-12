@@ -1,0 +1,15 @@
+2 2 50 10 Edit Model
+ Information about the model is stored in four
+files:
+1. The Parameters file is a list  of independent
+parameters used in the model.
+2. The Constraints file describes the parameters,
+which are expressed from other ones.
+3. The Particles file contains the table of
+particles and description of their properties.
+4. The Lagrangian file is a list of vertexes of
+interactions.
+
+ Select a menu function to view the corresponding
+file. Changes are forbidden in this program
+point.

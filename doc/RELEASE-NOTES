@@ -1,0 +1,173 @@
+#-------------------------------------------------
+# Copyright (C) 2007-2009, CompHEP Collaboration
+#------------------------------------------------------
+
+
+                        CompHEP-4.5.0 Release Notes
+
+************************************************************************
+                         ATTENTION!
+
+1. The version 4.4.90 and later has some incompatibilities with previous one!
+2. THIS VERSION IS INTENDED FOR TESTS ONLY!!!
+************************************************************************
+
+This document describes changes made on all versions starting from 4.4.0
+
+Changes v.4.4.3 -> v.4.4.90
+============================
+1.  A new version of the numerical batch script num_batch.pl
+    Now it is the main tool to perform calculations with several subprocesses/
+    The sciprt has comprehencive build-in help (./num_batch.pl --help)
+2.  Two bugs in output (event files) have been fixed.
+3.  Two bugs in generation of session.dat with s_comphep have been fixed.
+4.  A new version of the program mk_tab. Now it can process event files 
+    with several subprocesses in both new and old format.
+5.  All PDFs in the beam/strfun tables have prefix PDF (or LHA, if LHAPDF 
+    is interfaced)
+6.  Diagram viewing is available in n_comphep (a new option in the main menu)
+7.  Re-arranged menu "Initial State". Beam particle and PDF are separated.
+8.  The LHA event file format has been added, still with no extra HepML tags.
+9.  Now CompHEP is compatible with gcc-4.x
+10. CompHEP can be compiled in two different modes: with OR without LHAPDF.
+11. Several options to ./configure have been added: 
+    --with-gcc4, --with-lhapdf, --debug, --help
+12. New NUM_BATCH-HOWTO
+13. LHAPDF_in_CompHEP-HOWTO
+
+
+Changes v.4.4.2 -> v.4.4.3
+============================
+1. Remove bug of the REDUCE program generator.
+
+
+Changes v.4.4.0 -> v.4.4.2
+============================
+
+Content
+========
+
+1. Incompatibilities
+2. Fixed bugs and clean up code.
+3. Documentation and help files
+4. Interface
+5. Source structure
+6. Miscellaneous
+
+1. Incompatibilities
+---------------------------------
+
+NO
+
+
+2. Fixed bugs and clean up code.
+---------------------------------
+
+c,C->m,M subprocess with PDF: calculation of cross section was improved.
+Some minor bugs were fixed.
+
+
+3. Documentation and help files
+---------------------------------
+
+Some misprints in help files.
+
+
+4. Interface
+---------------------------------
+
+NO
+
+5. Source structure
+---------------------------------
+
+NO
+
+6. Miscellaneous
+---------------------------------
+
+Next stable version of CompHEP will be 4.6.0
+
+
+
+Changes v.4.2.1 -> v.4.4.0
+============================
+
+
+Content
+========
+
+1. Incompatibilities
+2. Fixed bugs and clean up code.
+3. Documentation and help files
+4. Interface
+5. Source structure
+6. Miscellaneous
+
+
+1. Incompatibilities
+----------------------
+
+New scheme of work with initial beams and final composite particles was 
+changed.
+
+If you have a private model and want to use them with CompHEP-4.4.0, you 
+have to copy cpart1.mdl file to cpartN.mdl file where N is a number of 
+your model by commands:
+
+   cd path_to_user_working_directory/model
+   cp cpart1.mdl cpartN.mdl
+
+All new composite particles must be introduce into table by using edit model 
+facilities.
+
+
+2. Fix the bugs and clean up code.
+-----------------------------------
+
+2.1. Compilation bug when CERN libraries do not available
+2.2. Make randomization of momenta of 2 last particles in event file.
+2.3. QCD lambda are taken from PDF now.
+
+
+3. Documentation and help files
+--------------------------------
+
+3.1. SYMB_BATCH-HOWTO
+3.2. NUM_BATCH-HOWTO
+3.3. Help for beam table (s_beam_1.txt)
+3.4. Help for structure function table (s_strfn_1.txt)
+
+
+4. Interface
+-------------
+
+Symbolic part
+        Add table for initial beam (proton, anti-proton, ...)
+        Introduce switch F3 from beams to particles and vs.
+        Change composite particle table (see [1])
+        Introduce switch F3 from composite particles to particles and vs.
+        Symbolic conservation law is off by default.
+        LOCK file is restored.
+        Maximum sum of output and input particles (MAXINOUT) is 10 by default.
+
+Numerical part
+        re-arrange menu "Width scheme"
+        Change "Equiv.Photon(...)" to WWA
+
+Common
+        Re-arrangement of usage of messages and warnings.
+
+
+
+5. Source structure
+--------------------
+
+5.1. All CompHEP libraries were collected into lib subdirectory
+5.2. CompHEP PDF file standard description move to tbl-pdf directory
+5.3. Files drandXX.[ch] move to service2 subdirectory
+
+
+
+6. Miscellaneous
+----------------

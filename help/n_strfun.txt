@@ -1,0 +1,14 @@
+3 11 74
+   The following distributions are available:
+   CTEQ4m, MRS(A'), MRS(G) parton distribution functions for the 
+proton/antiproton,
+   'Laser photons' for the spectrum of hard photons scattered backward
+in the collision of laser beam with the high energy electron beam,
+   'Equiv.photons' for the spectrum of soft photons emitted by the initial 
+monochromatic electron/positron at a small angle,  
+   'ISR' for the effective spectrum of electron/positron after energy 
+losses due to the multiple soft photon radiation from the initial state 
+(resumed) and radiation in the electromagnetic field of the other 
+positron/electron bunch.
+    See the Manual for details. 
+

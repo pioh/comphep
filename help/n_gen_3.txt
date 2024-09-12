@@ -1,0 +1,5 @@
+1 12 51 3
+  Initiates the program of event generation.
+  Generated events will be stored in the
+  "event_N.txt" file, where N is the current
+  session number.

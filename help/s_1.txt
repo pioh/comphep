@@ -1,0 +1,14 @@
+ 1 4 51   Model menu  
+   This is a list of available physical models.
+Select a model for further work.
+   The 'QED', '4-fermion' and 'Standard Model' are 
+built-in models. The Standard Model is available in 
+two gauges, the unitary (physical) gauge and the 
+'t Hooft-Feynman gauge. We recommend to use the 
+'t Hooft-Feynman gauge for complicated calculations.
+   New models can be created with the help of the 
+"CREATE NEW MODEL" menu function. The first character 
+of the new model name is always the underscore symbol '_'.
+  The user has a possibility to change the contents of
+any model. The original version of any built-in model
+can be restored.

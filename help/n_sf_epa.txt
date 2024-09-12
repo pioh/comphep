@@ -1,0 +1,11 @@
+1 6 35
+  The Weizsacker-Williams approximation can be used
+for the electroproduction processes. In this 
+approximation the electroproduction cross section 
+is reduced to the convolution of photoproduction 
+cross section with the equivalent photon spectrum. 
+The spectrum depends on the photon momentum scale 
+Q^2, inherent to the process under consideration.
+
+
+

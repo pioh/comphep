@@ -1,0 +1,173 @@
+############################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration            
+# Author: A. Sherstnev                                      
+############################################################
+.PHONY: all link clean man safeman
+
+CHEP=$(shell cat ../.compheppath)
+CC=$(shell cat $(CHEP)/CC)
+CFLAGS=$(shell cat $(CHEP)/CFLAGS)
+CLIBS=$(shell cat $(CHEP)/CLIBS)
+RANLIB=$(shell cat $(CHEP)/RANLIB)
+F77LIBS=$(shell cat $(CHEP)/F77LIBS)
+OCLK=../oneclickcode
+INS:=-I$(CHEP)/include
+
+F_TARGET=
+F_OBJ=
+D_TARGET=
+D_OBJ=
+have_a = $(wildcard ffile_*)
+have_d = $(wildcard d*.c)
+have_f = $(wildcard f_0.a)
+ifneq ($(strip $(have_a)),) 
+F_TARGET=$(shell cat ffile_0)
+F_OBJ=$(subst .c,.o,$(F_TARGET))
+endif
+ifneq ($(strip $(have_d)),) 
+D_TARGET=$(shell ls d*.c)
+D_OBJ=$(subst .c,.o,$(D_TARGET))
+endif
+
+cobjects=$(F_OBJ) $(D_OBJ) sqme.o service.o
+
+link:
+	@if (test ! -f f_0.a); then \
+	  echo "\nError: the main library f_0.a does not exist";\
+	  echo "       create it with 'make man' or 'make safeman'\n";\
+	  exit 10;\
+	fi
+	rm -f ffile_*
+	@$(RANLIB) f_0.a
+	@make -C ../usr
+	$(CC) $(CFLAGS) -o n_comphep.exe $(CHEP)/src/num/n_comphep.o \
+	../usr/userFun.o -lnum -levents -lpdf -lsymb -lserv f_*.a -lmssm -lexternal $(CLIBS) -L$(CHEP)/lib $(F77LIBS)
+
+ifneq ($(strip $(have_f)),) 
+all: makemodeltmp link
+	@echo "Numerical CompHEP has been created!"
+else
+all: 
+	@echo "\nERROR! There is no f_0.a library"
+	@echo "Generate code in CompHEP GUI or create the library with 'make man'\n"
+endif
+
+man: checkmodeltmp keep_ffiles ffiles d_compile makemodeltmp link
+	@echo "Numerical CompHEP has been created"
+
+safeman: keep_ffiles ffiles d_compile link
+	@echo "Numerical CompHEP has been created"
+
+binclean:
+	@rm -f f_0.a n_comphep.exe
+	@tar xf diags.tar
+	@tar xf other_codes.tar
+	@rm -f diags.tar other_codes.tar
+
+clean:
+	@mv Makefile  .Makefile
+	@mv n_comphep .n_comphep
+	@mv diag_view .diag_view
+	@rm -fr *
+	@mv .Makefile  Makefile
+	@mv .n_comphep n_comphep
+	@mv .diag_view diag_view
+
+#############################################################################################################
+.PHONY: checkmodeltmp makemodeltmp safemakemodeltmp f_compile d_compile ffiles man_f_compile
+
+checkmodeltmp:
+	@if (test -d tmp || test -d models); then \
+	  echo "\n**************************************************************";\
+	  echo " The directories tmp and models exists";\
+	  echo " If you do want to keep them use make safeman"; \
+	  echo " Press [Enter] to continue or ^C to stop"; \
+	  echo "**************************************************************";\
+	  read stdin; \
+	fi
+
+makemodeltmp:
+	@if (test -d tmp); then rm -r tmp; fi
+	@if (test -d models); then rm -r models; fi
+	@cp -rf ../models .
+	@cp -rf ../tmp .
+
+safemakemodeltmp:
+	@if (test ! -d tmp); then cp -rf ../models .; fi
+	@if (test ! -d models); then cp -rf ../tmp .; fi
+
+keep_ffiles:
+	@tar r -f diags.tar ffile_*
+
+f_compile:
+	@tar r --remove-files -f diags.tar $(F_TARGET)
+	@$(AR) -r f_0.a $(F_OBJ)
+	@rm -f $(F_OBJ)
+
+d_compile: sqme.o service.o $(D_OBJ)
+	@tar r --remove-files -f other_codes.tar $(D_TARGET) sqme.c service.c extern.h
+	@$(AR) -r f_0.a $(D_OBJ) sqme.o service.o
+	@rm -f sqme.o service.o $(D_OBJ)
+
+ffiles:
+	@make man_f_compile
+	@rm -f ffile_0
+	@for x in `ls ffile_*`; do mv -f $$x ffile_0; make man_f_compile; done
+	@if [ -x diags.tar ]; then gzip diags.tar; fi
+
+man_f_compile: $(F_OBJ)
+	@echo $(F_OBJ)
+	@tar r --remove-files -f diags.tar $(F_TARGET)
+	@$(AR) -r f_0.a $(F_OBJ)
+	@rm -f $(F_OBJ)
+
+#############################################################################################################
+.PHONY: oneclick
+
+oneclick: makemodeltmp
+	@if (test -d $(OCLK)); then \
+	  rm -rf $(OCLK); \
+	fi
+	mkdir $(OCLK)
+	@cp $(CHEP)/usr/num_batch.pl  $(OCLK)/.
+	@cp $(CHEP)/usr/oneclick/Makefile  $(OCLK)/.
+	@cp $(CHEP)/usr/oneclick/oneclick  $(OCLK)/.
+	@cp $(CHEP)/usr/oneclick/configure $(OCLK)/.
+	@chmod 744 $(OCLK)/num_batch.pl
+	@chmod 744 $(OCLK)/oneclick
+	@chmod 744 $(OCLK)/configure
+
+	mkdir $(OCLK)/chepcode
+	mkdir $(OCLK)/chepcode/bin
+	mkdir $(OCLK)/chepcode/lib
+	@cp    $(CHEP)/Makefile     $(OCLK)/chepcode/.
+	@cp    $(CHEP)/icon         $(OCLK)/chepcode/.
+	@cp    $(CHEP)/comphep*.png $(OCLK)/chepcode/.
+	@cp -r $(CHEP)/external     $(OCLK)/chepcode/.
+	@cp -r $(CHEP)/include      $(OCLK)/chepcode/.
+	@cp -r $(CHEP)/src          $(OCLK)/chepcode/.
+	@cp -r $(CHEP)/help         $(OCLK)/chepcode/.
+	@cp -r $(CHEP)/strfun       $(OCLK)/chepcode/.
+	@cp -r $(CHEP)/usr          $(OCLK)/chepcode/.
+	@make -C $(OCLK)/chepcode totclean
+
+	mkdir $(OCLK)/gencode
+	@tar cjvf $(OCLK)/gencode/other_codes.tar.bz2 d*.c service.c sqme.c extern.h
+	@tar cjvf $(OCLK)/gencode/ffiles.tar.bz2 ffile_*
+	@tar cjvf $(OCLK)/gencode/diags.tar.bz2 f*.c
+	@cp $(CHEP)/usr/oneclick/Makefile.gencode  $(OCLK)/gencode/Makefile
+
+	mkdir $(OCLK)/usercode
+	@cp $(CHEP)/usr/oneclick/Makefile.usercode $(OCLK)/usercode/Makefile
+	@cp $(CHEP)/usr/userFun.* $(OCLK)/usercode/.
+
+	mkdir $(OCLK)/results
+	@cp -r models $(OCLK)/results/.
+	@cp -r tmp $(OCLK)/results/.
+
+	@tar cjf $(OCLK).tar.bz2 $(OCLK)
+	@rm -rf *.c ffile_* extern.h
+
+#############################################################################################################
+$(cobjects): %.o: %.c
+	$(CC) -c $(CFLAGS) $(INS) $< -o $@

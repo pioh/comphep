@@ -1,0 +1,9 @@
+1 12 51 3
+ The factor of artificial increase of maxima. Ordinary
+maxima of functions in the sub-cubes are detected with
+errors. As a result multiple identical events appear. 
+The factor of artificial increase prevents identical
+events but from the other side decreases the efficiency
+of event generation.
+
+

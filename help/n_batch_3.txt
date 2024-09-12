@@ -1,0 +1,6 @@
+2 10 50
+  Ncall1 and Itmx1 are the number of integrand 
+calls for one iteration and number of iterations
+for the primary sequence of integrations. As a result
+the optimal grid for the following more precise 
+Monte Carlo integration should be found by VEGAS.

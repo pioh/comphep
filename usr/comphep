@@ -1,0 +1,27 @@
+#!/bin/sh
+###########################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration
+###########################################################
+export COMPHEP=`cat .compheppath`
+program=s_comphep.exe
+
+if [ x$1 = xDEBUG ]; then
+  DDD=ddd
+fi
+
+if(test -x $COMPHEP/bin/diag_viewer.exe) then
+while :
+do
+  ${DDD} $COMPHEP/bin/$program $*
+  case $? in
+    13) ;;
+    24) ${DDD} $COMPHEP/bin/$program -blind "]}}]]]}]}9"
+        break;;
+    *)
+      break
+  esac
+done
+else
+  echo "\n  $script (error): no file $COMPHEP/bin/$program. Compile CompHEP in $COMPHEP\n"
+  exit
+fi

@@ -1,0 +1,7 @@
+QED
+ Parameters 
+ Name | Value       |>  Comment                                   <|
+Me    |0.000511     |electron mass                                  
+Mm    |0.1057       |muon mass                                      
+EE    |0.30286      |Electromagnetic coupling constant (<-> 1/137)  
+====================================================================

@@ -1,0 +1,284 @@
+#------------------------------------------------------
+# Copyright (C) 2007-2009, CompHEP Collaboration
+#------------------------------------------------------
+
+
+/********************************************************************************************/
+1. Introduction.
+
+  Numerical batch mode is a useful tool to calculate cross sections and generate
+  events in tasks with the large number of subprocesses or where the large computer
+  resources are required. It helps to perform the large scale calculations, even
+  the calculations on MC farms (with the PBS and LSF batch systems).
+
+  At first, a user should prepare a numerical CompHEP program - event generator -
+  in graphical mode (see details in CompHEP manual). This script uses special
+  'blind' keys to launch the program in the batch regime. The numerical program
+  can also be prepared by the symb_batch.pl script.
+
+
+/********************************************************************************************/
+2. Configuration of calculation task.
+
+  At first, the generator should be configurated. All paramaters for the numerical
+  sessions are stored in the file batch.dat. It is formed from session.dat. So
+  the user should prepare session.dat with the generator GUI interface.
+
+  cd results
+  ./n_comphep
+
+  The users sets all required parameters (PDF, QCD scale, kinematical cuts,
+  regularizations, etc.) for the first process, check the vegas menu and close
+  the program. The session.dat will be created.
+
+  After that, the user runs the batch script with no options to create the configuration
+  file (results/batch.dat) with the same parameters for all subprocesses
+  as (s)he sets for the first one. The script should be run from the CompHEP
+  working directory (CWDIR):
+
+  ./num_batch.pl
+
+  By default, the directory 'results' will be used by this script to find and
+  run the generator n_comphep.exe. The user can change the default name by
+  the option -d {new_dir}. Use the option for all manipulation where you need
+  a reference to the n_comphep.exe, e.g.:
+
+  ./num_batch.pl -d new_dir
+
+  If you want to change parameters of a particular subprocess you can edit the
+  results/batch.dat file manually or use GUI: choose the required subprocess in
+  GUI,   change the parameters, check the vegas menu and return to the main GUI
+  menu   (this operation saves the parameters to session.dat). After that, the
+  script can insert the new parameters to the results/batch.dat file (add session.dat
+  to batch.dat) if you launch it with the command:
+
+  ./num_batch.pl --add
+
+
+/********************************************************************************************/
+3. Usage: 
+
+./num_batch.pl [-d dir] [-b file] [-run [vegas,max,evnt,cleanstat,cleangrid,clean]] [-proc N1,N2-N3,N4] [-nses N] [-old] [-ginv]
+./num_batch.pl [-d dir] [-b file] [--add [file]]
+./num_batch.pl [-d dir] [-b file] [-nevnt Nevents]
+./num_batch.pl [-d dir] [-b file] [-call Ncalls]
+./num_batch.pl [-d dir] [-b file] [-show [proc,inistat,params,cuts,regs,qcd,vegas,events,cs]]
+./num_batch.pl [-lcs [prt file names]]
+./num_batch.pl [-kfactor [factor] -files [event file names]]
+./num_batch.pl [-h] [--help]
+./num_batch.pl [-h] [--version|-v]
+
+/--------------------------------------------------------------------------------------------/
+/***                    Launch numerical CompHEP in batch (single machine)                ***/
+-run [vegas,max,evnt] - run vegas / maxima search / event generation,
+                        run all steps: -run with no options;
+-run [cleanstat,cleangrid,clean] - clean statistic / grid / clean both;
+-proc n1,n2-n3,n4...  - run calculation for these processes only;
+-nses n               - n is a number of the first session, it is
+                        calculated automatically by default;
+-ginv                 - gauge invariance ON (See CompHEP manual);
+-safe                 - prevent to launch n_comphep if it is locked by the LOCK file;
+-old                  - generate events in the old CompHEP format
+                        (compatible with cpyth-1.2.*);
+-d dir_name           - use the directory new_dir instead of results for calculations;
+-b file_name          - use the file file_name instead of batch.data for calculations;
+
+/--------------------------------------------------------------------------------------------/
+/***                        Batch system regime (computer farms)                          ***/
+-pbs [pbs prefix] (e.g. qsub)  - run calculations in parallel with PBS batch system;
+-lsf [lsf prefix] (e.g. bsub -I)  - run calculations in parallel with LSF batch system;
+-nocombine            - do not combine automatically the results of
+                       PBS (LSF) calculations from the temporary subdirectories
+                       it can be done with the -combine option later;
+-combine              - combine the results of previouse calculations from the
+                       temporary PBS directories (you need it only if you used
+                       -nocombine option before);
+
+/--------------------------------------------------------------------------------------------/
+/***                          Statistics and file manipulations                           ***/
+-show ...             - print different parts of batch file
+   [proc]             - subprocess list
+   [inistat]          - initial state: beams, sqrt(S), PDF (of each subprocess)
+   [params]           - print parameter list (for each subprocess)
+   [cuts]             - print cuts applied list (for each subprocess)
+   [regs]             - print regularization list (for each subprocess)
+   [qcd]              - print qcd information (for each subprocess)
+   [vegas]            - print vegas information (for each subprocess)
+   [events]           - print events information (for each subprocess)
+   [cs]               - print cross section of each subprocess and the full one;
+
+-lcs  LIST            - report all cross sections in the results from prt_* files,
+                        LIST is the list of prt files (e.g. prt_* or prt_1 prt_2 ...);
+--add [file]          - add parameters from exist session.dat
+                        file (or [file])  to batch.dat file in [dir]
+-kfactor {factor}     - change cross sections in event files, the event file
+                        names are set by the command -files
+-files {file_names}   - set event file names to change cross sections in the
+                        files (by an option -files)
+-nevnt Nevents        - set the full number of events. The script sets the number
+                        of event for each subprocess according to its contribution
+                        to the full cross section;
+-call Ncalls          - set a number of calls in vegas sesssions;
+
+/--------------------------------------------------------------------------------------------/
+/***                             Help and other options                                   ***/
+-h                    - print this message
+--help                - print the long help message
+--version|-v          - print version of the script
+
+
+/********************************************************************************************/
+3. How to start the calculations.
+
+  If the configuration process of the program has been finished you are ready
+  to start calculations. It can be done with the command -run:
+
+  ./num_batch.pl -run
+
+  with this command n_comphep.exe will calculate cross sections, find maxima
+  and generate events for all of the subprocesses.
+
+  The full process can be divided to separate steps:
+  ./num_batch.pl -run vegas   : calculation of cross sections
+  ./num_batch.pl -run max     : search for maxima
+  ./num_batch.pl -run evnt    : event generation, can be used fter vegas
+                    and max calculations only!
+
+  There are several additional options, useful in practical calculations:
+  ./num_batch.pl -run cleanstat   : clean the vegas statistic
+  ./num_batch.pl -run cleangrid   : clean the vegas grid
+  ./num_batch.pl -run clean       : clean the vegas grid and statistic
+
+  The option -proc allows a specific set of subprocesses be calculated.
+  For instance,
+
+  ./num_batch.pl -run -proc 1,3-5,17,2
+
+  means calculations for 1st, 3rd, 4th, 5th, 17th, 8th subprocesses,
+
+  CompHEP stores all session details in protocal files, prt_XYZ, where XYZ is
+  equal to the session number. By default, the number of a new session will be
+  XYZ+1, where XYZ is the last sesstion number. The user can change the behaviour
+  with the option -nses. E.g.
+
+  ./num_batch.pl -d new_dir -run vegas -proc 2-10,12 -nses 20
+
+  means calculations for the subprocesses 2-10,12 and the first session (for the
+  2nd subprocess) will have the number 20. n_comphep.exe located in the directory
+  new_dir will do thew calculations.
+
+  WARNING! if prt_20 exists already, n_comphep.exe will append the details of the
+  2th subprocess to the file, even the file corresponds to another subprocess.
+
+
+/********************************************************************************************/
+4. Parallel calculations. Calculations with LSF or PBS systems.
+
+  All of the commands described above provide the consecutive method of calculations
+  of subprocesses. But the user can organize parallel calculations of the subprocesses,
+  directly or running jobs in BATCH systems (LSF or PBS). There are two options
+  -lsf and -pbs with almost the same functionality, but used in different (LSF or
+  PBS) systems (different default prefixes and options).
+
+  ./num_batch.pl -run vegas -pbs
+
+  This command will create temporary subdirectories for each subprocess and run
+  the PBS batch job for each of subprocess with PBS command:
+  qsub -I run.sh
+
+  or for LSF system
+  ./num_batch.pl -run vegas -lsf
+  will submit
+  bsub -I run.sh
+
+  After the jobs completion the script will remove the temporary subdirectories
+  automatically and save the results in the usual manner.
+
+  If your PBS or LSF system does not provide you interactive option ( -I ) you
+  should add the -nocombine option.
+
+  ./num_batch.pl -run vegas -lsf  -nocombine
+
+  This command will submit the LSF jobs and exit immediately. When all of the
+  submitted jobs will be finished the user can combine results from the
+  temporary subdirectories by an additional command:
+
+  ./num_batch.pl -combine
+
+  If the user wants to change the default method to submit the jobs it is possible
+  to run something like:
+
+  ./num_batch.pl -run vegas -lsf 'bsub -I -q large -N -B -o log.out'
+
+  Interactive parallel calculations can be launched with the empty prefix of the
+  command:
+
+  ./num_batch.pl -run vegas -lsf ' '
+
+  In the case  will start calculations of the subprocesses in parallel and combine
+  the results at the end.
+
+  WARNING! The calculations with batch systems presume a direct access to
+  n_comphep.exe and the CompHEP installation area (to PDF tables). So, if your
+  computer farm nodes uses separate file systems, you have to edit the scripts
+  run.sh and add a code which will copy all necessary files (the subdirectory
+  and the PDF tables from the CompHEP area) to the farm nodes. Certainly, the
+  code should copy all results to the corresponding subdirectories.
+
+
+/********************************************************************************************/
+5. Presentation of results.
+
+  There are two special options to summarize information in batch.dat or
+  in protocol files.
+
+  The option -lcs prints the cross sections and statistical errors from the
+  protocol files. Examples of usage of the command:
+
+  ./num_batch.pl -lcs prt_1 prt_2 prt_5
+  ./num_batch.pl -lcs results/prt_*
+
+  The command -show prints separate parts of batch.dat. For example,
+  -show proc    : prints the full subprocess list,
+  -show inistat : prints initial states: beams, sqrt(S), PDF
+  -show params  : prints the list of physical parameters
+  -show cuts    : prints the cuts applied list
+  -show regs    : prints the regularization list
+  -show qcd     : prints qcd information
+  -show vegas   : prints vegas information
+  -show events  : prints events information
+  -show cs      : prints the the total one and cross sections of each subprocess
+
+  Examples:
+
+  ./num_batch.pl -show inistat
+  ./num_batch.pl -d new_dir -show cs
+
+
+/********************************************************************************************/
+6. Other manipulations in batch mode.
+
+  By default, CompHEP sets the numbers of events for the event generation equal each
+  other. Since subrpocesses have different cross sections, not all of the events will
+  be used after the generation. The command -nevnt sets the total number of events
+  for all subprocesses according to their contributions to the total cross section.
+  For example,
+
+  ./num_batch.pl -nevnt 100000
+
+  means the full number of events generated by n_comphep.exe in all event files will
+  be 100000. Since the further mixing of the event files is a statistical process,
+  the real number of events in the final file will be between 100000 - sqrt(100000)
+  and 100000.
+
+  The command -call changes the number of calls in vegas sesssions. Usage:
+
+  ./num_batch.pl -call 100000
+
+  The commands -kfactor and -files are useful if a user wants to change cross
+  sections of subprocesses in the event files prepared, so batch.dat is not changed.
+  Sometimes the option is needed. Usage:
+
+  ./num_batch.pl -kfactor 2.0 -files results/events_*
+
+  It means all cross section in the files (results/events_*) will be doubled.

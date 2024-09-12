@@ -1,0 +1,12 @@
+ 1 12 51 
+   Start the Monte Carlo integration.  The result of 
+integration is displayed on the screen.
+   The adaptive Monte Carlo integrator VEGAS will carry 
+out 'Itmx' iterations of integration improving Monte 
+Carlo grid after each iteration. See the 'Error' column 
+displayed on the screen. The grid optimization is
+successful if the 'Error' value does not increase 
+from iteration to iteration.
+   If the accumulated accuracy of the integration 
+is not sufficient, the user can continue calculation. 
+The old grid is used in a new integration session.

@@ -1,0 +1,9 @@
+3 15 75  Constraints                 
+  1. "Name" is an identifier of the variable. See the Help for the
+"Parameter" table for more detailed information.
+  2. "Expression" can be an algebraic formula, composed of integer
+numbers, identifiers described above in this table, identifiers enumerated
+in the "Parameters" table, parentheses '(',')', arithmetic operators
+'+'.'-','/','*','**' and the sqrt( ) function. For raising to a power 
+a^b the second operand must be an integer.
+3. 'Comment' is a brief parameter description.

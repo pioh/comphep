@@ -1,0 +1,47 @@
+#!/bin/sh
+###########################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration
+# Author: Alexander Sherstnev 
+###########################################################
+#export COMPHEP=`cat .compheppath`
+program=mk_tab.exe
+script=mk_tab.sh
+
+if (test -f .compheppath) then
+  export COMPHEP=`cat .compheppath`
+else if (test -f ../.compheppath) then
+  export COMPHEP=`cat ../.compheppath`
+else
+  echo "\n  $script (error): .compheppath is not found in ./ or ../. $program can't function\n"
+  exit
+fi
+fi
+
+if (test -z $1) then
+   echo "***********************************************"
+   echo "* INPUT ERROR: no input parameters            *"
+   echo "* execute:                                    *"
+   echo "*     ./$script --help                        *"
+   echo "***********************************************"
+   exit
+fi
+
+if (test -x usr/$program) then
+  if [ x$1 = xDEBUG ]; then
+    (export COMPHEP=$COMPHEP;ddd usr/$program)
+  else
+    usr/$program $*
+  fi
+else
+  make -C usr
+  if (test -x usr/$program) then
+    if [ x$1 = xDEBUG ]; then
+      (export COMPHEP=$COMPHEP;ddd usr/$program)
+    else
+      usr/$program $*
+    fi
+  else
+    echo "\n  $script (error): no file usr/$program. Execute make in usr\n"
+    exit
+  fi
+fi

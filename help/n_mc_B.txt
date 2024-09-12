@@ -1,0 +1,14 @@
+10 10 50
+
+ This is an entry to the next menu level which
+allows the user to set parameters of the Monte
+Carlo integrator VEGAS and to start it.
+  See $COMPHEP/MAN/vegas for general information
+about VEGAS and the following menu help messages
+for details.
+  After the VEGAS run the information about
+cross section is displayed on the screen and is
+written to the protocol file.
+  Functions of the next level menu allow the
+user to define the histograms for various 
+distributions and to display the corresponding plots.

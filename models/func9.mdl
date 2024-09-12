@@ -1,0 +1,6 @@
+_SM_ud
+ Constraints 
+ Name |> Expression                 <|> Comment                  <|
+CW    |sqrt(1-SW^ 2)                 | cos of the Weinberg angle   
+MW    |MZ*CW                         | W-boson  mass               
+===================================================================

@@ -1,0 +1,30 @@
+              Non-profit Use License Agreement 
+
+This Agreement is to be held between the Authors of the CompHEP
+program and a Party which acquires the program. On acquiring the
+program the Party agrees to be bound by terms of this Agreement.
+
+
+1. This License entitles the Licensee (one person) and the
+Licensee's research group to obtain a copy of the source or
+executable code of CompHEP and to use the acquired program for
+academic research or other non-profit purposes within the research
+group; or, it entitles the Licensee (a company, organization or
+computing center) to install the program and allow an access to the
+executable code to the members of the Licensee for academic research
+or other non-profit use. 
+2. No user or site will re-distribute the
+source code or executable code to a third party in the 
+modified form. Any re-distribution  must be accompanied with the 
+current license.
+3. Publications which result from using the program will contain
+references to the articles describing CompHEP. See the necessary
+references on the CompHEP Web  page: 
+    http://theory.npi.msu.su/~comphep
+4. This License does not permit any commercial (profit-making or
+proprietary) use or re-licensing or re-distributions. Persons
+interested in a for-profit use should contact the Authors.
+5. The Authors of CompHEP do not guarantee that the program is free
+of errors or meets its specification and cannot be held responsible
+for loss or consequential damage as a result of using it.
+

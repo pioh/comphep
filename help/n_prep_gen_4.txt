@@ -1,0 +1,5 @@
+1 12 51 3
+ Starts the procedure of local maxima search.
+The menu of event generator appears when the
+procedure is completed.
+

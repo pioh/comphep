@@ -1,0 +1,4 @@
+10 10 50 Plot
+ This menu function removes the current menu from
+the screen and redraws the plot using the new values 
+of Y_min, Y_max, Y_scale.

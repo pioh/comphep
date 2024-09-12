@@ -1,0 +1,21 @@
+:
+
+goToGen="]]]]]]]]]}]]]]]]]}"
+
+
+if( test -r session.dat) then
+   testStr=`grep Max: session.dat`
+fi 
+
+if(test "$testStr") then 
+  if(test $# -ne 1) then
+     echo ERROR!. $0 need one parameters:
+     echo "   number of events"
+     exit 1
+  else
+     n_comphep -blind $goToGen}$1}]]}{9
+  fi
+else 
+  echo " Generator is not prepared!" 
+  exit 1
+fi

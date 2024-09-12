@@ -1,0 +1,264 @@
+#-------------------------------------------------
+# Copyright (C) 2001-2009, CompHEP Collaboration
+#------------------------------------------------------
+
+   The CompHEP pdf file standard
+
+                      Abstract
+                      ~~~~~~~~
+
+CompHEP pdf file standard is designed  to obtain unique software
+realization  for  various  particle distribution functions.
+
+In the   current moment  a lot of functions which describe parton 
+distribution in hadrons are available and intensively used.
+ They was created  by  various  teams  and are  realized by means of 
+different software programs. In the same time almost all this programs
+use  common algorithm. Namely, they  interpolate
+data  stored   for some grid of function arguments in the file.
+
+  In the process of development of CompHEP package we 
+meet a challenge of providing the  user with a possibility  to operate with
+large number of  distribution functions. 
+After some experience of direct  embedding of ailing 
+codes in our software,  we had  recognized that the best way should 
+be a development  of one standard for pdf files and realization of
+unique program that  will perform  the  interpolation taking into account 
+some special features of partonic distribution functions.
+
+ We especially were compelled  do it, because numerical calculations
+in CompHEP are realized by means of C-software code, whereas 
+traditionally pdf-functions are presenter by means of Fortran routines.
+
+  This article contains description of our standard
+and description of Fortran and C-routines designed by our group 
+to provide work with such files.  Programs are distributed 
+according to GNU General Public License (so-called copyleft).
+
+    
+   Comments to the existent pdf programs and  date files.
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Generally  distribution function depends on two arguments, Feynman parameter
+x and energy scale Q.
+x is unitless and run in  [0,1] interval. Traditionally  Q is
+presented in GeV unit.    Generally, distribution  functions are
+obtained by fitting of experimental data.  It
+leads to limits for small  values of x and for large values of Q  where
+function  is valid.  Also there is limit about  1 GeV on
+small Q values. Below  this limit the perturbative QCD theory,
+which  is a basement of structure function
+approach in particle physics,  does not valid.
+ The authors of particle distribution functions pay attention of
+user that they are not responsible for   extrapolation  of
+functions outside these limits.
+
+  Q parameter is changed on large interval, starting a value
+about 1 GeV  up to a typical hight limit about 10^4 GeV.
+QCD -motivated dependence on this parameter is a polynomial function
+of log(Q). So a polynomial interpolation  for data on log(Q) grid
+is used.
+
+  x parameter  dependence has some features at the ends
+of interval. Ordinary we expect x^(-1) behavior at small x
+and (1-x)^n near x=1. Some authors ignore it and
+use a  grid that contains enough  points
+near x=0 and x=1 for good interpolation.  Other authors apply the 
+interpolation procedure to   function  that previously  divided on these 
+factors and restore factors  after  interpolation.  In the last case 
+the size of data file may be reduced twice.
+
+Ordinary  the polynomials of small power (one or two) are used
+for interpolation. 
+
+The correct usage of pdf  must be accompanied by the same   
+formula  of  strong coupling constant alpha(Q) evaluation, 
+that  was used in the process  of search of distribution  functions.
+Although the alpha(s) dependence is presented by simple 
+analytic formula, we   propose to include data for  this function
+into the the pdf file as a table. It allows to realize some general approach 
+to mutual evaluation of distribution function and alpha(Q).
+
+           CompHEP structure of pdf data file.
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CompHEP pdf file contains several items of information,
+Each item is started by a keyword. Numerical data following
+a keyword must be separated by white-space characters, 
+for example by   space, tab, or the new line symbol. 
+The number of such symbols 
+is not essential. The keyword and the following data must be separated by 
+a white-space symbols too.
+We start any  keyword  from the '#' symbol. 
+
+The keywords are 
+
+a) #x-grid       
+
+After this word the file  has contain a sequence of numbers which 
+specify the grid for the x variable.
+ The number of points has exceed 2. Data must increase from point to point.
+The data for the x-grid are finished by the first word in the file 
+which can not be interpreted as a number. 
+
+b) #q-grid  
+
+Specifies the beginning of data for Q grid. The data must be positive  
+to provide the further  transition to the logarithmic scale.
+The  requirements formulated  for the x grid also  are valid here.
+This item is optional. Generally we can consider distribution functions which
+ do not  depend on the Q parameter. Artificial Q grid is not need in this case.
+
+c) #x-min
+   #x-max
+   #q-min
+   #q-max
+These keywords are used to specify the minimum and maximum boundaries 
+of  'x' and 'q' intervals,  where  results of interpolation should be correct.
+An  appearance of one corresponding number after each of these keywords
+is expected. These keywords are optional. If one of them is  absent then the 
+first and the last points of 
+the corresponding grid  are used to specify the boundaries. When  argument of 
+particle  distribution function is out of the range the corresponding warning
+is written into stderr device. 
+
+
+
+d) #alpha 
+
+This keywords starts a data for alpha(Q) for the Q  
+grid points.  This item must contain just the same number of points as
+Q parameter grid.  This item can not precede   the #q-grid one.  
+The item is optional.
+
+e)  #1-parton
+    #2-parton
+     ......
+
+Keywords  of this type  mark the beginning of data for  distributions.
+They can not precede #x-grid and #q-grid items because the power 
+of data for  such item   must be in the strong correspondence with 
+the powers of x-grid and q-grid. In the beginning one  have to write all  
+data corresponding  to
+the smallest Q value. After that data for the second point of Q grid 
+must be presented. By other words,  parton distribution  data must be 
+present by a two  dimension array of 
+x-grid and q-grid indexes where the x-grid index runs the first.
+
+Such  item can optionally be finished by word 'powers' after that
+one or two numbers (say r0 and r1) are follow. 
+It means that after interpolation of the data  the result must be 
+multiplied on factor x^r0 *(1-x)^r1 to get the real parton distribution.
+If only one number is presented it will corresponds to the r0.
+
+f) #distribution 
+
+After this word the title name of distribution and the list 
+of parton is expected.  The title name has been surrounded by the "
+symbols. The name  may contain space symbols inside.
+
+ Partons whose distributions are  identical (say b and b-bar quarks
+in the proton)  may be  combined into a  group.
+Partons of one group should be closed into   brackets ( ) and 
+separated by the comma. 
+
+For example:
+
+#distribution "CTEQ99Z (proton)" (b,b-bar) (c,c-bar) (s,s-bar) d u g u-bar d-bar         
+
+ The position of the group  or parton name  in the list
+corresponds to the  ordinal number of  data (see above) . So, the parton of
+the first  group ( b and b-bar in the example)  are described by 
+the  #1-parton item data. 
+
+ One file can contain several '#distribution' keywords. In practice case 
+we need  two of them to describe in one file both  particle
+and anti-particle distributions. In the case of alias distribution CTEQ99Z
+it should be 
+
+#distribution "CTEQ99Z (anti-proton)" (b,b-bar) (c,c-bar) (s,s-bar)
+                                        d-bar u-bar g u d         
+
+
+g)#mass 
+
+  This is an  optional  keyword allows to introduce mass of 
+the composite  particle.
+It is expected that corresponding numerical value
+follows  this keyword. Default value for mass parameter is 1 GeV.
+
+h)#lExtrapolation 
+  The presence of this keyword means that linear interpolation has been
+used  
+
+
+
+         C-programs 
+        ~~~~~~~~~~~
+Here we describe software programs written in C 
+which provide the user with a possibility to work 
+with data files of above format.
+
+The first function that we would like to present is  
+
+void  makePdfList(char * file, char * parton, pdfList ** list);
+
+This function opens the file 'file' and look for the 
+#distribution  keywords. If such a word is detected and 
+the name  'parton' presented in the lits of its constituents,
+then the corresponding records is added to the  list 
+of available distributions. The record in  this list is 
+organized in the following way.
+ 
+
+typedef struct pdfList
+{ struct pdfList * next;  
+  char *  name;      /*  the title name of distribution        */     
+  char * file;       /* name of file where it is stored        */
+  int   position;    /* ordering number of parton in the list of functions*/
+} pdfList; 
+
+The second function   
+
+int    getPdfData(char * file, int n_parton, pdfStr * data );
+                     /* read 'file' and  fill items of  'data' */
+
+
+
+
+typedef struct pdfStr
+{ double mass;       /* mass of composite particle             */
+  int  nq;           /* number of points in Q-scale grid       */ 
+  int  nx;           /* number of points in X-scale grid       */
+  double * x_grid;   /* data for the X-grid                    */
+  double * q_grid;   /* log() data for the Q-grid              */
+  double * alpha;    /* data for QCD-alpha(Q) corresponding to */ 
+                     /* the Q-grid points*/ 
+  double * strfun;   /* data for interpolation of distibution corresponding */
+                     /* to  (Q-grid)*(X-grid) points;          */ 
+                     /* index of (X-grid) is rinning first     */
+  double pow0;       /* factor x^pow *(1-x)^pow1  must be      */   
+  double pow1;       /* applied after interpolation            */ 
+} pdfStr;  
+
+extern void   delPdfList(pdfList * list);
+
+
+extern void   delPdfList(pdfList * list);
+                     /* free  memory allocated for 'list' */
+                     
+extern int    getPdfData(char * file, int n_parton, pdfStr * data );
+                     /* read 'file' and  fill items of  'data' */ 
+
+extern void   freePdfData( pdfStr * data);
+                    /* free  memory allocated for data items   */
+                    /* and assigne NULL to  them.              */
+
+extern double interFunc(double x, double q, pdfStr * W); 
+                     /* interpolates data for given x and q    */ 
+                     /* according to information stored in W.  */
+                     /* result should be multiplied by the     */  
+                     /* power factors later on                 */
+extern double interAlpha(double q, pdfStr * W );
+                     /* interpolates data for QCD-alpha(Q)     */
+
+#endif
+

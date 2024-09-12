@@ -1,0 +1,162 @@
+############################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration            
+# Author: A. Sherstnev                                      
+############################################################
+.PHONY: all unarchcodes link ffiles d_compile f_compile extractf
+
+CHEP=../chepcode
+USERCODEDIR=../usercode
+
+INS:=-I$(CHEP)/include -I.
+CC=$(shell cat $(CHEP)/CC)
+CFLAGS=$(shell cat $(CHEP)/CFLAGS)
+CLIBS=$(shell cat $(CHEP)/CLIBS)
+RANLIB=$(shell cat $(CHEP)/RANLIB)
+F77LIBS=$(shell cat $(CHEP)/F77LIBS)
+
+F_TARGET=
+F_OBJ=
+D_TARGET=
+D_OBJ=
+have_a = $(wildcard ffile_*)
+have_d = $(wildcard d*.c)
+have_f = $(wildcard f_0.a)
+ifneq ($(strip $(have_a)),) 
+F_TARGET=$(shell cat ffile_0)
+F_OBJ=$(subst .c,.o,$(F_TARGET))
+endif
+ifneq ($(strip $(have_d)),) 
+D_TARGET=$(shell ls d*.c)
+D_OBJ=$(subst .c,.o,$(D_TARGET))
+endif
+
+cobjects=$(F_OBJ) $(D_OBJ) sqme.o service.o
+
+ifneq ($(strip $(have_f)),) 
+all: link
+	@echo "Numerical CompHEP has been created!"
+else
+all: 
+	@echo "\nERROR! There is no f_0.a library."
+	@echo "Gnererate code in GUI CompHEP and create the library with 'make gen'\n"
+endif
+
+gen: precompile unarchcodes ffiles link totcleanfcode
+	@rm -f d*.c d*.o sqme.* service.* extern.h
+	@echo "Numerical CompHEP has been created!"
+		
+
+precompile:
+	@if (test ! -f $(CHEP)/CC); then \
+	  echo " ";\
+	  echo "*******************************************";\
+	  echo " 'make' can not find $(CHEP)/CC file.";\
+	  echo " Launch the root 'configure' script first.";\
+	  echo "*******************************************";\
+	  echo " ";\
+	  exit 99; \
+	fi
+	@if (test ! -f $(CHEP)/CFLAGS); then \
+	  echo " ";\
+	  echo "*******************************************";\
+	  echo " 'make' can not find $(CHEP)/CFLAGS file.";\
+	  echo " Launch the root 'configure' script first.";\
+	  echo "*******************************************";\
+	  echo " ";\
+	  exit 99; \
+	fi
+	@if (test ! -f $(CHEP)/CLIBS); then \
+	  echo " ";\
+	  echo "*******************************************";\
+	  echo " 'make' can not find $(CHEP)/CLIBS file.";\
+	  echo " Launch the root 'configure' script first.";\
+	  echo "*******************************************";\
+	  echo " ";\
+	  exit 99; \
+	fi
+	@if (test ! -f $(CHEP)/F77LIBS); then \
+	  echo " ";\
+	  echo "*******************************************";\
+	  echo " 'make' can not find $(CHEP)/F77LIBS file.";\
+	  echo " Launch the root 'configure' script first.";\
+	  echo "*******************************************";\
+	  echo " ";\
+	  exit 99; \
+	fi
+	@if (test ! -f $(CHEP)/RANLIB); then \
+	  echo " ";\
+	  echo "*******************************************";\
+	  echo " 'make' can not find $(CHEP)/RANLIB file.";\
+	  echo " Launch the root 'configure' script first.";\
+	  echo "*******************************************";\
+	  echo " ";\
+	  exit 99; \
+	fi
+
+unarchcodes:
+	@tar xjf other_codes.tar.bz2
+	@tar xjf ffiles.tar.bz2
+	@if (test -f diags.tar.bz2); then \
+		bunzip2 diags.tar.bz2; \
+	fi
+
+link:
+	@$(RANLIB) f_0.a
+	@make -C ../usercode
+	$(CC) $(CFLAGS) -o ../results/n_comphep.exe $(CHEP)/src/num/n_comphep.o \
+	$(USERCODEDIR)/userFun.o -lnum -levents -lpdf -lsymb -lserv f_*.a -lmssm -lexternal $(CLIBS) -L$(CHEP)/lib $(F77LIBS)
+
+ffiles:
+	@make d_compile
+	@make extractf
+	@make f_compile
+	@rm -f ffile_0
+	@for x in `ls ffile_*`; do \
+		mv -f $$x ffile_0; \
+		make extractf; \
+		make f_compile; \
+	done
+	rm -f ffile_* *.c
+	touch .done
+
+d_compile: sqme.o service.o $(D_OBJ)
+	@echo compiling: $(D_OBJ) sqme.o service.o
+	@$(AR) -r f_0.a $(D_OBJ) sqme.o service.o
+#	@rm -f $(D_OBJ) sqme.* service.* extern.h $(D_TARGET)
+
+f_compile: $(F_OBJ)
+	@echo compiling: $(F_OBJ)
+	@ar -r f_0.a $(F_OBJ)
+#	@rm -f $(F_OBJ) $(F_TARGET)
+
+extractf:
+	@tar xf diags.tar $(F_TARGET)
+
+############################################################
+.PHONY: clean totclean
+
+cleanfcode:
+	@rm -f $(F_OBJ) $(F_TARGET)
+
+totcleanfcode:
+	@tar xjf ffiles.tar.bz2
+	@make cleanfcode
+	@rm -f ffile_0
+	@for x in `ls ffile_*`; do \
+		echo remove files from $$x; \
+		mv -f $$x ffile_0; \
+		make cleanfcode; \
+	done
+	@rm -f ffile_*
+
+clean: totcleanfcode
+	@rm -f d*.c d*.o sqme.* service.* extern.h *.a
+	@if (test -f diags.tar); then \
+		bzip2 diags.tar; \
+	fi
+
+totclean: clean
+	@rm -fr *.a .done
+
+$(cobjects): %.o: %.c
+	$(CC) -c $(CFLAGS) $(INS) $< -o $@

@@ -1,0 +1,25 @@
+:
+
+goToCut="]]]]]]}"
+find=""
+tab="	"
+CtrlC=`echo "\003"`
+end="{9"
+n=1
+
+
+if(test $# -ne 4) then
+   echo ERROR!. $0 need 3 parameters:
+   echo "     1. position of cut in the list"
+   echo "     2. name of function" 
+   echo "     3. min limit"
+   echo "     4. max limit"
+      exit 1
+   else
+      while(test $n -lt $1 )
+      do
+        n=`expr $n + 1`
+        find="]$find"
+      done
+       ./n_comphep -blind  "$goToCut$find$CtrlC$2$tab$CtrlC$3$tab$CtrlC$4$end"
+fi 

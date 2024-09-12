@@ -1,0 +1,14 @@
+10 10 65
+  The CTEQ4m set of parton distribution functions (PDF) describes 
+the momentum distributions of quarks and gluons in the proton and
+the antiproton. The variation ranges of x, Q variables are
+       10^-5 < x < 1  
+       1.6 GeV < Q < 10000 GeV 
+If the Monte Carlo sample point is out of this range, an 
+extrapolation of the PDF is used. Warning is displayed for
+every case.
+  The CTEQ4m set of PDF includes the Q-dependence calculated
+in the NLO approximation within the MSbar scheme, Alpha_s(MZ)=0.116
+See details in
+  H.L.Lai, J.Huston, S.Kuhlmann, F.Olness, J.Owens, D.Soper,
+  W.K.Tung, H.Weerts, Phys.Rev. D55 (1997) 1280 

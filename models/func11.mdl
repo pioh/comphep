@@ -1,0 +1,44 @@
+_H_R_DM
+ Constraints 
+ Name |> Expression                                                                        <|> Comment                      <|
+CW    |sqrt(1-SW^2)                                                                         |cos of the Weinberg angle        
+c12   |sqrt(1-s12^2)                                                                        |parameter  of C-K-M matrix       
+c23   |sqrt(1-s23^2)                                                                        |parameter  of C-K-M matrix       
+c13   |sqrt(1-s13^2)                                                                        |parameter  of C-K-M matrix       
+Vud   |c12*c13                                                                              |C-K-M matrix element             
+Vus   |s12*c13                                                                              |C-K-M matrix element             
+Vub   |s13                                                                                  |C-K-M matrix element             
+Vcd   |-s12*c23-c12*s23*s13                                                                 |C-K-M matrix element             
+Vcs   |c12*c23-s12*s23*s13                                                                  |C-K-M matrix element             
+Vcb   |s23*c13                                                                              |C-K-M matrix element             
+Vtd   |s12*s23-c12*c23*s13                                                                  |C-K-M matrix element             
+Vts   |-c12*s23-s12*c23*s13                                                                 |C-K-M matrix element             
+Vtb   |c23*c13                                                                              |C-K-M matrix element             
+MW    |MZ*CW                                                                                |mass of W boson                  
+v     |2*MW*SW/EE                                                                           |                                 
+cost  |sqrt(fabs(1-sint^2))                                                                 |                                 
+lamb0 |lamb+(MR^2-MH^2)/(2*v)*sint^2                                                        |                                 
+HHH   |lamb0*cost^3                                                                         |                                 
+HHR   |lamb0*cost^2*sint                                                                    |                                 
+wH    |width1(MR,sint)                                                                      |                                 
+wR    |width2(MR,sint)                                                                      |                                 
+c     |(MR^2-MH^2)*2*sint*cost/(MR^2*cost^2+MH^2*sint^2)                                    |                                 
+CR    |InvLR*(cost-c*sint)                                                                  |                                 
+CH    |InvLR*(sint+c*cost)                                                                  |                                 
+RFF   |CR-sint/v                                                                            |                                 
+HFF   |CH+cost/v                                                                            |                                 
+yt    |myfunc2(Mtop)                                                                        |                                 
+yW    |myfunc2(MW)                                                                          |                                 
+loopt |myfunc3(yt,1)                                                                        |                                 
+loopW |myfunc3(yW,2)                                                                        |                                 
+Imlt  |myfunc4(yt,1)                                                                        |                                 
+ImlW  |myfunc4(yW,2)                                                                        |                                 
+RGG   |7*CR+loopt*RFF                                                                       |                                 
+HGG   |7*CH+loopt*HFF                                                                       |                                 
+ImRGG |Imlt*RFF                                                                             |                                 
+ImHGG |Imlt*HFF                                                                             |                                 
+RAA   |-11/(3)*CR+(loopW+8/(3)*loopt)*RFF                                                   |                                 
+HAA   |-11/(3)*CH+(loopW+8/(3)*loopt)*HFF                                                   |                                 
+ImRAA |(ImlW+8/(3)*Imlt)*RFF                                                                |                                 
+ImHAA |(ImlW+8/(3)*Imlt)*HFF                                                                |                                 
+==============================================================================================================================

@@ -1,0 +1,19 @@
+_SM_ud
+ Particles 
+ Full  name  |A  |A+ |2*spin| mass |width |color|aux|>LaTex(A)<|>LaTeX(A+)   <|
+photon       |A  |A  |2     |0     |0     |1    |G  |\gamma    |\gamma         
+gluon        |G  |G  |2     |0     |0     |8    |G  |g         |g              
+electron     |e  |E  |1     |0     |0     |1    |   |e         |\bar{e}        
+e-neutrino   |ne |Ne |1     |0     |0     |1    |L  |\nu_e     |\bar{\nu}_e    
+muon         |m  |M  |1     |Mm    |0     |1    |   |\mu       |\bar{\mu}      
+m-neutrino   |nm |Nm |1     |0     |0     |1    |L  |\nu_\mu   |\bar{\nu}_\mu  
+tau-lepton   |l  |L  |1     |Mtau  |0     |1    |   |\tau      |\bar{\tau}     
+t-neutrino   |nl |Nl |1     |0     |0     |1    |L  |\nu_\tau  |\bar{\nu}_\tau 
+u# quark     |u# |U# |1     |0     |0     |3    |   |u_#       |\bar{u_#}      
+d# quark     |d# |D# |1     |0     |0     |3    |   |d_#       |\bar{d_#}      
+t-quark      |t  |T  |1     |Mt    |wt    |3    |   |t         |\bar{t}        
+b-quark      |b  |B  |1     |Mb    |0     |3    |   |b         |\bar{b}        
+Higgs        |H  |H  |0     |MH    |wH    |1    |   |H         |H              
+W-boson      |W+ |W- |2     |MW    |wW    |1    |G  |W^+       |W^-            
+Z-boson      |Z  |Z  |2     |MZ    |wZ    |1    |G  |Z         |Z              
+===============================================================================

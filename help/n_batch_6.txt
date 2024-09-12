@@ -1,0 +1,7 @@
+2 10 50
+  One can save the calculated values of matrix 
+elements into the file in order to generate 
+the weighted events flow afterward. 
+This menu function switches ON/OFF the option
+of writing into the file. Not available for the 
+Interpreter and n_comphep_c.

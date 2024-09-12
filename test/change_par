@@ -1,0 +1,22 @@
+:
+
+goToPar="]]}"
+find="}"
+end="}9"
+n=1
+
+
+if(test $# -ne 2) then
+   echo ERROR!. $0 need 2 parameters:
+   echo "     1. number of the parameter" 
+   echo "     2. new value"
+      exit 1
+   else
+      while(test $n -lt $1 )
+      do
+        n=`expr $n + 1`
+        find="]$find"
+      done
+
+      ./n_comphep -blind "$goToPar$find$2$end"
+fi 

@@ -1,0 +1,22 @@
+:
+
+goToGen="]]]]]]]]]}]]]]]]]}"
+
+
+if( test -r session.dat) then
+   testStr=`grep Max: session.dat`
+   if(test "$testStr") then 
+     echo Generator is already prepared!
+     exit 1
+   fi
+fi 
+   
+
+if(test $# -ne 2) then
+   echo ERROR!. $0 need two parameters:
+   echo "     1. number of cubes;" 
+   echo "     2. number of call for each cube to find maxima."
+      exit 1
+   else 
+       n_comphep -blind $goToGen}$1}]}$2}]]}{9
+fi 

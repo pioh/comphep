@@ -1,0 +1,5 @@
+2 10 50
+  "Tab. param." is the name of the variable which is
+taken as an argument of the table. The list of
+possible parameters will appear after your call of
+this menu.

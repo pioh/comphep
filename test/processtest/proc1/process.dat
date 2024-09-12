@@ -1,0 +1,43 @@
+############################################################
+#         Data file for symb_script.pl
+#       For the symbolic batch script version 1.0
+############################################################
+
+#  You have to set the model number, which you are going to use.
+#  The model number corresponds to the string number of the model
+#  in the CompHEP model menu in the GUI mode. 
+model number: 4
+
+#  Beam names can be taken from a table of beams 
+#  (see CompHEP in the GUI regime). Energy unit is GeV
+beam 1: p
+beam 2: p
+beam energy 1: 7000.000000
+beam energy 2: 7000.000000
+
+#  This string defines the final state of your process. Model 
+#  particles and composite particles (see the corresponding table)
+#  can be used. 
+final state:m,M,G
+
+#  If you'd like to exclude Feynman diagrams with some model
+#  particles (in propagators!), enter the particles here
+exclude diagrams with: 
+
+#  If you'd like to keep Feynman diagrams with some model
+#  particles (in propagators!), enter the particles here
+keep diagrams with: 
+
+#  If you enter no, s_comphep generates diagrams and does not
+#  do symbolic calculations.
+make symbolic calculations(yes/no): yes
+
+#  If you enter no, comphep calculates all squared diagrams, 
+#  but n_comphep will not be created.
+make n_comphep generator(yes/no): yes
+
+# excluded Feynman diagrams, simple list of digram numbers
+excluded diagrams:
+
+# excluded squared Feynman diagrams, simple list of digram numbers
+excluded squared diagrams:

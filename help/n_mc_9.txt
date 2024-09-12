@@ -1,0 +1,18 @@
+2 5 50 
+  In many processes the matrix element squared 
+is too singular for efficient Monte Carlo integration.
+  Propagators of intermediate particles cause the
+s-channel and t-channel peaks of the amplitude. They
+can be explicitly indicated to the integration program
+to ensure efficient integration with meaningful result.
+
+  The regularization program is efficient if the
+phase space parametrization is properly chosen.
+  Regularization of a singularity which leads to infinite 
+cross section (e.g. the t-channel gamma pole) should be
+associated with a kinematics cut for the corresponding 
+momentum squared ('S'-type cut). The regularization 
+program is sensitive only to this type of cuts since they
+reduce the phase space regions with divergences of the
+amplitude.
+ 

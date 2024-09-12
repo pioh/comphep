@@ -1,0 +1,22 @@
+5 5 65
+  Substitution of the Breit-Wigner propagators 
+for the s-channel virtual particles can break the
+gauge invariance of the amplitude. 'Gauge invariance OFF'
+denotes the prescription for direct substitution of the
+Breit-Wigner propagators which does not take care of
+the gauge invariance.
+   'Gauge invariance ON' denotes the prescription which
+respects the gauge invariance. First the sum of the
+diagrams is taken preserving gauge cancellations between 
+them, then the Breit-Wigner denominators are substituted 
+by multiplication of the entire squared amplitude on the 
+factor
+
+ ( Zero width denomonator) /( Breit-Wigner denominator)
+
+for each s-channel resonance. It should be pointed out that
+the zero width 'Zero width denomonator' P^2-Mass^2 suppresses 
+artificially the contributions of nonresonant diagrams in the 
+vicinity of the resonance P^2=M^2. In most cases the total 
+cross section error is negligibly small with the only exception 
+of overlapping resonances.

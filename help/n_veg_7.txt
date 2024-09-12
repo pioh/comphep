@@ -1,0 +1,5 @@
+1 12 50
+   In each integration session VEGAS improves the
+ integration grid for optimization of the integration.
+   This menu function restores the original 
+ integration grid.

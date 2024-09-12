@@ -1,0 +1,4 @@
+1 12 51 3
+  The event generator divides the phase space
+into hypercubes. Increase the number of hypercubes
+to improve the efficiency of the event generator.

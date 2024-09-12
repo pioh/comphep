@@ -1,0 +1,7 @@
+QED
+ Particles 
+ Full  name  |A  |A+ |2*spin| mass |width |color|aux|>LaTex(A)<|>LaTeX(A+)   <|
+photon       |A  |A  |2     |0     |0     |1    |G  |\gamma    |\gamma         
+electron     |e  |E  |1     |Me    |0     |1    |   |e         |\bar{e}        
+muon         |m  |M  |1     |Mm    |0     |1    |   |\mu       |\bar{\mu}      
+===============================================================================

@@ -1,0 +1,21 @@
+1 5 70
+ This menu function changes the form of the Breit-Wigner propagator.
+For the case 'S-dependence OFF' the following expressions for its
+scalar part are substituted:
+
+a) Power=1                       b) Power=2
+
+       P^2 - Mass^2                           1
+ ----------------------------    ------------------------------
+(P^2-Mass^2)^2 + (Mass*Width)^2  (P^2-Mass^2)^2 + (Mass*Width)^2
+
+Here P, Mass, Width are the virtual particle Lorentz momentum,
+mass and width correspondingly.
+  For the case 'S-dependence  ON' the Width is replaced by
+
+                    P^2   
+Width -> Width * ---------
+                   Mass^2
+
+  This substitution simulates higher order corrections.
+

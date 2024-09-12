@@ -1,0 +1,21 @@
+10 10 65
+  The MRS parton distribution functions (PDF, two sets, MRS(A')
+and MRS(G)) describe the momentum distributions of quarks and 
+gluons in the proton or the antiproton. 
+  For the A' set the sea quark and gluon distributions are 
+parameterized at small x by the x^(-Lambda) function, where 
+the universal parameter Lambda is the same for all distributions.
+  The G set uses different Lambda parameters for the sea quark 
+and the gluon distributions. QCD theoretical motivation is in favor
+of the universal Lambda parameter (A' set), but the experimental 
+data fit for the G set is better.
+  The PDF Q-dependence is calculated in the NLO approximation within 
+the MSbar scheme, Alpha_s(MZ)=0.113/0.114 for A' case/G case. 
+The variation ranges of x, Q^2 variables are
+               10^-5 < x < 1
+               5 GeV^2 < Q^2 < 1310720 GeV^2 
+See details in
+  A.D.Martin, R.G.Roberts, W.J.Stirling, Phys.Lett. B354 (1995) 155
+
+The type of the distribution and the name of initial particle are
+indicated in brackets and can be changed by the user. 

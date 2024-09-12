@@ -1,0 +1,25 @@
+2 4 76                  Table of beams
+             This table consists of four fields:
+
+1. "Name" for an identifier of the beam. It may contain up to 6 characters.
+   The first character must be a letter, others may be either letters or 
+   digits; CompHEP identifiers are sensitive to the case of characters. 
+   But any two identifiers must be different after rewriting them in low 
+   case. There are reserved names, which cannot be used here: 
+  "i" is used for imaginary unit;
+  "Sqrt2" is used for sqrt(2)
+  "p1","p2","p3",.. are used for particle momenta. 
+  "m1","m2","m3",.. are reserved for Lorentz indexes of particles.
+   G5 is used for the gamma-five Dirac matrix;
+   
+2. "Mass" for numerical value of the beam mass in GeV units;
+
+3. "Content" is a list of particles in the beam. All names must coincide
+    with particle names in the model, which you use. Otherwise, this beam 
+    will not available for the model.
+    
+4. "Structure functions" is a name of a structure functions which are used 
+   for the beam. This name has to coincide with a name from the structure
+   function table. Also one can use beams without structure functions,
+   for the beams you can enter either OFF in the field, or leave this 
+   field empty.

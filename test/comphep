@@ -1,0 +1,5 @@
+:
+
+COMPHEP=`pwd`/..
+export COMPHEP
+sh $COMPHEP/comphep

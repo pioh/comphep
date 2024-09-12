@@ -1,0 +1,11 @@
+2 10 50
+  Ncall2 and Itmx2 are the number of integrand
+calls for one iteration and number of iterations
+for the second (main) step of integration.  The
+grid constructed on the first step is used but
+the integral estimate obtained on the first step
+is not used for event generation.
+  While using the stratified sampling method it is 
+desirable to increase Ncall2, taking into account 
+that the time of calculation is proportional to 
+Ncall2*Itmx2.

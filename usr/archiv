@@ -1,0 +1,11 @@
+#!/bin/sh
+###########################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration
+###########################################################
+export COMPHEP=`cat .compheppath`
+
+if [ x$1 = xDEBUG ]; then
+  DDD=ddd
+fi
+
+${DDD} $COMPHEP/bin/archiv.exe $*

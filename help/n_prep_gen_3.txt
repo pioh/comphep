@@ -1,0 +1,6 @@
+1 12 51 3
+ If switched on, the simplex method is used to 
+improve the values of maxima that have been found in 
+each hypercube by the random search method. The 
+number of integrand calls is not more than 50 per
+hypercube.

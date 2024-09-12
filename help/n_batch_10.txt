@@ -1,0 +1,4 @@
+2 10 50
+   Max.val. is the maximum value of 
+          chosen parameter.
+

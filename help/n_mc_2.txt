@@ -1,0 +1,10 @@
+10 10 60 
+ This  menu function calls the next level menu which allows 
+one to set:
+ 1. a structure function for the first incoming particle
+ 2. a structure function for the second incoming particle
+ 3. the first particle momentum 
+ 4. the second particle momentum 
+
+A plot for the selected structure function can be displayed by 
+pressing the F7 key.

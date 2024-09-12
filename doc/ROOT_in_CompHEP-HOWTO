@@ -1,0 +1,34 @@
+#-------------------------------------------------
+# Copyright (C) 2007-2009, CompHEP Collaboration
+# Author: Alexander Sherstnev
+#------------------------------------------------------
+
+
+/********************************************************************************************/
+1. Introduction.
+
+/********************************************************************************************/
+2. Installation of ROOT
+
+ The last version of ROOT is available here:
+   http://root.cern.ch
+
+/********************************************************************************************/
+3. Configuration of CompHEP with ROOT
+
+  I. set the environment variable ROOTSYS, which should point to a directory where ROOT 
+     is installed. In (t)csh:
+
+    setenv ROOTSYS /home/soft/root
+
+    or in bash:
+
+    set ROOTSYS=/home/soft/root; export $ROOTSYS
+
+  II. launch the script ./configure in CompHEP with the option --with-root:
+
+    ./configure --with-root
+
+  III. compile CompHEP:
+
+    make

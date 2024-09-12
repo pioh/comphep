@@ -1,0 +1,22 @@
+2 2 50 0 Edit Model
+ Information about the model is stored in four
+files:
+1. The Parameters file is a list of independent
+parameters used in the model.
+2. The Constraints file describes the parameters,
+which are expressed from other ones.
+3. The Particles file contains the table of
+particles and description of their properties.
+4. The Lagrangian file is a list of vertexes of
+interactions.
+  Select the corresponding item to view/edit its
+contents.
+  When you  leave this menu, CompHEP checks the
+model. If a certain file is changed, CompHEP asks
+you: "Save correction ?". For the case of
+negative answer CompHEP forgets your changes. If
+the answer is affirmative, CompHEP begins to check
+the model contents. If no error is found, you are
+returned to the previous menu. Otherwise an error
+message appears on the screen and  exit from
+the menu does not occur.

@@ -1,0 +1,22 @@
+
+ Strfuns 
+ Name                             <|> CHEP Number <|> CERNLIB number |> CERNLIB member <|
+OFF                                |0              |0                |0                 
+WWA (m=0.000511 Ch=-1 Q=100)       |1              |0                |0                 
+Laser Photons                      |2              |0                |0                 
+ISR(100 Beamstr.:OFF)              |3              |0                |0                 
+PDF:cteq6m(proton)                 |10             |4                |57                
+PDF:cteq6m(anti-proton)            |11             |4                |57                
+PDF:cteq6l1(proton)                |12             |4                |58                
+PDF:cteq6l1(anti-proton)           |13             |4                |58                
+PDF:cteq6d(proton)                 |14             |4                |56                
+PDF:cteq6d(anti-proton)            |15             |4                |56                
+PDF:cteq5m1(proton)                |16             |4                |53                
+PDF:cteq5m1(anti-proton)           |17             |4                |53                
+PDF:cteq5l(proton)                 |18             |4                |46                
+PDF:cteq5l(anti-proton)            |19             |4                |46                
+PDF:cteq4m(proton)                 |10             |4                |34                
+PDF:cteq4m(anti-proton)            |21             |4                |34                
+PDF:cteq4l(proton)                 |22             |4                |32                
+PDF:cteq4l(anti-proton)            |23             |4                |32                
+========================================================================================

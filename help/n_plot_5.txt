@@ -1,0 +1,10 @@
+10 10 50 Plot
+  This menu function allows to save the current 
+graphical image of the plot in the LaTeX format. 
+We use Axodraw package to draw axes and lines. 
+The image can be refined by means of the self-explanatory
+Axodraw commands in the output LaTeX source file.
+Choose the picture and symbol size before the
+generation of LaTeX source and see the output file 
+name displayed on the screen.
+

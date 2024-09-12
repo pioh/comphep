@@ -1,0 +1,9 @@
+5 5 50 
+ This menu function provides a possibility 
+to calculate the integrated cross section or
+forward-backward asymmetry as a function of
+a chosen parameter, and displays the
+corresponding plot on the screen.
+  The range of the parameter variation and 
+the number of steps are input in the standard
+way.

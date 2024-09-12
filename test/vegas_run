@@ -1,0 +1,11 @@
+:
+
+if(test $# -ne 2) then 
+   echo  Error! $0 needs two numerical parameters:
+   echo  "         1. number of iterations;"
+   echo  "         2. number of calls for iteration."
+   exit 1
+else 
+     n_comphep -blind "]]]]]]]]]}}"$1"}]}"$2"}]]}9}"
+  cd -
+fi

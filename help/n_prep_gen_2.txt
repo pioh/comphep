@@ -1,0 +1,4 @@
+1 12 51 3
+  This menu function defines the number of 
+integrand calls in the random search for the
+local maximum in each hypercube.

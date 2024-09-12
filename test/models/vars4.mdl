@@ -1,0 +1,22 @@
+St.Model(Feyn.gauge)
+ Parameters 
+ Name | Value       |> Comment                                                             <|
+EE    |0.31223      |Elementary charge (alpha=1/128.9, on-shell, MZ point, PDG96)            
+GG    |1.238        |Strong coupling (LEP/SLD average alphas=0.122, PDG96)                   
+SW    |0.4730       |sine of the electroweak mixing angle (PDG96)                            
+s12   |0.221        |Parameter of C-K-M matrix  (PDG96)                                      
+s23   |0.041        |Parameter of C-K-M matrix  (PDG96)                                      
+s13   |0.0035       |Parameter of C-K-M matrix  (PDG96)                                      
+Mm    |0.1057       |muon mass                                                               
+Mt    |1.777        |tau-lepton mass      (PDG96)                                            
+Mc    |1.420        |c-quark mass  (pole mass, PDG96)                                        
+Ms    |0.200        |s-quark mass  (pole mass, PDG96)                                        
+Mb    |4.620        |b-quark mass  (pole mass, PDG96)                                        
+Mtop  |175          |t-quark mass  (pole mass)                                               
+MZ    |91.1884      |Z-boson mass         (PDG96)                                            
+MH    |100          |higgs mass                                                              
+wtop  |1.59         |t-quark width        (tree level 1->2x)                                 
+wZ    |2.49444      |Z-boson width        (tree level 1->2x)                                 
+wW    |2.08895      |W-boson width        (tree level 1->2x)                                 
+wH    |0.004244     |Higgs width          (tree level 1->2x)                                 
+=============================================================================================

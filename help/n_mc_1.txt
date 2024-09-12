@@ -1,0 +1,9 @@
+3 10 45 6
+  Symbolic calculation by CompHEP gives
+symbolic result for a set of processes.
+For example, the input
+e1,E1 -> 2*x allows you to select one of the 
+subprocesses from e1,E1 -> two particles
+for the subsequent numerical calculation.
+
+

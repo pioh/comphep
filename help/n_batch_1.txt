@@ -1,0 +1,3 @@
+2 10 50
+Append the current task settings to BATCH.DAT file.
+

@@ -1,0 +1,5 @@
+ 1 12 51 5
+  The number of integrand evaluations per
+iteration. The real number of evaluations will
+be slightly smaller than defined by the user
+because the method of stratified sampling is used.

@@ -1,0 +1,47 @@
+#!/bin/sh
+###########################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration
+# Author: Alexander Sherstnev 
+###########################################################
+export LHAPDFPATH=
+export COMPHEP=
+
+if (test -f .compheppath) then
+  export COMPHEP=`cat .compheppath`
+else if (test -f ../.compheppath) then
+  export COMPHEP=`cat ../.compheppath`
+else if (test -f ../../.compheppath) then
+  export COMPHEP=`cat ../../.compheppath`
+else
+  echo "\nn_comphep (warning): no .compheppath found in ./ or ../ or ../../. n_comphep.exe may function unproperly\n"
+fi
+fi
+fi
+
+if (test ! -d $COMPHEP) then
+  echo " "
+  echo "n_comphep (warning): no installed CompHEP in $COMPHEP"
+  echo "      If you use the standard CompHEP installation, check .compheppath"
+  echo "      If you use !-click installation, execute make relocate"
+fi
+
+if (test -f ../.lhapdfpath) then
+  export LHAPDFPATH=`cat ../.lhapdfpath`
+  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDFPATH"
+else if (test -f ../../.lhapdfpath) then
+  export LHAPDFPATH=`cat ../../.lhapdfpath`
+  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDFPATH"
+fi
+fi
+export LD_LIBRARY_PATH=$LHAPDFPATH/lib:$LD_LIBRARY_PATH
+
+if (test -x n_comphep.exe) then
+  if [ x$1 = xDEBUG ]; then
+    (export COMPHEP=$COMPHEP;export LHAPDFPATH=$LHAPDFPATH;export LD_LIBRARY_PATH=$LD_LIBRARY_PATH;ddd n_comphep.exe $2 $3)
+  else
+    ./n_comphep.exe $1 $2
+  fi
+else
+  echo "\nn_comphep (error): no file n_comphep.exe\n"
+  exit
+fi

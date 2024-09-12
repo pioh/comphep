@@ -1,0 +1,5 @@
+10 10 50 Plot
+  Sets a maximum value of the variable on the Y axis.
+Use the 'Redraw plot' menu function to get the new 
+histogram after invoking this. 
+

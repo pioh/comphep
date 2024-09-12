@@ -1,0 +1,73 @@
+#-------------------------------------------------
+# Copyright (C) 2007-2009, CompHEP Collaboration
+#------------------------------------------------------
+
+NAME
+
+    symb_batch.pl
+
+SYNOPSIS
+
+./symb_batch.pl
+./symb_batch.pl [-h] [--help]
+./symb_batch.pl [-d DIR] [-n FILE] [-show diagrams]
+./symb_batch.pl [-d DIR] -recovery
+./symb_batch.pl [-d DIR] -relink
+./symb_batch.pl -show status
+
+
+DECSRIPTION
+
+The main goal of the script is to launch the symbolic part of the
+CompHEP generator in non-GUI mode. This allows the reuse of the script,
+avoiding typing mistakes, and also should facilitate using farms.
+
+Script with no options generate n_comphep.exe program in the directory 
+`results'.
+  
+If the directory results is not empty before the script launching, 
+it is renamed to results_old_0 and the script creates a new results 
+directory.
+  
+
+OPTIONS
+
+  -d DIR
+          name of directory with results (default 'results')
+
+  -h (--help)
+          output short (long) help
+
+  -n FILE
+          name of file with data (default 'process.dat')
+
+  -recovery If the s_comphep program crashed during calculations of
+            squared diagrams, you can launch the script with the
+            recovery option and s_comphep resumes the computation
+            from the last calculated diagram.
+            
+  -relink  If you have changed userFun.c file one should relink the n_comphep
+           program. You can launch the script with the
+           relink option and s_comphep relink the n_comphep program and
+           save all details of the relinking to the symb_batch.log file.
+  
+  -show diagrams - this option is applied if you'd like to exclude
+                   by hand some diagrams from all those set by 
+                   the program. The script launches s_comphep in GUI
+                   mode in the feynman diagrams menu. After reviewing
+                   the diagrams you have to finish the GUI session (click F9 
+                   and Y) and the script will go on.
+                   
+  -show status - show the current working status of the script.
+                 (i.e. what the script is doing now, how many diagrams
+                  have been calculated already, etc.) 
+                  Warning: THIS OPTION IS NOT IMPLEMENTED YET!
+
+FILES
+   process.dat    Detailed instructions and explanations for the changes 
+                  are contained in the file itself. 
+
+
+SEE ALSO
+
+   num_batch.pl

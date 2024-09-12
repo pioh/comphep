@@ -1,0 +1,8 @@
+_SM_qQ
+ Particles 
+ Full  name  |A  |A+ |2*spin| mass |width |color|aux|>LaTex(A)<|>LaTeX(A+)   <|
+gluon        |G  |G  |2     |0     |0     |8    |G  |g         |g              
+q#-quark     |q# |Q# |1     |0     |0     |3    |   |q_#       |\bar{q_#}      
+t-quark      |t  |T  |1     |Mtop  |wtop  |3    |   |t         |\bar{t}        
+b-quark      |b  |B  |1     |Mb    |0     |3    |   |b         |\bar{b}        
+===============================================================================

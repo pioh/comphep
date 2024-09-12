@@ -1,0 +1,32 @@
+1) Homepage
+   http://comphep.sinp.msu.ru
+
+
+2) A short description of the code is available on 
+   http://comphep.sinp.msu.ru/overview
+
+
+3) Installation procedure is described in INSTALL
+
+
+4) All changes are described on corresponing pages at 
+   http://comphep.sinp.msu.ru/download/main
+
+
+5) Authors:
+   E. Boos, V. Bunichev, M. Dubinin, L. Dudko, V. Edneral, V. Ilyin, A. Kryukov, 
+   V. Savrin (SINP MSU, Moscow, Russia), A. Semenov (JINR, Dubna, Russia), 
+   A. Sherstnev (University of Oxford, UK and SINP MSU, Moscow, Russia[on leave])
+
+
+6) Necessary references:
+    I. E.Boos et al. [CompHEP Collaboration], Nucl. Instrum. Meth. A534(2004), p250 (arXiv:hep-ph/0403113).
+    "CompHEP 4.4: Automatic computations from Lagrangians to events"
+
+    II. A.Pukhov and et al., (arXiv:hep-ph/9908288)
+    CompHEP - a package for evaluation of Feynman diagrams and integration over multi-particle phase space. 
+    User's manual for version 3.3,
+
+    If you use CompHEP-PYTHIA interface (cpyth), please cite the following reference:
+    A.S. Belyaev et al., A talk given at ACAT'2000 (Fermilab, 16-20 Oct 2000), (arXiv:hep-ph/0101232)
+    "CompHEP - PYTHIA interface: integrated package for the collision events generation based on exact matrix elements."

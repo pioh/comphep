@@ -1,0 +1,19 @@
+1 11 51
+ The first two functions of this menu allow to set
+the limits of Feynman 'x' variable. The input must 
+satisfy the condition
+               0 <= x-Min < xMax <=1
+ The third function allows the user to define the 
+number of points for the argument (not greater than 
+150) to be used for the plot.
+ The fourth menu function allows the user to define
+the QCD scale, which is a hidden parameter of the
+partonic distribution functions.
+  The last menu function 'Display plot' draws the
+plot on the screen.
+
+The minimal and the maximal values of the argument
+'x' are x_Min + dx and x_Max-dx, correspondingly, 
+where dx=(x_Max-x_Min)/2/Npoints. The endpoints x=0 
+and x=1 do not appear on the plot. 
+ 

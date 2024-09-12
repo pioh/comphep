@@ -1,0 +1,9 @@
+5 12 70
+  This menu item provides the possibility to define a momentum
+distribution function (PDF) for the first and second incoming particles. 
+The name of the activated distribution is displayed in the corresponding 
+menu. "Momentum distribution OFF" selection  means that the convolution of 
+the matrix element squared with a distribution function will be not 
+performed.
+  The user can display a plot for the distribution by pressing 
+the F7 key.

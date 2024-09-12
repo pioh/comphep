@@ -1,0 +1,40 @@
+2 4 76 22  Table editor
+   To change the position of the cursor and the highlighted cell one can
+use the arrow keys, the Tab key and the mouse click. If the table is 
+opened for changes and one types any symbol it will be inserted 
+into the table at the cursor position.
+   The  PgUp, PgDn  keys are used to scroll the table. The F1 and F2
+functional keys provide information about the meaning of table fields and
+about facilities of the Table Editor.
+   There are some auxiliary commands which help the user to operate the
+tables. These commands can be realized by means of Control symbols or by
+mouse click on the command label displayed on the table border:
+  "Top" (^T)    moves the cursor to the top line of the table.
+  "Bottom" (^B) moves the cursor to the bottom line of the table.
+  "GoTo" (^G)   moves the cursor to the line directed by the user.
+  "Find" (^F)   searches the string directed by the user.
+  "Zoom" (^Z)   switches on the zoom mode to view/edit contents of the
+highlighted cell. In this case a special window appears and the field text
+wraps this window. To terminate the Zoom mode one has either to press Enter
+to accept changes or Esc to forget them.
+  "ErrMess"(^E) redisplays an  error message  concerning the contents of
+one of the tables.
+
+   The above commands are available in both modes of the Table Editor. 
+The labels of these commands are on the bottom border of the table.
+The following commands are available only if the table is opened for 
+changes:
+  "Clr" (^C)    clears the contents of the current fields right to the
+cursor position.
+  "Rest" (^R)   restores the contents of the current field which existed
+before the last input.
+  "Del" (^D)    cuts the current line from the table and saves it into 
+the buffer.
+  "New" (^N)    creates a new line and fills it with the contents of the
+buffer. You can also press the Enter key to create a new line.
+  "Size" (^S)   allows  the user to change the width of the current field. 
+This command is active only if the cursor is in the column whose
+name is surrounded by the '\verb|>|','\verb|<|' symbols.
+   The labels of these commands are on the top border of the window.
+
+   Press the Esc key to exit the table.

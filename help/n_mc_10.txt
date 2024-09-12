@@ -1,0 +1,14 @@
+2 7 50
+   This is an entry to the next menu level which 
+allows the user to set the parameters of the Monte 
+Carlo integrator VEGAS and to launch it.
+   After VEGAS integration the information about
+the cross section is displayed on the screen and is 
+written in the session.dat file. 
+   It is possible to generate various distributions 
+in the process of integration.
+   Event generation can be started when the 
+integration is completed.
+
+   
+

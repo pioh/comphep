@@ -1,0 +1,22 @@
+17 2  62
+  This program is used to display the graphical image of
+constructed diagrams - amplitude or squared. The number of
+diagrams that you can simultaneously see on the screen
+depends on the diagram and window sizes. If you would like
+to see more diagrams on one screen, increase the window size
+using standard X11 facilities (e.g. using the Window Manager).
+  The current diagram is indicated by a surrounding box. In the
+left-top corner of the screen you can find the ordinal number 
+of the selected diagram and the total number of diagrams. You can 
+change the current diagram by Arrow keys or by a mouse click.
+  You can use the PgDn/PgUp keys to scroll the diagram set. 
+The Home/End key moves you to the beginning/end of the set. 
+To display a diagram with some ordinal number directly, 
+press the key '#' and input the number.
+  To finish work with the Diagram Viewer, press the Esc key.
+  The names of these actions are shown in the top line of
+the screen. You can use a mouse click to perform any of them.
+    There are also auxiliary, context-depending functions. 
+Their names are written in the bottom. To get an information
+about these functions press the F1 key. To start one, click on
+the function or press the capital letter in the function name.

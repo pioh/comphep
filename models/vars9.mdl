@@ -1,0 +1,17 @@
+_SM_ud
+ Parameters 
+ Name | Value       |> Comment                                                             <|
+EE    |0.31345      |Elementary charge (alpha=1/127.9, on-shell, MZ point, PDG2002)          
+GG    |1.21358      |Strong coupling (MZ point, average alpha_s=0.1172\pm0.002, PDG2002)     
+SW    |0.48076      |sine of the Weinberg angle (MZ point -> MW=79.957GeV, PDG2002)          
+Mm    |0.10566      |muon mass                                                               
+Mtau  |1.77699      |tau-lepton mass (PDG2002)                                               
+Mb    |4.850        |b-quark mass  (pole mass: 4.6-5.1, PDG2002)                             
+Mt    |174.3        |t-quark mass  (pole mass, PDG2002)                                      
+MZ    |91.1876      |Z-boson mass             (PDG2002)                                      
+MH    |115          |higgs mass                                                              
+wt    |1.54687      |t-quark width        (tree level 1->2x, CompHEP calculation)            
+wZ    |2.43680      |Z-boson width        (tree level 1->2x, CompHEP calculation)            
+wW    |2.02842      |W-boson width        (tree level 1->2x, CompHEP calculation)            
+wH    |0.0055508    |Higgs width          (tree level 1->2x, CompHEP calculation)            
+=============================================================================================

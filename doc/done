@@ -1,0 +1,2155 @@
+(r514) Add lhef format for the option -kfactor
+(r513) bug in MIX fixed, it can't process LHE files with several subprocesses. Add -zrandom to mix
+(r512) Add manual compilation of n_comphep.exe (launch make manually in resutls: spechail goal - man)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+(r511) New version: 4.5.1
+
+(r510) Corrections for properer protocol files in NUM_CHEP
+(r508) Add some stat. information in TRANSLATOR
+(r507) Remove prt file in MIX, now all information goes to stdout
+(r506) Wrong mother numbers of decay particles in final event corrected in CASCADE
+(r505) Bug fixed: the bug prevents using ISR/LSR/EPA
+(r504) configuration procedure: Exit if --with-root is used, but ROOTSYS is undefined
+(r503) Stylish corrections in CASCADE
+(r502) bugs in TRANSLATOR fixed: wrong color for cpyth1, and wrong mather numbers in both cpyth1/cpyth2 formats
+(r501) Tiny bug corrected in LHE routines in NUM_CHEP
+(r500) Improved randomization in NUM_CHEP
+(r499) Improved statistics, proper random number generator initialization in MIX.
+(r498) configuration procedure: uncomment xlib warning comment. Important for Ubuntu
+(r497) another cascade regime added to CASCADE
+(r496) Bug in TRANSLATOR fixed: for events with particles with the "-" symbol in names can not be processed (for cpyth1 only)
+(r495) Corrections of event writing for decays and colorless states in LHE
+(r494) corrections in main Makefile
+(r493) corrections in Makefiles
+(r492) add indirect headers (important for gcc-2.X)
+(r491) Add Constraints to prt files (for decays only!)
+(r490) Default values of global variables added
+(r489) compilation procedure: Correction in Makefiles: ar -> $(AR), reading CC/CFLAGS from files
+(r488) Default values of global variables added
+(r487) Default values of global variables added
+(r486) Default values of variables added
+(r485) Default values variables added
+(r484) Default values of variables added
+(r483) Bug fixed in CASCADE. When there is no resonance the event is lost, instead to be written unchanged
+(r482) A stupid bug fixed
+(r481) Add dummy routines for the case if ROOT is not used
+(r480) Add pathtocomphep for reading of PDF data in RTUPLER
+(r479) Add dummy routines for the case if ROOT is not used
+(r478) Default value of variables added (in order to exclude COMMON symbols in objects)
+(r477) configure corrections needed for MacOS
+(r476) Add prt file for 1->2 decays IN NUM_CHEP
+(r474) Some code for ONECLICK
+(r473) Some code for ONECLICK
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+(r471) New version: 4.5.0
+
+(r470) corrections of INSTALL file in order to decribe the installation procedure properly
+(r469) Simplification of out_c.c
+(r468) add squared diagram viewer in n_comphep
+(r467) Bug fixed: wrong reading of slhaOutput in sugrac
+(r466) Corrections in documentation
+(r465) Correct Copyright label
+(r464) Correct Copyright label
+(r463) Correct Copyright label
+(r462) Correct Copyright label
+(r461) Bug fixed: add lost file name for compilation in Makefile
+(r460) Remove Makefile in lib
+(r459) Remove unnecessary documentation file (CHANGES)
+(r458) Correction in documentation (in README)
+(r457) Remove external and unnecessary code
+(r456) Correct Copyright label
+(r455) Code simplification
+(r454) Correct Copyright label
+(r453) Move batch.h to include/batch.h
+(r452) Correct Copyright label
+(r451) Correct Copyright label
+(r450) Correct Copyright label
+(r449) Add yet not working code for weighted events yet
+(r448) New visualisation of squared diagrams and correct Latex code
+(r447) Correct Copyright label
+(r446) change in LaTeX generation: documentstyle -> documentclass
+(r445) code simplification: small correction of commands in system()
+(r444) configuration procedure: add new option to configure (--with-m64), which addd gcc option (-m64) to CFLAGS
+(r443) compilation procedure: add report on compilation of n_comphep.exe to sumbolic  GUI
+(r442) bug fixed in configuration procedure: replace of wrong name of an option (--with-libxlm2 -> --with-libxlm)
+(r441) Inconsistancy corrected. If ROOTSYS is defined, but ROOT interface is not ordered make tries to compile RTUPLER in any case.
+(r440) Bug in LHE event generator fixed: LHE file has cs +/- cserr, where cserr is relative error, but it should be absolute error
+(r439) bug fixed: Wrong placement of XML tags (outside of the <header> tag)
+(r438) Add Constrants to decay 1->2 menu
+(r437) preliminary code for showing compilation status in symbolic GUI
+(r436) toy ROOT analysis code added, moved to user dir by RTUPLER
+(r435) improved code for ROOT histrogramming
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+(r434) New version: 4.5pre8
+
+------------------------------------------------------------------------
+r433 | sherstnv | 2009-01-06 17:57:21 +0000 (Tue, 06 Jan 2009) | 2 lines
+
+   M /trunk/src/symb/ini_ses.c
+
+(r433) Bug in init session.dat generation
+
+------------------------------------------------------------------------
+r432 | sherstnv | 2009-01-06 17:06:06 +0000 (Tue, 06 Jan 2009) | 2 lines
+
+   M /trunk/src/num/cascade_cpyth2.c
+   M /trunk/src/num/cascade_cpyth_lhef.c
+   M /trunk/src/num/include/cascade_cpyth_lhef.h
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/lhef_routines.c
+
+(r432) Cascade matching for LHE files
+
+------------------------------------------------------------------------
+r431 | sherstnv | 2009-01-06 17:05:28 +0000 (Tue, 06 Jan 2009) | 2 lines
+
+   M /trunk/src/num/cascade_cpyth1.c
+
+Remove a common routine (from 4_vector)
+
+------------------------------------------------------------------------
+r430 | sherstnv | 2009-01-06 17:04:39 +0000 (Tue, 06 Jan 2009) | 2 lines
+
+   M /trunk/src/num/evnt_format_lhaef.c
+
+Bug for decay event files
+
+------------------------------------------------------------------------
+r429 | sherstnv | 2009-01-06 16:58:08 +0000 (Tue, 06 Jan 2009) | 2 lines
+
+   M /trunk/src/num/include/trans_cpyth1.h
+   M /trunk/src/num/trans_cpyth1.c
+   M /trunk/src/num/translator.c
+
+Add translation of un-mixed cpyth1 files
+
+------------------------------------------------------------------------
+r428 | sherstnv | 2009-01-06 16:56:06 +0000 (Tue, 06 Jan 2009) | 2 lines
+
+   M /trunk/src/num/event_reader.c
+   M /trunk/src/num/include/event_reader.h
+   M /trunk/src/num/include/tag_routines.h
+   M /trunk/src/num/tag_routines.c
+
+Move a routine form event_reader to tag_routines. Bugs in LHE
+
+------------------------------------------------------------------------
+r427 | sherstnv | 2009-01-06 16:53:16 +0000 (Tue, 06 Jan 2009) | 2 lines
+
+   M /trunk/src/num/phys_val.c
+   M /trunk/src/service2/4_vector.c
+   M /trunk/src/service2/include/4_vector.h
+
+Move a routine from phys_val to 4_vector
+
+------------------------------------------------------------------------
+r426 | sherstnv | 2008-12-15 14:13:14 +0000 (Mon, 15 Dec 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format1.c
+   M /trunk/src/num/evnt_format2.c
+   M /trunk/src/num/evnt_format_lhaef.c
+
+Fixed bug for event generation
+
+------------------------------------------------------------------------
+r425 | sherstnv | 2008-12-15 13:09:46 +0000 (Mon, 15 Dec 2008) | 2 lines
+
+   M /trunk/src/num/trans_cpyth1.c
+   M /trunk/src/num/trans_cpyth2.c
+
+(r425) bug fixed in TRASLATOR: proper translation of decay events
+
+------------------------------------------------------------------------
+(r424) bug fixed: right generation of decay events
+
+------------------------------------------------------------------------
+r423 | sherstnv | 2008-12-15 13:07:54 +0000 (Mon, 15 Dec 2008) | 2 lines
+
+   M /trunk/src/num/include/tag_routines.h
+   M /trunk/src/num/tag_routines.c
+
+(r423) New routines, corrected bug: it can't detect the format tag in decay event files
+
+------------------------------------------------------------------------
+r422 | sherstnv | 2008-12-15 13:06:58 +0000 (Mon, 15 Dec 2008) | 2 lines
+
+   M /trunk/src/num/tag_parser.c
+
+corrected wron beheviour of one routine
+
+------------------------------------------------------------------------
+r421 | sherstnv | 2008-12-12 16:21:56 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/src/symb/rfactor.c
+   M /trunk/src/tab/tab_routines.c
+
+Corrected warnings
+
+------------------------------------------------------------------------
+r420 | sherstnv | 2008-12-12 16:19:50 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+   A /trunk/src/num/core_data.c
+   M /trunk/src/num/evnt_format1.c
+   M /trunk/src/num/evnt_format2.c
+   M /trunk/src/num/evnt_format_lhaef.c
+   M /trunk/src/num/evnt_menu.c
+   A /trunk/src/num/include/core_data.h
+   M /trunk/src/num/include/evnt_format1.h
+   M /trunk/src/num/include/evnt_menu.h
+   M /trunk/src/num/include/runVegas.h
+   M /trunk/src/num/include/vegas.h
+   M /trunk/src/num/mc_menu.c
+   M /trunk/src/num/runVegas.c
+   M /trunk/src/num/rw_sess.c
+   M /trunk/src/num/vegas.c
+   M /trunk/src/num/width_12.c
+
+Add event generation for decays 1->2
+
+------------------------------------------------------------------------
+r419 | sherstnv | 2008-12-12 16:19:17 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/src/num/lhef_routines.c
+
+Corrected warnings
+
+------------------------------------------------------------------------
+r418 | sherstnv | 2008-12-12 16:18:29 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/src/num/include/rtuple_cpyth1.h
+   M /trunk/src/num/include/rtuple_cpyth2.h
+   M /trunk/src/num/include/rtuple_cpyth_lhef.h
+   M /trunk/src/num/rtuple_cpyth1.c
+   M /trunk/src/num/rtuple_cpyth2.c
+   M /trunk/src/num/rtuple_cpyth_lhef.c
+
+Corrected warnings
+
+------------------------------------------------------------------------
+r417 | sherstnv | 2008-12-12 13:46:12 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/src/symb/ini_ses.c
+
+Small correction of the numner of EOL
+
+------------------------------------------------------------------------
+r416 | sherstnv | 2008-12-12 13:36:19 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/src/num/lhef_routines.c
+   M /trunk/src/num/sf_pdf.c
+   M /trunk/src/num/wrap.F
+
+Corrected warnings
+
+------------------------------------------------------------------------
+r415 | sherstnv | 2008-12-12 13:09:56 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/strfun/cteq4l.pdf
+   M /trunk/strfun/cteq5l.pdf
+
+Fix capital letters in PDF names
+
+------------------------------------------------------------------------
+r414 | sherstnv | 2008-12-12 11:02:39 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/src/symb/ini_ses.c
+
+Bug in the dummy cut table (one column lost)
+
+------------------------------------------------------------------------
+r413 | sherstnv | 2008-12-12 11:01:52 +0000 (Fri, 12 Dec 2008) | 2 lines
+
+   M /trunk/Makefile
+
+Bug in the dist target.
+
+------------------------------------------------------------------------
+(r412) Some stylish code improvements
+(r411) Remove old code
+(r410) code simplification: Fix warnings
+(r409) rtupler added, all binaries are moved to bin
+(r408) First working version of the cascade program
+(r407) Add preliminary code of cascade program for scalars
+(r406) Warning corrections for pedantic mode of compilation
+(r405) LanHEP added but still can not be used...
+(r404) code simplification: corrections of PASCAL-style
+(r403) Exclusive cuts added
+(r402) Corrections in order to enable SUSY calculations in multi-CPU batch mode
+(r401) Corrections for the case of negative cs in num_batch.pl
+(r400) Corrections for system calls in num_batch.pl
+(r399) missing FORM file added
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+(r398) New version: 4.5pre7
+
+------------------------------------------------------------------------
+r397 | sherstnv | 2008-11-14 16:41:48 +0000 (Fri, 14 Nov 2008) | 2 lines
+
+   M /trunk/src/num/mc_menu.c
+
+Wronk comment corrected
+
+------------------------------------------------------------------------
+r396 | sherstnv | 2008-11-14 16:41:17 +0000 (Fri, 14 Nov 2008) | 2 lines
+
+   M /trunk/src/symb/s_comphep.c
+
+Small correction
+
+------------------------------------------------------------------------
+r390 | sherstnv | 2008-11-12 14:29:32 +0000 (Wed, 12 Nov 2008) | 2 lines
+
+   M /trunk/src/symb/out_form.c
+
+Slava Bunichev autorship for src/symb/out_form.c added
+
+------------------------------------------------------------------------
+r389 | sherstnv | 2008-11-12 14:18:54 +0000 (Wed, 12 Nov 2008) | 2 lines
+
+   M /trunk/src/symb/out_form.c
+
+Lost changes by Slava Bunichev for interface CompHEP-FORM
+
+------------------------------------------------------------------------
+r388 | sherstnv | 2008-11-12 14:14:20 +0000 (Wed, 12 Nov 2008) | 2 lines
+
+   M /trunk/src/service2/unix_utils.c
+
+More strict condition for mkdir(). In order to exclude sticky bits for new dirs
+
+------------------------------------------------------------------------
+r387 | sherstnv | 2008-11-11 11:33:11 +0000 (Tue, 11 Nov 2008) | 2 lines
+
+   M /trunk/src/service2/drandXX.c
+   M /trunk/src/service2/include/drandXX.h
+
+New routines for iterative MC
+
+------------------------------------------------------------------------
+r386 | sherstnv | 2008-11-11 11:31:43 +0000 (Tue, 11 Nov 2008) | 2 lines
+
+   M /trunk/src/num/vegas.c
+
+Small bug for event generation fixed
+
+------------------------------------------------------------------------
+r385 | sherstnv | 2008-11-11 11:28:28 +0000 (Tue, 11 Nov 2008) | 2 lines
+
+   M /trunk/src/symb/m_utils.c
+
+Bug for new model creation fixed
+
+------------------------------------------------------------------------
+r384 | sherstnv | 2008-10-15 11:32:56 +0100 (Wed, 15 Oct 2008) | 2 lines
+
+   M /trunk/src/num/vegas.c
+
+Simple optimization in event generation
+
+------------------------------------------------------------------------
+r383 | sherstnv | 2008-10-15 11:31:13 +0100 (Wed, 15 Oct 2008) | 2 lines
+
+   M /trunk/src/num/vegas.c
+
+Stupid error in vegas_events, wrong new maxima during event generation
+
+------------------------------------------------------------------------
+r377 | sherstnv | 2008-08-13 11:13:23 +0100 (Wed, 13 Aug 2008) | 2 lines
+
+   M /trunk/Makefile
+
+new version: 4.5pre6
+
+------------------------------------------------------------------------
+r376 | sherstnv | 2008-08-13 11:12:19 +0100 (Wed, 13 Aug 2008) | 2 lines
+
+   M /trunk/src/num/vegas.c
+
+a bug has been fixed
+
+------------------------------------------------------------------------
+r375 | sherstnv | 2008-07-30 23:50:14 +0100 (Wed, 30 Jul 2008) | 2 lines
+
+   M /trunk/src/num/vegas.c
+
+Bug!
+
+------------------------------------------------------------------------
+r374 | sherstnv | 2008-07-30 23:49:43 +0100 (Wed, 30 Jul 2008) | 2 lines
+
+   M /trunk/Makefile
+   M /trunk/src/num/lhapdf.c
+   D /trunk/strfun/LHAIndex-comphep-full.txt
+   D /trunk/strfun/LHAIndex-comphep-short.txt
+   A /trunk/strfun/PDFsets.index
+   M /trunk/strfun/cteq4m.pdf
+
+Improvements in strfun. CompHEP is compatible with lhapdf-5.3 or later!
+
+------------------------------------------------------------------------
+r366 | sherstnv | 2008-07-29 17:43:54 +0100 (Tue, 29 Jul 2008) | 2 lines
+
+   D /trunk/src/num/include/translator.h
+   M /trunk/src/num/translator.c
+
+Remove useless header
+
+------------------------------------------------------------------------
+r365 | sherstnv | 2008-07-29 17:43:21 +0100 (Tue, 29 Jul 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format2.c
+   M /trunk/src/num/pdf.c
+   M /trunk/src/num/sf_pdf.c
+
+Modified CERNpdf_number
+
+------------------------------------------------------------------------
+r364 | sherstnv | 2008-07-29 17:41:32 +0100 (Tue, 29 Jul 2008) | 2 lines
+
+   M /trunk/src/num/trans_cpyth1.c
+
+Remove useless headers
+
+------------------------------------------------------------------------
+r363 | sherstnv | 2008-07-29 17:40:28 +0100 (Tue, 29 Jul 2008) | 2 lines
+
+   M /trunk/src/service2/include/kfcodes.h
+   M /trunk/src/service2/kfcodes.c
+
+New routine
+
+------------------------------------------------------------------------
+r357 | sherstnv | 2008-07-28 15:37:57 +0100 (Mon, 28 Jul 2008) | 2 lines
+
+   M /trunk/src/num/runVegas.c
+   M /trunk/src/num/vegas.c
+   M /trunk/src/service2/include/chep_limits.h
+
+a couple of definitions has been moved to chep_limits.h
+
+------------------------------------------------------------------------
+r356 | sherstnv | 2008-07-28 15:30:55 +0100 (Mon, 28 Jul 2008) | 2 lines
+
+   M /trunk/src/num/lhef_routines.c
+   M /trunk/src/tab/tab_routines.c
+
+One routine interface has been re-defined
+
+------------------------------------------------------------------------
+r355 | sherstnv | 2008-07-28 15:29:50 +0100 (Mon, 28 Jul 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format_lhaef.c
+
+Now LHAPDF codes stored in LHEF file in the <init> section
+
+------------------------------------------------------------------------
+r354 | sherstnv | 2008-07-28 15:28:13 +0100 (Mon, 28 Jul 2008) | 2 lines
+
+   M /trunk/src/num/event_reader.c
+   M /trunk/src/num/include/event_reader.h
+
+Bug in one routine fixed. A new routine added
+
+------------------------------------------------------------------------
+r353 | sherstnv | 2008-07-23 14:48:00 +0100 (Wed, 23 Jul 2008) | 2 lines
+
+   M /trunk/src/num/include/lhapdf.h
+   M /trunk/src/num/lhapdf.c
+
+New routine for cpyth
+
+------------------------------------------------------------------------
+r352 | sherstnv | 2008-06-19 17:45:53 +0100 (Thu, 19 Jun 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format2.c
+
+Stupid putch! don't get a reason of the bug...
+
+------------------------------------------------------------------------
+r351 | sherstnv | 2008-06-19 16:20:55 +0100 (Thu, 19 Jun 2008) | 2 lines
+
+   M /trunk/usr/symb_batch.pl
+
+Wrong behaviour with -d ... corrected
+
+------------------------------------------------------------------------
+r350 | sherstnv | 2008-06-19 16:20:06 +0100 (Thu, 19 Jun 2008) | 2 lines
+
+   M /trunk/src/symb/batch.c
+   M /trunk/usr/process.dat
+
+feynman -> Feynman
+
+------------------------------------------------------------------------
+r349 | sherstnv | 2008-06-19 14:52:31 +0100 (Thu, 19 Jun 2008) | 2 lines
+
+   M /trunk/src/mssmlib/fhf3.c
+
+A misprint has been corrected
+
+------------------------------------------------------------------------
+r348 | sherstnv | 2008-05-13 17:22:08 +0100 (Tue, 13 May 2008) | 2 lines
+
+   M /trunk/Makefile
+   M /trunk/include/sqme0.c
+   M /trunk/src/service2/tptcmac.c
+   M /trunk/usr/Makefile
+
+Small corrections
+
+------------------------------------------------------------------------
+r347 | sherstnv | 2008-05-13 11:39:12 +0100 (Tue, 13 May 2008) | 2 lines
+
+   M /trunk/src/num/rw_sess.c
+
+Bug in rw of sesssion.dat for decays
+
+------------------------------------------------------------------------
+r346 | sherstnv | 2008-05-12 15:34:40 +0100 (Mon, 12 May 2008) | 2 lines
+
+   M /trunk/configure
+
+Correction in help
+
+------------------------------------------------------------------------
+r345 | sherstnv | 2008-05-09 17:41:41 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/src/symb/squar.c
+
+Some tiny improvements only
+
+------------------------------------------------------------------------
+r344 | sherstnv | 2008-05-09 15:12:35 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/src/num/include/translator.h
+   M /trunk/src/num/mix.c
+   M /trunk/src/num/translator.c
+
+Add help to mix/traslator
+
+------------------------------------------------------------------------
+r343 | sherstnv | 2008-05-09 14:38:33 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/src/num/sf_lhapdf.c
+
+Bug in LHAPDF code
+
+------------------------------------------------------------------------
+r342 | sherstnv | 2008-05-09 14:37:32 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/src/num/trans_cpyth2.c
+
+Mistake in the file, can't be compiled
+
+------------------------------------------------------------------------
+r341 | sherstnv | 2008-05-09 14:11:08 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/Makefile
+
+Small correction for cleaning
+
+------------------------------------------------------------------------
+r340 | sherstnv | 2008-05-09 14:10:04 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/src/num/sf_lhapdf.c
+   M /trunk/src/num/trans_cpyth2.c
+
+Correction in storing of info for LHEPDF numbers into event files
+
+------------------------------------------------------------------------
+r338 | sherstnv | 2008-05-09 11:52:14 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/Makefile
+
+Add some useful targets
+
+------------------------------------------------------------------------
+r336 | sherstnv | 2008-05-09 11:46:12 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/configure
+
+Remove redandant  option, corrected help
+
+------------------------------------------------------------------------
+r335 | sherstnv | 2008-05-09 11:44:06 +0100 (Fri, 09 May 2008) | 2 lines
+
+   M /trunk/src/num/trans_cpyth2.c
+
+Bug in reading of STRFUN
+
+------------------------------------------------------------------------
+r330 | sherstnv | 2008-05-08 16:15:43 +0100 (Thu, 08 May 2008) | 2 lines
+
+   M /trunk/src/num/include/event_reader.h
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/include/tag_writer.h
+   M /trunk/src/num/lhef_routines.c
+   M /trunk/src/num/tag_writer.c
+
+Small rearangement of records in header files
+
+------------------------------------------------------------------------
+r329 | sherstnv | 2008-05-08 15:57:37 +0100 (Thu, 08 May 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.5pre4
+
+------------------------------------------------------------------------
+r328 | sherstnv | 2008-05-08 15:56:42 +0100 (Thu, 08 May 2008) | 2 lines
+
+   M /trunk/src/num/mix.c
+
+Add help on -o
+
+------------------------------------------------------------------------
+r327 | sherstnv | 2008-05-08 15:54:36 +0100 (Thu, 08 May 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+   M /trunk/src/num/include/mix_format1.h
+   M /trunk/src/num/include/mix_format2.h
+   M /trunk/src/num/include/mix_format_lhef.h
+   M /trunk/src/num/mix.c
+   M /trunk/src/num/mix_format1.c
+   M /trunk/src/num/mix_format2.c
+   M /trunk/src/num/mix_format_lhef.c
+   D /trunk/src/num/mix_lhef.c
+
+Some small change in mixing code
+
+------------------------------------------------------------------------
+r326 | sherstnv | 2008-05-08 14:26:00 +0100 (Thu, 08 May 2008) | 2 lines
+
+   M /trunk/src/num/trans_cpyth1.c
+   M /trunk/src/num/trans_cpyth2.c
+
+Bug in color chain printing
+
+------------------------------------------------------------------------
+r325 | sherstnv | 2008-05-08 09:06:57 +0100 (Thu, 08 May 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format2.c
+   M /trunk/src/num/evnt_format_lhaef.c
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/lhef_routines.c
+   M /trunk/src/num/mix.c
+   M /trunk/src/num/mix_format1.c
+   M /trunk/src/num/mix_format2.c
+   M /trunk/src/num/mix_format_lhef.c
+   M /trunk/src/num/trans_cpyth1.c
+   M /trunk/src/num/trans_cpyth2.c
+
+Problem with colour in LHE, swap of momenta if beam1 == beam2
+
+------------------------------------------------------------------------
+r324 | sherstnv | 2008-05-07 15:07:03 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/num/sf_pdf.c
+   M /trunk/src/symb/out_c.c
+
+Corrections should be done in order to compensate changes in code
+
+------------------------------------------------------------------------
+r323 | sherstnv | 2008-05-07 12:52:40 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/num/event_reader.c
+
+Corrected version of my tag library
+
+------------------------------------------------------------------------
+r322 | sherstnv | 2008-05-07 12:51:15 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/num/trans_cpyth1.c
+   M /trunk/src/num/trans_cpyth2.c
+   M /trunk/src/num/translator.c
+
+Working version of traslator to LHE
+
+------------------------------------------------------------------------
+r321 | sherstnv | 2008-05-07 12:49:45 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/num/tag_routines.c
+
+Corrected version of my tag librar
+
+------------------------------------------------------------------------
+r320 | sherstnv | 2008-05-07 12:47:40 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/num/alphas2.c
+
+Working version of alpha_em, bug in LHAPDF realization of alpha_s
+
+------------------------------------------------------------------------
+r319 | sherstnv | 2008-05-07 12:46:46 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/num/sf_lhapdf.c
+
+Small correction for strncpy
+
+------------------------------------------------------------------------
+r318 | sherstnv | 2008-05-07 12:46:11 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/num/compare.c
+   M /trunk/src/num/fill.c
+   M /trunk/src/num/include/tag_parser.h
+   M /trunk/src/num/include/tag_reader.h
+   M /trunk/src/num/tag_parser.c
+   M /trunk/src/num/tag_reader.c
+   M /trunk/src/num/tag_writer.c
+   M /trunk/src/num/validity.c
+
+Corrected version of my tag library
+
+------------------------------------------------------------------------
+r317 | sherstnv | 2008-05-07 12:45:13 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/symb/physics.c
+   M /trunk/src/symb/sos.c
+
+Small corrections for strncpy
+
+------------------------------------------------------------------------
+r316 | sherstnv | 2008-05-07 12:44:22 +0100 (Wed, 07 May 2008) | 2 lines
+
+   M /trunk/src/tab/tab_routines.c
+
+Bug 
+
+------------------------------------------------------------------------
+r315 | sherstnv | 2008-05-01 16:45:13 +0100 (Thu, 01 May 2008) | 2 lines
+
+   M /trunk/Makefile
+   M /trunk/configure
+   M /trunk/include/out_ext.h
+   D /trunk/src/num/4_vector.c
+   M /trunk/src/num/Makefile
+   M /trunk/src/num/alphas2.c
+   A /trunk/src/num/alphas_menu.c
+   M /trunk/src/num/compare.c
+   M /trunk/src/num/cs_22.c
+   M /trunk/src/num/decay.c
+   M /trunk/src/num/evnt_format1.c
+   M /trunk/src/num/evnt_format2.c
+   M /trunk/src/num/evnt_format_lhaef.c
+   M /trunk/src/num/evnt_tools.c
+   M /trunk/src/num/fill.c
+   D /trunk/src/num/include/4_vector.h
+   M /trunk/src/num/include/alphas2.h
+   A /trunk/src/num/include/alphas_menu.h
+   M /trunk/src/num/include/const.h
+   D /trunk/src/num/include/kfcodes.h
+   M /trunk/src/num/include/pdf.h
+   M /trunk/src/num/include/sf_epa.h
+   M /trunk/src/num/include/sf_isr.h
+   M /trunk/src/num/include/sf_lhapdf.h
+   M /trunk/src/num/include/sf_lsr.h
+   M /trunk/src/num/include/sf_pdf.h
+   M /trunk/src/num/include/strfun.h
+   A /trunk/src/num/include/strfun_par.h
+   A /trunk/src/num/include/tag_routines.h
+   A /trunk/src/num/include/trans_cpyth1.h
+   A /trunk/src/num/include/trans_cpyth2.h
+   D /trunk/src/num/kfcodes.c
+   M /trunk/src/num/kinaux.c
+   M /trunk/src/num/lhaef.c
+   M /trunk/src/num/lhapdf.c
+   M /trunk/src/num/lhef_routines.c
+   M /trunk/src/num/mc_menu.c
+   M /trunk/src/num/pdf.c
+   M /trunk/src/num/phys_val.c
+   M /trunk/src/num/q_kin.c
+   M /trunk/src/num/runVegas.c
+   M /trunk/src/num/rw_sess.c
+   M /trunk/src/num/sf_epa.c
+   M /trunk/src/num/sf_isr.c
+   M /trunk/src/num/sf_lhapdf.c
+   M /trunk/src/num/sf_lsr.c
+   M /trunk/src/num/sf_pdf.c
+   M /trunk/src/num/simpson.c
+   M /trunk/src/num/strfun.c
+   A /trunk/src/num/strfun_par.c
+   M /trunk/src/num/tag_parser.c
+   A /trunk/src/num/tag_routines.c
+   M /trunk/src/num/tools.c
+   A /trunk/src/num/trans_cpyth1.c
+   A /trunk/src/num/trans_cpyth2.c
+   M /trunk/src/num/translator.c
+   M /trunk/src/num/validity.c
+   M /trunk/src/num/vegas.c
+   M /trunk/src/num/width_12.c
+   A /trunk/src/service2/4_vector.c
+   M /trunk/src/service2/Makefile
+   A /trunk/src/service2/include/4_vector.h
+   M /trunk/src/service2/include/chep_limits.h
+   A /trunk/src/service2/include/kfcodes.h
+   A /trunk/src/service2/kfcodes.c
+   M /trunk/src/symb/include/model.h
+   M /trunk/src/symb/out_c.c
+   M /trunk/src/tab/e_tools.c
+   M /trunk/src/tab/include/e_tools.h
+   M /trunk/src/tab/tab_routines.c
+   M /trunk/usr/Makefile
+   M /trunk/usr/Makefile.results
+   A /trunk/usr/translator
+   M /trunk/usr/userFun.c
+
+Translator added, many changes in inner structure
+
+------------------------------------------------------------------------
+r314 | sherstnv | 2008-04-28 11:10:55 +0100 (Mon, 28 Apr 2008) | 2 lines
+
+   A /trunk/doc/internal-pdf-HOWTO
+   D /trunk/doc/internal-pdf.txt
+
+Unification of doc file names
+
+------------------------------------------------------------------------
+r313 | sherstnv | 2008-04-28 11:04:04 +0100 (Mon, 28 Apr 2008) | 2 lines
+
+   M /trunk/src/num/phys_val.c
+
+Bug in definition of pvect when no new rest frame is used
+
+------------------------------------------------------------------------
+r312 | sherstnv | 2008-04-25 13:48:40 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/models/func5.mdl
+   M /trunk/models/func6.mdl
+   M /trunk/models/func7.mdl
+   M /trunk/models/func8.mdl
+   M /trunk/models/lgrng5.mdl
+   M /trunk/models/lgrng6.mdl
+   M /trunk/models/lgrng7.mdl
+   M /trunk/models/lgrng8.mdl
+
+Modifications in MSSM models according to Andrey's files
+
+------------------------------------------------------------------------
+r311 | sherstnv | 2008-04-25 13:47:21 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.5.0rc3
+
+------------------------------------------------------------------------
+r310 | sherstnv | 2008-04-25 13:45:43 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/phys_val.c
+
+More effective calculation of variables
+
+------------------------------------------------------------------------
+r309 | sherstnv | 2008-04-25 13:44:18 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/4_vector.c
+
+Copyright lebel correction
+
+------------------------------------------------------------------------
+r308 | sherstnv | 2008-04-25 12:33:39 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/tab/tab_routines.c
+
+mk_tab works with LHE if libxml is unavailable, bug in cpyth2
+
+------------------------------------------------------------------------
+r307 | sherstnv | 2008-04-25 12:32:25 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/lhef_routines.c
+
+Bug in LHE mixing without libxml
+
+------------------------------------------------------------------------
+r306 | sherstnv | 2008-04-25 12:23:48 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/mix_format2.c
+
+prt.pev -> Prt.PEV
+
+------------------------------------------------------------------------
+r305 | sherstnv | 2008-04-25 12:23:17 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/mix_format_lhef.c
+
+More reliable error processing
+
+------------------------------------------------------------------------
+r304 | sherstnv | 2008-04-25 10:45:14 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/include/kfcodes.h
+   M /trunk/src/num/kfcodes.c
+
+New function kfcode -> CompHEP name
+
+------------------------------------------------------------------------
+r303 | sherstnv | 2008-04-25 10:42:27 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/lhef_routines.c
+
+mk_tab can build histos event XML is unavailable, corrections in processing of errors
+
+------------------------------------------------------------------------
+r302 | sherstnv | 2008-04-25 10:39:57 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/event_reader.c
+
+Bug in LHE event reader
+
+------------------------------------------------------------------------
+r301 | sherstnv | 2008-04-25 10:39:03 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/tab/e_tools.c
+
+Relaible processing of errors
+
+------------------------------------------------------------------------
+r300 | sherstnv | 2008-04-25 08:27:02 +0100 (Fri, 25 Apr 2008) | 2 lines
+
+   M /trunk/src/num/mix.c
+
+Small mistake in program reports
+
+------------------------------------------------------------------------
+r299 | sherstnv | 2008-04-24 17:49:50 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/src/num/mix_format_lhef.c
+
+Simplified code, remove ** pointers
+
+------------------------------------------------------------------------
+r298 | sherstnv | 2008-04-24 17:49:01 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/src/num/lhef_routines.c
+
+Lost XML doc remover
+
+------------------------------------------------------------------------
+r297 | sherstnv | 2008-04-24 17:48:28 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/src/tab/tab_routines.c
+
+Bug in mk_tab for LHE format
+
+------------------------------------------------------------------------
+r296 | sherstnv | 2008-04-24 15:04:04 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/configure
+
+Correction dor dealing with libxml2
+
+------------------------------------------------------------------------
+r295 | sherstnv | 2008-04-24 14:54:17 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/src/num/mix_format_lhef.c
+
+Correction in memory treatment
+
+------------------------------------------------------------------------
+r294 | sherstnv | 2008-04-24 14:53:10 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/usr/mix
+   M /trunk/usr/mk_tab
+
+More stable behaviour of the scripts
+
+------------------------------------------------------------------------
+r293 | sherstnv | 2008-04-24 14:52:41 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.5.0rc2
+
+------------------------------------------------------------------------
+r292 | sherstnv | 2008-04-24 10:57:01 +0100 (Thu, 24 Apr 2008) | 2 lines
+
+   M /trunk/src/service2/include/chep_limits.h
+
+Correct Copyright lebel
+
+------------------------------------------------------------------------
+r291 | sherstnv | 2008-04-23 17:13:37 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+   M /trunk/configure
+   M /trunk/src/num/Makefile
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/lhef_routines.c
+   M /trunk/src/num/mix_format_lhef.c
+   M /trunk/src/symb/s_comphep.c
+   M /trunk/src/tab/tab_routines.c
+   M /trunk/usr/Makefile
+   M /trunk/usr/Makefile.results
+   M /trunk/usr/diag_view
+
+Possibility to compile without libxml2 added (new option for configure)
+
+------------------------------------------------------------------------
+r290 | sherstnv | 2008-04-23 14:05:54 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/mssmlib/fhf3.c
+
+Clearer worning if there is no FeynHiggs 
+
+------------------------------------------------------------------------
+r289 | sherstnv | 2008-04-23 13:49:44 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+Bug during make setup
+
+------------------------------------------------------------------------
+r288 | sherstnv | 2008-04-23 12:41:17 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+First release candidate for 4.5.0
+
+------------------------------------------------------------------------
+r287 | sherstnv | 2008-04-23 12:40:34 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/mssmlib/Makefile
+   D /trunk/src/mssmlib/fhf2.c
+   A /trunk/src/mssmlib/fhf3.c
+   D /trunk/src/mssmlib/include/fhf2.h
+   A /trunk/src/mssmlib/include/fhf3.h
+   M /trunk/src/service2/read_func.c
+
+Preliminary code for new MSSM models' realization
+
+------------------------------------------------------------------------
+r286 | sherstnv | 2008-04-23 12:39:51 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/usr/Makefile
+
+Bug in usr/Makefile in USER area
+
+------------------------------------------------------------------------
+r285 | sherstnv | 2008-04-23 12:38:58 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/models/func5.mdl
+   M /trunk/models/func6.mdl
+   M /trunk/models/func7.mdl
+   M /trunk/models/func8.mdl
+   M /trunk/models/lgrng5.mdl
+   M /trunk/models/lgrng6.mdl
+   M /trunk/models/lgrng7.mdl
+   M /trunk/models/lgrng8.mdl
+   M /trunk/models/prtcls5.mdl
+   M /trunk/models/prtcls6.mdl
+   M /trunk/models/prtcls7.mdl
+   M /trunk/models/prtcls8.mdl
+   M /trunk/models/vars5.mdl
+   M /trunk/models/vars6.mdl
+   M /trunk/models/vars7.mdl
+   M /trunk/models/vars8.mdl
+
+New implementation of MSSM models
+
+------------------------------------------------------------------------
+r284 | sherstnv | 2008-04-23 12:21:27 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/tab/Makefile
+   M /trunk/src/tab/e_tools.c
+   M /trunk/src/tab/include/e_tools.h
+   A /trunk/src/tab/include/tab_routines.h
+   M /trunk/src/tab/mk_tab.c
+   A /trunk/src/tab/tab_routines.c
+
+New mk_tab, compatible with LHE 
+
+------------------------------------------------------------------------
+r283 | sherstnv | 2008-04-23 12:20:47 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/lhef_routines.c
+
+Add new routines, bugs in testEvent/moveEvent fixed
+
+------------------------------------------------------------------------
+r282 | sherstnv | 2008-04-23 12:19:33 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/lhaef.c
+
+Correction of LHE header output
+
+------------------------------------------------------------------------
+r281 | sherstnv | 2008-04-23 12:19:03 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/mix_format_lhef.c
+
+remove md5sum file
+
+------------------------------------------------------------------------
+r280 | sherstnv | 2008-04-23 12:18:21 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format2.c
+
+Internal simplifications
+
+------------------------------------------------------------------------
+r279 | sherstnv | 2008-04-23 12:16:50 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/evnt_tools.c
+
+Bug in cpyth2 reader (wrong processing of string comands)
+
+------------------------------------------------------------------------
+r278 | sherstnv | 2008-04-23 12:15:33 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+   M /trunk/src/num/mix_lhef.c
+
+test program for LHE mixing
+
+------------------------------------------------------------------------
+r277 | sherstnv | 2008-04-23 11:57:23 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/compare.c
+   M /trunk/src/num/fill.c
+   M /trunk/src/num/include/fill.h
+
+Remove global int number_proc (tags * t)
+
+------------------------------------------------------------------------
+r276 | sherstnv | 2008-04-23 11:55:55 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/event_reader.c
+   M /trunk/src/num/include/event_reader.h
+
+New event reader for LHE
+
+------------------------------------------------------------------------
+r275 | sherstnv | 2008-04-23 11:54:27 +0100 (Wed, 23 Apr 2008) | 2 lines
+
+   M /trunk/src/num/subproc.c
+
+Bug in get_final_state_name (void);
+
+------------------------------------------------------------------------
+r274 | sherstnv | 2008-04-22 07:45:25 +0100 (Tue, 22 Apr 2008) | 2 lines
+
+   M /trunk/src/num/routines.c
+
+minor correction
+
+------------------------------------------------------------------------
+r273 | sherstnv | 2008-04-18 14:37:17 +0100 (Fri, 18 Apr 2008) | 2 lines
+
+   M /trunk/usr/num_batch.pl
+   M /trunk/usr/symb_batch.pl
+
+nice option is added to batch scripts
+
+------------------------------------------------------------------------
+r272 | sherstnv | 2008-04-17 18:00:19 +0100 (Thu, 17 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.5pre1
+
+------------------------------------------------------------------------
+r271 | sherstnv | 2008-04-17 17:59:53 +0100 (Thu, 17 Apr 2008) | 2 lines
+
+   M /trunk/usr/num_batch.pl
+
+Date stamp update
+
+------------------------------------------------------------------------
+r270 | sherstnv | 2008-04-17 17:59:12 +0100 (Thu, 17 Apr 2008) | 2 lines
+
+   M /trunk/src/num/fill.c
+   M /trunk/src/num/mix_format2.c
+
+Bug in memory manipulation
+
+------------------------------------------------------------------------
+r269 | sherstnv | 2008-04-17 15:47:19 +0100 (Thu, 17 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+   M /trunk/src/symb/Makefile
+   A /trunk/src/symb/batch.c
+   A /trunk/src/symb/batch.h
+   M /trunk/src/symb/include/sos.h
+   M /trunk/src/symb/s_comphep.c
+   M /trunk/src/symb/sos.c
+   M /trunk/usr/symb_batch.pl
+
+Automatic generation od process.dat with selected diagrams
+
+------------------------------------------------------------------------
+r268 | sherstnv | 2008-04-16 10:42:31 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+   A /trunk/src/num/sf_epa.c
+   A /trunk/src/num/sf_isr.c
+   A /trunk/src/num/sf_lhapdf.c
+   A /trunk/src/num/sf_lsr.c
+   A /trunk/src/num/sf_pdf.c
+   D /trunk/src/num/strfun
+   A /trunk/src/num/strfun.c
+
+Remve strfun dir
+
+------------------------------------------------------------------------
+r267 | sherstnv | 2008-04-16 10:40:17 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+   A /trunk/src/num/compare.c
+   A /trunk/src/num/fill.c
+   A /trunk/src/num/lhef_routines.c
+   D /trunk/src/num/libmix
+   A /trunk/src/num/mix_format1.c
+   A /trunk/src/num/mix_format2.c
+   A /trunk/src/num/mix_format_lhef.c
+   A /trunk/src/num/mix_lhef.c
+   A /trunk/src/num/routines.c
+   A /trunk/src/num/tag_parser.c
+   A /trunk/src/num/tag_reader.c
+   A /trunk/src/num/tag_writer.c
+   A /trunk/src/num/validity.c
+
+Remve libmix dir
+
+------------------------------------------------------------------------
+r265 | sherstnv | 2008-04-16 10:08:10 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.4.112
+
+------------------------------------------------------------------------
+r264 | sherstnv | 2008-04-16 10:07:15 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/usr/comphep
+
+Better error treatment
+
+------------------------------------------------------------------------
+r263 | sherstnv | 2008-04-16 10:06:35 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/usr/diag_view
+
+Use diag_viewer.exe from installation area
+
+------------------------------------------------------------------------
+r262 | sherstnv | 2008-04-16 10:05:46 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/src/num/n_comphep.c
+
+Use diag_viewer.exe from instaalation area
+
+------------------------------------------------------------------------
+r261 | sherstnv | 2008-04-16 10:05:17 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/src/symb/sos.c
+
+LHC style ini state
+
+------------------------------------------------------------------------
+r260 | sherstnv | 2008-04-16 10:04:51 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   M /trunk/usr/Makefile.results
+
+Use the diag_viewer.exe from installation area
+
+------------------------------------------------------------------------
+r259 | sherstnv | 2008-04-16 10:03:40 +0100 (Wed, 16 Apr 2008) | 2 lines
+
+   D /trunk/usr/add_usrF
+
+Remove useless file
+
+------------------------------------------------------------------------
+r255 | sherstnv | 2008-04-15 16:47:01 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+
+Remove useless instruction
+
+------------------------------------------------------------------------
+r252 | sherstnv | 2008-04-15 16:28:24 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.4.111
+
+------------------------------------------------------------------------
+r251 | sherstnv | 2008-04-15 15:05:16 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+   A /trunk/doc/internal-pdf.txt
+   A /trunk/src/service2/cteq_internal.c
+   D /trunk/tbl-pdf
+
+Mode CTEQ convertor to src/service2
+
+------------------------------------------------------------------------
+r250 | sherstnv | 2008-04-15 14:52:06 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   D /trunk/RELEASE-NOTES
+   A /trunk/doc/RELEASE-NOTES
+   D /trunk/doc/release_note.tex
+
+Some corrections in official files
+
+------------------------------------------------------------------------
+r249 | sherstnv | 2008-04-15 14:50:01 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   D /trunk/ChangeLog
+   M /trunk/INSTALL
+   M /trunk/README
+   D /trunk/TODO
+
+Some corrections for official files
+
+------------------------------------------------------------------------
+r248 | sherstnv | 2008-04-15 14:40:30 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   M /trunk/usr/diag_view
+   M /trunk/usr/n_comphep
+
+Add some usefull instructions to sh scripts
+
+------------------------------------------------------------------------
+r247 | sherstnv | 2008-04-15 14:38:29 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   D /trunk/launch_n_comphep
+
+remove useless file
+
+------------------------------------------------------------------------
+r246 | sherstnv | 2008-04-15 14:34:23 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   M /trunk/src/symb/Makefile
+   D /trunk/src/symb/_ampl.rest
+   A /trunk/src/symb/constr.c
+   M /trunk/src/symb/denominators.c
+   D /trunk/src/symb/diagram
+   A /trunk/src/symb/diagrams.c
+   A /trunk/src/symb/diaprins.c
+   A /trunk/src/symb/draw_ampl.c
+   A /trunk/src/symb/drawdiag.c
+   M /trunk/src/symb/form_code.c
+   D /trunk/src/symb/include/c_out.h
+   M /trunk/src/symb/include/denominators.h
+   D /trunk/src/symb/include/form_out.h
+   D /trunk/src/symb/include/math_out.h
+   A /trunk/src/symb/include/out_c.h
+   A /trunk/src/symb/include/out_form.h
+   A /trunk/src/symb/include/out_math.h
+   A /trunk/src/symb/include/out_red.h
+   D /trunk/src/symb/include/out_serv.h
+   A /trunk/src/symb/include/out_service.h
+   D /trunk/src/symb/include/red_out.h
+   M /trunk/src/symb/ini_ses.c
+   A /trunk/src/symb/l_string.c
+   A /trunk/src/symb/optimise.c
+   D /trunk/src/symb/out
+   A /trunk/src/symb/out_c.c
+   A /trunk/src/symb/out_form.c
+   A /trunk/src/symb/out_math.c
+   A /trunk/src/symb/out_red.c
+   A /trunk/src/symb/out_service.c
+   A /trunk/src/symb/procvar.c
+   M /trunk/src/symb/r_code.c
+   A /trunk/src/symb/reader_c.c
+   M /trunk/src/symb/s_comphep.c
+   M /trunk/src/symb/screen.c
+   A /trunk/src/symb/showgrph.c
+   M /trunk/src/symb/sos.c
+   A /trunk/src/symb/squar.c
+
+Remove internal dirs
+
+------------------------------------------------------------------------
+r245 | sherstnv | 2008-04-15 14:25:16 +0100 (Tue, 15 Apr 2008) | 2 lines
+
+   M /trunk/src/chep_crt/crt_util.c
+
+Bug in working of screen update if hotkey routine runs
+
+------------------------------------------------------------------------
+r244 | sherstnv | 2008-04-14 18:46:39 +0100 (Mon, 14 Apr 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.4.110
+
+------------------------------------------------------------------------
+r243 | sherstnv | 2008-04-14 18:45:56 +0100 (Mon, 14 Apr 2008) | 2 lines
+
+   M /trunk/src/num/include/vegas.h
+   M /trunk/src/num/vegas.c
+
+Improved routines in vegas
+
+------------------------------------------------------------------------
+r242 | sherstnv | 2008-04-14 18:22:33 +0100 (Mon, 14 Apr 2008) | 2 lines
+
+   M /trunk/src/num/lhaef.c
+
+Memeory bug in CompHEP lhaef interface
+
+------------------------------------------------------------------------
+r241 | sherstnv | 2008-04-14 18:14:15 +0100 (Mon, 14 Apr 2008) | 2 lines
+
+   M /trunk/src/num/evnt_menu.c
+
+Bug in event generation menu
+
+------------------------------------------------------------------------
+r240 | sherstnv | 2008-04-11 16:08:40 +0100 (Fri, 11 Apr 2008) | 3 lines
+
+   M /trunk/src/symb/diagram/Makefile
+   M /trunk/src/symb/diagram/showgrph.c
+   D /trunk/src/symb/diagram/showgrph2.c
+   M /trunk/src/symb/include/diagrams.h
+   D /trunk/src/symb/include/showgrph2.h
+   M /trunk/src/symb/include/sos.h
+   M /trunk/src/symb/s_comphep.c
+   M /trunk/src/symb/screen.c
+   M /trunk/src/symb/sos.c
+
+Add automatic process.dat generation and remove redundant code for diagram showing
+
+
+------------------------------------------------------------------------
+r239 | sherstnv | 2008-04-09 18:24:48 +0100 (Wed, 09 Apr 2008) | 2 lines
+
+   M /trunk/src/num/vegas.c
+
+Missed switch for simplex calculation restored
+
+------------------------------------------------------------------------
+r238 | sherstnv | 2008-04-09 18:05:15 +0100 (Wed, 09 Apr 2008) | 2 lines
+
+   M /trunk/src/num/include/vegas.h
+   M /trunk/src/num/runVegas.c
+   M /trunk/src/num/vegas.c
+
+Improvements in CompHEP version of vegas algo
+
+------------------------------------------------------------------------
+r237 | sherstnv | 2008-04-01 18:36:04 +0100 (Tue, 01 Apr 2008) | 2 lines
+
+   M /trunk/src/chep_crt/crt_util.c
+   M /trunk/src/chep_crt/include/crt_util.h
+   M /trunk/src/num/evnt_menu.c
+   M /trunk/src/num/include/q_kin.h
+   M /trunk/src/num/include/runVegas.h
+   M /trunk/src/num/include/vegas.h
+   M /trunk/src/num/q_kin.c
+   M /trunk/src/num/runVegas.c
+   M /trunk/src/num/rw_sess.c
+   M /trunk/src/num/vegas.c
+
+Optimization of internal routines for VEGAS. Preparation for multithreading for GUI menu.
+
+------------------------------------------------------------------------
+r236 | sherstnv | 2008-03-31 16:12:59 +0100 (Mon, 31 Mar 2008) | 2 lines
+
+   M /trunk/Makefile
+   A /trunk/src/lem
+   A /trunk/src/lem/Makefile
+   A /trunk/src/lem/include
+   A /trunk/src/lem/include/lem_interface.h
+   A /trunk/src/lem/lem.c
+   A /trunk/src/lem/lem_interface.c
+
+Preparition of LEM module
+
+------------------------------------------------------------------------
+r235 | sherstnv | 2008-03-31 12:03:55 +0100 (Mon, 31 Mar 2008) | 2 lines
+
+   M /trunk/src/num/libmix/mix_format_lhef.c
+   M /trunk/src/num/runVegas.c
+
+Remove/add (un)needed headers
+
+------------------------------------------------------------------------
+r234 | sherstnv | 2008-03-31 11:43:52 +0100 (Mon, 31 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/lhaef.c
+   M /trunk/src/num/libmix/lhef_routines.c
+   M /trunk/src/num/libmix/mix_format_lhef.c
+
+Add CS error calculation to mixing for LHE files
+
+------------------------------------------------------------------------
+r233 | sherstnv | 2008-03-28 12:31:57 +0000 (Fri, 28 Mar 2008) | 2 lines
+
+   M /trunk/Makefile
+
+New version: 4.4.108
+remove all needless dirs for compilation
+
+------------------------------------------------------------------------
+r232 | sherstnv | 2008-03-28 12:30:55 +0000 (Fri, 28 Mar 2008) | 2 lines
+
+   M /trunk/src/chep_crt/crt.c
+   M /trunk/src/chep_crt/edittab.c
+   M /trunk/src/chep_crt/file_scr.c
+   D /trunk/src/getmem
+   M /trunk/src/mssmlib/sugrac.c
+   M /trunk/src/num/alphas2.c
+   M /trunk/src/num/cs_22.c
+   M /trunk/src/num/cut.c
+   M /trunk/src/num/diag_viewer.c
+   M /trunk/src/num/err_code.c
+   M /trunk/src/num/event_reader.c
+   M /trunk/src/num/evnt_format1.c
+   M /trunk/src/num/evnt_format2.c
+   M /trunk/src/num/evnt_format_lhaef.c
+   M /trunk/src/num/evnt_menu.c
+   M /trunk/src/num/histogram.c
+   M /trunk/src/num/include/kinaux.h
+   M /trunk/src/num/include/lhaef.h
+   M /trunk/src/num/include/lhapdf.h
+   M /trunk/src/num/include/pdf.h
+   M /trunk/src/num/include/regfunal.h
+   M /trunk/src/num/include/regul.h
+   M /trunk/src/num/include/routines.h
+   M /trunk/src/num/include/subproc.h
+   M /trunk/src/num/include/tag_parser.h
+   M /trunk/src/num/include/translator.h
+   M /trunk/src/num/kinaux.c
+   M /trunk/src/num/kininpt.c
+   M /trunk/src/num/lhaef.c
+   M /trunk/src/num/lhapdf.c
+   M /trunk/src/num/libmix/Makefile
+   M /trunk/src/num/libmix/lhef_routines.c
+   M /trunk/src/num/libmix/mix_format1.c
+   M /trunk/src/num/libmix/mix_format2.c
+   M /trunk/src/num/libmix/mix_format_lhef.c
+   M /trunk/src/num/libmix/mix_lhef.c
+   M /trunk/src/num/libmix/routines.c
+   M /trunk/src/num/libmix/tag_parser.c
+   M /trunk/src/num/libmix/tag_reader.c
+   M /trunk/src/num/libmix/tag_writer.c
+   M /trunk/src/num/mc_menu.c
+   M /trunk/src/num/mix.c
+   M /trunk/src/num/n_comphep.c
+   M /trunk/src/num/num_serv.c
+   M /trunk/src/num/param.c
+   M /trunk/src/num/pdf.c
+   M /trunk/src/num/phys_val.c
+   M /trunk/src/num/q_kin.c
+   M /trunk/src/num/rd_num.c
+   M /trunk/src/num/regfunal.c
+   M /trunk/src/num/regul.c
+   M /trunk/src/num/roothisto.c
+   M /trunk/src/num/runVegas.c
+   M /trunk/src/num/rw_sess.c
+   M /trunk/src/num/strfun/Makefile
+   M /trunk/src/num/strfun/sf_epa.c
+   M /trunk/src/num/strfun/sf_isr.c
+   M /trunk/src/num/strfun/sf_lhapdf.c
+   M /trunk/src/num/strfun/sf_lsr.c
+   M /trunk/src/num/strfun/sf_pdf.c
+   M /trunk/src/num/strfun/strfun.c
+   M /trunk/src/num/subproc.c
+   M /trunk/src/num/translator.c
+   M /trunk/src/num/vegas.c
+   M /trunk/src/num/width_12.c
+   M /trunk/src/plot/plot.c
+   M /trunk/src/plot/view_tab.c
+   M /trunk/src/polynom/polynom.c
+   M /trunk/src/polynom/spinor.c
+   M /trunk/src/polynom/tensor.c
+   M /trunk/src/service2/Makefile
+   M /trunk/src/service2/files.c
+   A /trunk/src/service2/getmem.c
+   A /trunk/src/service2/include/chep_limits.h
+   M /trunk/src/service2/include/drandXX.h
+   M /trunk/src/service2/include/files.h
+   A /trunk/src/service2/include/getmem.h
+   M /trunk/src/service2/include/lbl.h
+   D /trunk/src/service2/include/os.h
+   D /trunk/src/service2/include/os.hh
+   M /trunk/src/service2/include/paragraphs.h
+   M /trunk/src/service2/include/parser.h
+   M /trunk/src/service2/include/parseref.h
+   M /trunk/src/service2/include/read_func.h
+   M /trunk/src/service2/include/s_files.h
+   M /trunk/src/service2/include/sets.h
+   M /trunk/src/service2/include/sortarr.h
+   A /trunk/src/service2/include/syst.h
+   D /trunk/src/service2/include/syst2.h
+   M /trunk/src/service2/include/tptcmac.h
+   A /trunk/src/service2/include/unix_utils.h
+   M /trunk/src/service2/lbl.c
+   D /trunk/src/service2/os_unix
+   M /trunk/src/service2/paragraphs.c
+   M /trunk/src/service2/parser.c
+   M /trunk/src/service2/read_func.c
+   M /trunk/src/service2/s_files.c
+   M /trunk/src/service2/sets.c
+   A /trunk/src/service2/syst.c
+   D /trunk/src/service2/syst2.c
+   M /trunk/src/service2/tptcmac.c
+   A /trunk/src/service2/unix_utils.c
+   M /trunk/src/symb/Makefile
+   M /trunk/src/symb/archiv.c
+   M /trunk/src/symb/beams.c
+   M /trunk/src/symb/chess.c
+   M /trunk/src/symb/colorf.c
+   M /trunk/src/symb/combine.c
+   M /trunk/src/symb/cweight.c
+   M /trunk/src/symb/cweight_old.c
+   M /trunk/src/symb/denominators.c
+   M /trunk/src/symb/diagram/Makefile
+   M /trunk/src/symb/diagram/constr.c
+   D /trunk/src/symb/diagram/constr.c_
+   M /trunk/src/symb/diagram/diagrams.c
+   M /trunk/src/symb/diagram/diaprins.c
+   M /trunk/src/symb/diagram/draw_ampl.c
+   M /trunk/src/symb/diagram/drawdiag.c
+   M /trunk/src/symb/diagram/showgrph.c
+   M /trunk/src/symb/diagram/showgrph2.c
+   M /trunk/src/symb/diagram/squar.c
+   M /trunk/src/symb/form_code.c
+   M /trunk/src/symb/ghosts.c
+   M /trunk/src/symb/include/beams.h
+   M /trunk/src/symb/include/ccolor.h
+   M /trunk/src/symb/include/combine.h
+   M /trunk/src/symb/include/model.h
+   M /trunk/src/symb/include/optimise.h
+   M /trunk/src/symb/include/physics.h
+   M /trunk/src/symb/include/process_core.h
+   M /trunk/src/symb/ini_ses.c
+   M /trunk/src/symb/m_utils.c
+   M /trunk/src/symb/model.c
+   M /trunk/src/symb/out/Makefile
+   M /trunk/src/symb/out/c_out.c
+   M /trunk/src/symb/out/form_out.c
+   M /trunk/src/symb/out/l_string.c
+   M /trunk/src/symb/out/math_out.c
+   M /trunk/src/symb/out/optimise.c
+   M /trunk/src/symb/out/out_serv.c
+   M /trunk/src/symb/out/procvar.c
+   M /trunk/src/symb/out/reader_c.c
+   M /trunk/src/symb/out/red_out.c
+   M /trunk/src/symb/physics.c
+   M /trunk/src/symb/pre_read.c
+   M /trunk/src/symb/prepdiag.c
+   M /trunk/src/symb/process.c
+   M /trunk/src/symb/process_core.c
+   M /trunk/src/symb/pvars.c
+   M /trunk/src/symb/r_code.c
+   M /trunk/src/symb/read_mdl.c
+   M /trunk/src/symb/reader0.c
+   M /trunk/src/symb/reader_s.c
+   M /trunk/src/symb/rfactor.c
+   M /trunk/src/symb/s_comphep.c
+   M /trunk/src/symb/saveres.c
+   M /trunk/src/symb/screen.c
+   M /trunk/src/symb/sos.c
+   M /trunk/src/symb/symbolic.c
+   M /trunk/src/symb/test_wrt.c
+   M /trunk/src/tab/e_tools.c
+   M /trunk/src/tab/include/e_tools.h
+   M /trunk/src/tab/mk_tab.c
+
+File structure reorganization
+
+------------------------------------------------------------------------
+r231 | sherstnv | 2008-03-28 10:03:24 +0000 (Fri, 28 Mar 2008) | 2 lines
+
+   D /trunk/src/getmem/Makefile
+   D /trunk/src/getmem/include
+
+Move getmem.c to service2
+
+------------------------------------------------------------------------
+r230 | sherstnv | 2008-03-28 10:01:44 +0000 (Fri, 28 Mar 2008) | 2 lines
+
+   M /trunk/src/chep_crt/Makefile
+   M /trunk/src/chep_crt/crt.c
+   M /trunk/src/chep_crt/crt_util.c
+   M /trunk/src/chep_crt/edittab.c
+   M /trunk/src/chep_crt/file_scr.c
+   M /trunk/src/chep_crt/help.c
+   M /trunk/src/chep_crt/include/chep_crt.h
+   M /trunk/src/chep_crt/include/file_scr.h
+   D /trunk/src/chep_crt/include/syst.h
+   D /trunk/src/chep_crt/syst.c
+   M /trunk/src/chep_crt/tex_util.c
+
+Reorganiation of file structure
+
+------------------------------------------------------------------------
+r229 | sherstnv | 2008-03-28 09:24:17 +0000 (Fri, 28 Mar 2008) | 2 lines
+
+   D /trunk/src/chep_crt/xwin
+
+Remove needless dir
+
+------------------------------------------------------------------------
+r228 | sherstnv | 2008-03-28 09:23:04 +0000 (Fri, 28 Mar 2008) | 2 lines
+
+   M /trunk/src/chep_crt/Makefile
+   A /trunk/src/chep_crt/X11_crt0.c
+   M /trunk/src/chep_crt/crt.c
+   M /trunk/src/chep_crt/crt_util.c
+   M /trunk/src/chep_crt/edittab.c
+   M /trunk/src/chep_crt/file_scr.c
+   M /trunk/src/chep_crt/help.c
+   A /trunk/src/chep_crt/include/X11_crt0.h
+   M /trunk/src/chep_crt/include/crt.h
+   D /trunk/src/chep_crt/include/crt0.h
+   M /trunk/src/chep_crt/include/crt_util.h
+   M /trunk/src/chep_crt/include/syst.h
+   M /trunk/src/chep_crt/pictures.c
+   M /trunk/src/chep_crt/syst.c
+   M /trunk/src/chep_crt/tex_util.c
+   D /trunk/src/chep_crt/xwin/X11_crt0.c
+
+Simplify file/general structure
+
+------------------------------------------------------------------------
+r227 | sherstnv | 2008-03-27 17:14:43 +0000 (Thu, 27 Mar 2008) | 2 lines
+
+   M /trunk/Makefile
+
+Version 4.4.106 -> 4.4.107
+
+------------------------------------------------------------------------
+r226 | sherstnv | 2008-03-27 17:14:12 +0000 (Thu, 27 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/include/mix_format_lhef.h
+   M /trunk/src/num/libmix/lhef_routines.c
+   M /trunk/src/num/libmix/mix_format_lhef.c
+
+First working mixing program for LHE files 
+
+------------------------------------------------------------------------
+r225 | sherstnv | 2008-03-27 17:13:19 +0000 (Thu, 27 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/lhaef.h
+   M /trunk/src/num/lhaef.c
+
+New leaef interface function
+
+------------------------------------------------------------------------
+r223 | sherstnv | 2008-03-26 16:32:11 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format2.c
+
+Bug in representation of the 'cut' tag in cpyth2 event files
+
+------------------------------------------------------------------------
+r222 | sherstnv | 2008-03-26 16:21:02 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/fill.h
+   M /trunk/src/num/include/mix_format1.h
+   M /trunk/src/num/include/mix_format2.h
+   M /trunk/src/num/include/mix_format_lhef.h
+   M /trunk/src/num/libmix/fill.c
+   M /trunk/src/num/libmix/mix_format1.c
+   M /trunk/src/num/libmix/mix_format2.c
+   M /trunk/src/num/libmix/mix_format_lhef.c
+
+Warning corrections
+
+------------------------------------------------------------------------
+r221 | sherstnv | 2008-03-26 16:04:29 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format_lhaef.c
+
+Nothing important. 
+
+------------------------------------------------------------------------
+r220 | sherstnv | 2008-03-26 16:02:56 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/libmix/mix_format_lhef.c
+
+Stupid bug!!!
+
+------------------------------------------------------------------------
+r219 | sherstnv | 2008-03-26 15:57:28 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/Makefile
+
+add libxml2 library for mix.exe linking
+
+------------------------------------------------------------------------
+r218 | sherstnv | 2008-03-26 14:19:37 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+   A /trunk/src/num/libmix
+   A /trunk/src/num/libmix/Makefile
+   A /trunk/src/num/libmix/compare.c
+   A /trunk/src/num/libmix/fill.c
+   A /trunk/src/num/libmix/lhef_routines.c
+   A /trunk/src/num/libmix/mix_format1.c
+   A /trunk/src/num/libmix/mix_format2.c
+   A /trunk/src/num/libmix/mix_format_lhef.c
+   A /trunk/src/num/libmix/mix_lhef.c
+   A /trunk/src/num/libmix/routines.c
+   A /trunk/src/num/libmix/tag_parser.c
+   A /trunk/src/num/libmix/tag_reader.c
+   A /trunk/src/num/libmix/tag_writer.c
+   A /trunk/src/num/libmix/validity.c
+   D /trunk/src/num/mixing
+
+rename num/mixing -> num/libmix
+
+------------------------------------------------------------------------
+r215 | sherstnv | 2008-03-26 13:43:22 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/evnt_format_lhaef.c
+   M /trunk/src/num/include/event_reader.h
+   M /trunk/src/num/include/lhaef.h
+   A /trunk/src/num/include/lhef_routines.h
+   M /trunk/src/num/mixing/Makefile
+   A /trunk/src/num/mixing/lhef_routines.c
+   M /trunk/src/num/mixing/mix_format_lhef.c
+
+1st version of mixing based on lhe format
+
+------------------------------------------------------------------------
+r214 | sherstnv | 2008-03-26 13:41:50 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/subproc.h
+
+Correction of the final state string (the full subprocess name returned before)
+
+------------------------------------------------------------------------
+r213 | sherstnv | 2008-03-26 13:32:52 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/subproc.c
+
+Correction of the final state string (the full subprocess name returned before)
+
+------------------------------------------------------------------------
+r212 | sherstnv | 2008-03-26 13:30:41 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/lhaef.c
+
+add Error attributes and small correstions in lhaef interface
+
+------------------------------------------------------------------------
+r211 | sherstnv | 2008-03-26 13:28:44 +0000 (Wed, 26 Mar 2008) | 2 lines
+
+   M /trunk/src/num/mix.c
+
+Error in format numbering. lhef = 4, not 3
+
+------------------------------------------------------------------------
+r210 | sherstnv | 2008-03-17 13:50:47 +0000 (Mon, 17 Mar 2008) | 2 lines
+
+   M /trunk/Makefile
+   M /trunk/usr/Makefile.results
+
+bug in Makefile in resuts. 4.4.104 -> 4.4.105
+
+------------------------------------------------------------------------
+r208 | sherstnv | 2008-03-13 17:29:14 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/src/num/mixing/mix_format2.c
+
+improvements in verbosity
+
+------------------------------------------------------------------------
+r207 | sherstnv | 2008-03-13 17:27:13 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/src/num/mixing/tag_writer.c
+
+add missing routines (for n_comphep)
+
+------------------------------------------------------------------------
+r206 | sherstnv | 2008-03-13 16:52:38 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/usr/Makefile
+
+bug in usr/Makefile, can't setup USERDIR properly
+
+------------------------------------------------------------------------
+r205 | sherstnv | 2008-03-13 16:29:08 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/src/num/mixing/compare.c
+   M /trunk/src/num/mixing/fill.c
+   M /trunk/src/num/mixing/mix_format1.c
+   D /trunk/src/num/mixing_trunk_old
+
+bugs in mix
+
+------------------------------------------------------------------------
+r204 | sherstnv | 2008-03-13 16:01:21 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/src/num/mix.c
+
+extra debug info in mix
+
+------------------------------------------------------------------------
+r203 | sherstnv | 2008-03-13 11:38:59 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/src/num/mixing/mix_format1.c
+
+small bug in printing of some information
+
+------------------------------------------------------------------------
+r202 | sherstnv | 2008-03-13 11:31:11 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/fill.h
+   M /trunk/src/num/include/mix_format1.h
+   M /trunk/src/num/include/mix_format2.h
+   M /trunk/src/num/include/mix_format_lhef.h
+   M /trunk/src/num/include/tag_parser.h
+   M /trunk/src/num/include/tag_reader.h
+   M /trunk/src/num/include/tag_writer.h
+   M /trunk/src/num/mix.c
+   M /trunk/src/num/mixing/compare.c
+   M /trunk/src/num/mixing/fill.c
+   M /trunk/src/num/mixing/mix_format_lhef.c
+   M /trunk/src/num/mixing/tag_parser.c
+   M /trunk/src/num/mixing/tag_reader.c
+   M /trunk/src/num/mixing/tag_writer.c
+   M /trunk/src/num/mixing/validity.c
+   M /trunk/usr/mix
+
+Copyright corrections
+
+------------------------------------------------------------------------
+r201 | sherstnv | 2008-03-13 11:25:28 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/usr/mix
+
+Copyright correction
+
+------------------------------------------------------------------------
+r200 | sherstnv | 2008-03-13 11:25:07 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/usr/mix
+
+Unified debug option: -g -> DEBUG
+
+------------------------------------------------------------------------
+r199 | sherstnv | 2008-03-13 11:24:26 +0000 (Thu, 13 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/fill.h
+   M /trunk/src/num/include/mix_format1.h
+   M /trunk/src/num/include/mix_format2.h
+   M /trunk/src/num/include/mix_format_lhef.h
+   M /trunk/src/num/mix.c
+   M /trunk/src/num/mixing/fill.c
+   M /trunk/src/num/mixing/mix_format1.c
+   M /trunk/src/num/mixing/mix_format2.c
+   M /trunk/src/num/mixing/mix_format_lhef.c
+
+A bug in the mix program: it can't read initial event file names
+
+------------------------------------------------------------------------
+r198 | sherstnv | 2008-03-07 19:27:40 +0000 (Fri, 07 Mar 2008) | 2 lines
+
+   M /trunk/src/num/Makefile
+   M /trunk/src/num/include/mix_format1.h
+   M /trunk/src/num/include/mix_format_lhef.h
+   M /trunk/src/num/include/tag_parser.h
+   M /trunk/src/num/include/tag_writer.h
+   M /trunk/src/num/mix.c
+   D /trunk/src/num/mix_format_lhef.c
+   A /trunk/src/num/mixing
+   A /trunk/src/num/mixing/Makefile
+   A /trunk/src/num/mixing/compare.c
+   A /trunk/src/num/mixing/fill.c
+   A /trunk/src/num/mixing/mix_format1.c
+   A /trunk/src/num/mixing/mix_format2.c
+   A /trunk/src/num/mixing/mix_format_lhef.c
+   A /trunk/src/num/mixing/routines.c
+   A /trunk/src/num/mixing/tag_parser.c
+   A /trunk/src/num/mixing/tag_reader.c
+   A /trunk/src/num/mixing/tag_writer.c
+   A /trunk/src/num/mixing/validity.c
+   A /trunk/src/num/mixing_trunk_old
+   A /trunk/src/num/mixing_trunk_old/Makefile
+   A /trunk/src/num/mixing_trunk_old/compare.c
+   A /trunk/src/num/mixing_trunk_old/fill.c
+   A /trunk/src/num/mixing_trunk_old/mix_format1.c
+   A /trunk/src/num/mixing_trunk_old/mix_format2.c
+   A /trunk/src/num/mixing_trunk_old/mix_format_lhef.c
+   A /trunk/src/num/mixing_trunk_old/routines.c
+   A /trunk/src/num/mixing_trunk_old/tag_parser.c
+   A /trunk/src/num/mixing_trunk_old/tag_reader.c
+   A /trunk/src/num/mixing_trunk_old/tag_writer.c
+   A /trunk/src/num/mixing_trunk_old/validity.c
+
+Bug fixes with mixing for cpyth2 files
+
+------------------------------------------------------------------------
+r197 | sherstnv | 2008-03-07 18:32:13 +0000 (Fri, 07 Mar 2008) | 2 lines
+
+   M /trunk/src/num/include/structures.h
+
+remove dublicated type (midstr)
+
+------------------------------------------------------------------------
+r196 | sherstnv | 2008-03-07 18:31:26 +0000 (Fri, 07 Mar 2008) | 2 lines
+
+   M /trunk/src/num/mix.c
+
+memory distribution bug
+
+------------------------------------------------------------------------
+r195 | sherstnv | 2008-03-07 18:29:02 +0000 (Fri, 07 Mar 2008) | 2 lines
+
+   D /trunk/src/num/compare.c
+   D /trunk/src/num/fill.c
+   D /trunk/src/num/mix_format1.c
+   D /trunk/src/num/mix_format2.c
+   D /trunk/src/num/routines.c
+   D /trunk/src/num/tag_parser.c
+   D /trunk/src/num/tag_reader.c
+   D /trunk/src/num/tag_writer.c
+   D /trunk/src/num/validity.c
+
+move code for mixing to src/num/mixing
+
+------------------------------------------------------------------------
+r194 | sherstnv | 2008-03-06 18:42:56 +0000 (Thu, 06 Mar 2008) | 2 lines
+
+   M /trunk/src/symb/diagram/drawdiag.c
+
+Stopper for 2->5 latex generation and 2->5 squared diagram vizualization (hope, is set temporarily!)
+
+------------------------------------------------------------------------
+r193 | sherstnv | 2008-03-06 18:41:15 +0000 (Thu, 06 Mar 2008) | 2 lines
+
+   M /trunk/src/symb/s_comphep.c
+
+Correct internal/code comments
+
+------------------------------------------------------------------------
+r192 | sherstnv | 2008-03-04 19:10:03 +0000 (Tue, 04 Mar 2008) | 3 lines
+
+   M /trunk/Makefile
+
+4.4.103 -> 4.4.104
+slha.sh -> SLHA.sh
+
+------------------------------------------------------------------------
+r191 | sherstnv | 2008-03-04 19:09:29 +0000 (Tue, 04 Mar 2008) | 2 lines
+
+   M /trunk/usr/symb_batch.pl
+
+-show diagrams -> -show diag
+
+------------------------------------------------------------------------
+r190 | sherstnv | 2008-03-04 19:08:23 +0000 (Tue, 04 Mar 2008) | 2 lines
+
+   M /trunk/src/mssmlib/sugrac.c
+
+slha.sh -> SLHA.sh
+
+------------------------------------------------------------------------
+r189 | sherstnv | 2008-03-04 18:15:07 +0000 (Tue, 04 Mar 2008) | 2 lines
+
+   M /trunk/usr/symb_batch.pl
+
+rename -show targets and tmp dir names for -mp
+
+------------------------------------------------------------------------
+r188 | sherstnv | 2008-03-04 11:33:24 +0000 (Tue, 04 Mar 2008) | 2 lines
+
+   M /trunk/src/symb/beams.c
+   M /trunk/src/symb/s_comphep.c
+   M /trunk/usr/Makefile.results
+   M /trunk/usr/symb_batch.pl
+
+Corrections for proper working of symb_batch.pl
+
+------------------------------------------------------------------------
+r186 | sherstnv | 2008-03-03 10:39:46 +0000 (Mon, 03 Mar 2008) | 2 lines
+
+   D /trunk/doc/manual
+
+move manual outside of the main code
+
+------------------------------------------------------------------------
+r185 | sherstnv | 2008-03-02 16:40:01 +0000 (Sun, 02 Mar 2008) | 2 lines
+
+   M /trunk/Makefile
+
+new version 4.4.103
+
+------------------------------------------------------------------------
+r184 | sherstnv | 2008-03-02 16:39:26 +0000 (Sun, 02 Mar 2008) | 2 lines
+
+   M /trunk/src/symb/process.c
+
+Bug fix: induced bug due to re-implementing of rapid editting of the composite particle table
+
+------------------------------------------------------------------------
+r183 | sherstnv | 2008-03-02 16:36:18 +0000 (Sun, 02 Mar 2008) | 2 lines
+
+   M /trunk/src/service2/include/read_func.h
+   M /trunk/src/service2/read_func.c
+
+Bug fix: sort4 should be accessable externally, since SUSY models depend on it
+
+------------------------------------------------------------------------
+r182 | sherstnv | 2008-02-29 17:32:13 +0000 (Fri, 29 Feb 2008) | 3 lines
+
+   M /trunk/Makefile
+
+new version: ???
+
+
+------------------------------------------------------------------------
+r181 | sherstnv | 2008-02-29 15:43:05 +0000 (Fri, 29 Feb 2008) | 2 lines
+
+   M /trunk/src/symb/out/c_out.c
+   M /trunk/src/symb/process.c
+
+bug fixes for decay mode
+
+------------------------------------------------------------------------
+r180 | sherstnv | 2008-02-29 15:34:54 +0000 (Fri, 29 Feb 2008) | 2 lines
+
+   M /trunk/src/num/n_comphep.c
+
+bug fix: suspending of n_comphep if diag_view is launched in n_comphep
+
+------------------------------------------------------------------------
+r179 | sherstnv | 2008-02-29 12:14:29 +0000 (Fri, 29 Feb 2008) | 2 lines
+
+   M /trunk/src/symb/process.c
+
+Old-style composite particle editting (during process entering)
+
+------------------------------------------------------------------------
+r178 | sherstnv | 2008-02-29 12:02:33 +0000 (Fri, 29 Feb 2008) | 2 lines
+
+   M /trunk/src/num/rw_sess.c
+   M /trunk/src/service2/drandXX.c
+
+Problem with random numbers on 64x machines
+
+------------------------------------------------------------------------
+r177 | sherstnv | 2008-02-29 12:01:35 +0000 (Fri, 29 Feb 2008) | 2 lines
+
+   M /trunk/src/symb/s_comphep.c
+   M /trunk/usr/Makefile.results
+
+keep make output in make_gui.log 
+
+------------------------------------------------------------------------
+r176 | sherstnv | 2008-02-29 12:00:56 +0000 (Fri, 29 Feb 2008) | 2 lines
+
+   M /trunk/src/symb/screen.c
+
+Grammar correction
+
+------------------------------------------------------------------------
+r175 | sherstnv | 2008-02-28 14:27:26 +0000 (Thu, 28 Feb 2008) | 2 lines
+
+   M /trunk/src/symb/process.c
+
+Change default decay particle e -> Z

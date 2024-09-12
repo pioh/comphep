@@ -1,0 +1,19 @@
+Effective 4-fermion
+ Particles 
+ Full  name  |A  |A+ |2*spin| mass |width |color|aux|>LaTex(A)<|>LaTeX(A+)   <|
+photon       |A  |A  |2     |0     |0     |1    |G  |\gamma    |\gamma        |   
+electron     |e1 |E1 |1     |0     |0     |1    |   |e         |\bar{e}       |    
+e-neutrino   |n1 |N1 |1     |0     |0     |1    |L  |\nu_e     |\bar{\nu}_e   |
+muon         |e2 |E2 |1     |Mm    |0     |1    |   |\mu       |\bar{\mu}     |
+m-neutrino   |n2 |N2 |1     |0     |0     |1    |L  |\nu_\mu   |\bar{\nu}_\mu |
+tau-lepton   |e3 |E3 |1     |Mt    |0     |1    |   |\tau      |\bar{\tau}    |    
+t-neutrino   |n3 |N3 |1     |0     |0     |1    |L  |\nu_\tau  |\bar{\nu}_\tau|   
+u-quark      |u  |U  |1     |0     |0     |3    |   |u         |\bar{u}       |
+d-quark      |d  |D  |1     |0     |0     |3    |   |d         |\bar{d}       |
+c-quark      |c  |C  |1     |Mc    |0     |3    |   |c         |\bar{c}       |    
+s-quark      |s  |S  |1     |Ms    |0     |3    |   |s         |\bar{s}       |    
+t-quark      |t  |T  |1     |Mtop  |wtop  |3    |   |t         |\bar{t}       |
+b-quark      |b  |B  |1     |Mb    |0     |3    |   |b         |\bar{b}       |
+W-boson      |W+ |W- |2     |MW    |wW    |1    |*  |W^+       |W^-           |
+Z-boson      |Z  |Z  |2     |MZ    |wZ    |1    |*  |Z         |Z             |
+===============================================================================

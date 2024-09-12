@@ -1,0 +1,8 @@
+
+            E.Boos et al. [CompHEP Collaboration],             
+ Nucl. Instrum. Meth. A 534(2004), 250 (arXiv:hep-ph/0403113). 
+
+ A.Pukhov, E.Boos, M.Dubinin, V.Edneral, V.Ilyin, D.Kovalenko, 
+ A.Kryukov, V.Savrin, S.Shichanin, and A.Semenov,              
+                 User manual for version 3.3,                  
+           Preprint INP MSU 98-41/542 (hep-ph/9908288)         

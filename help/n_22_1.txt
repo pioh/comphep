@@ -1,0 +1,5 @@
+5 5 40 
+  This function defines a relative 
+precision for the numerical integration
+over the scattering angle.
+

@@ -1,0 +1,30 @@
+ 3 9 72
+  By means of this table you can apply the phase space cuts. A phase 
+space function is described in the first column. Its limits are defined 
+by the second and the third columns. If one of these fields is empty, 
+the variation limit is defined by the physical region of the phase space.
+  The phase space function is defined by a key character and a particle
+set following this character without any separators. For example, "C13" 
+means the cosine of the angle between the first and third particles.
+  The following key characters are available:
+  A  - Angle in degrees;
+  C  - Cosine of angle;
+  J  - Jet cone angle;
+  E  - Energy of a particle set;
+  M  - Mass of a particle set;
+  P  - Cosine in the rest frame of a pair;
+  T  - Transverse momentum P_t  of a particle set;
+  S  - Squared 4-momentum of a particle set;
+  Y  - Rapidity of a particle.
+  U  - user implemented function.
+See the Manual for details.
+
+The parameter limits can be defined by an algebraic formula, which 
+contains numbers and identifiers enumerated in the "Model parameters" 
+menu. Parentheses "()" and algebraic operations "+,-,/,*,**,sqrt()" 
+are also permitted.
+  To define the range of an 'S'-type variable the user must input
+a value V in GeV which will be transformed to an 'S'-type variable
+following the prescription V*abs(V). For example, to set the s13 cut
+s13=(p1-p3)^2= -100 GeV^2, type -100 in the column "Max bound".
+

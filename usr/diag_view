@@ -1,0 +1,29 @@
+#!/bin/sh
+###########################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration
+# Author: Alexander Sherstnev 
+###########################################################
+#export COMPHEP=`cat .compheppath`
+program=diag_viewer.exe
+script=diag_viewer.sh
+
+if (test -f .compheppath) then
+  export COMPHEP=`cat .compheppath`
+else if (test -f ../.compheppath) then
+  export COMPHEP=`cat ../.compheppath`
+else
+  echo "\n  $script (error): .compheppath is not found in ./ or ../. $program can't function\n"
+  exit
+fi
+fi
+
+if(test -x $COMPHEP/bin/$program) then
+  if [ x$1 = xDEBUG ]; then
+    (export COMPHEP=$COMPHEP;export LD_LIBRARY_PATH=$LD_LIBRARY_PATH;ddd $COMPHEP/bin/$program)
+  else
+    $COMPHEP/bin/$program
+  fi
+else
+  echo "\n  $script (error): no file $COMPHEP/bin/$program. Compile CompHEP in $COMPHEP\n"
+  exit
+fi

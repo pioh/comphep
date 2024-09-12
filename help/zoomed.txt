@@ -1,0 +1,33 @@
+2 2 76 22 CompHEP service
+          VII. Zoom editor
+
+VII.1. Zoom editor
+==================
+
+Press [Z] to call zoom editor for the current field. 
+The colour of letters in the current field changes to yellow 
+and the yellow small box (cursor) appears.
+
+If the window that opens has the size more than maximum length 
+of the field, the last (unused) positions are filled by the 
+'<' character.
+
+The keys [<-], [->], [up] and [down] can be
+used to move the cursor.
+
+Press [delete] key to delete the current character. 
+Press [back space] key to delete the previous character.
+
+[home] and [end] keys move the cursor to the beginning and 
+to the end of the field.
+
+There are the following special keys
+
+Key: [home], [page up]
+Go to the beginning of the field.
+
+Key: [end], [page down]
+Go to the end of the field.
+
+Key: [enter],[esc]
+Save current contents of the field and return to the edit table mode.

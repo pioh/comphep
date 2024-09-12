@@ -1,0 +1,22 @@
+####################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration   #
+# Author: A. Sherstnev                             #
+####################################################
+.PHONY: clean
+CHEP=../chepcode
+
+CC=    $(shell cat $(CHEP)/CC)
+CFLAGS=$(shell cat $(CHEP)/CFLAGS)
+CLIBS:=$(shell cat $(CHEP)/CLIBS)
+INS:=-I$(CHEP)/src
+
+mk_tab.exe: userFun.o
+	$(CC) $(CFLAGS) -o mk_tab.exe userFun.o -L$(CHEP)/lib -ltab -lmix -levents -lnum -lserv $(CLIBS)
+
+userFun.o: userFun.c
+
+clean:
+	@rm -f *.o mk_tab.exe
+	
+%.o: %.c
+	$(CC) $(CFLAGS) $(INS) -c $<

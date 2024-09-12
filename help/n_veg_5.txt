@@ -1,0 +1,4 @@
+1 12 50
+   Display plots produced
+in the Monte Carlo integration.
+

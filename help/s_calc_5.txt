@@ -1,0 +1,9 @@
+5 5 45   Make n_comphep
+   This menu function is  used to perform
+ several steps of evaluation in the 
+ background mode. They are 
+   a) symbolic calculations,
+   b) writing results in the C format to files,
+   c) compilation of C codes and creation of 
+ the event generator file 'n_comphep_c', which 
+ can be used for the subsequent simulations.

@@ -1,0 +1,7 @@
+10 10 50 Plot
+  Switches on the linear or the logarithmic scale
+for the Y axis. The logarithmic scale is permitted
+only if Y_min>0 and Y_max/Y_min >10.
+Use the 'Redraw plot' menu function to get the new 
+histogram after invoking this.
+

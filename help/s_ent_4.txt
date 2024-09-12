@@ -1,0 +1,10 @@
+6 6 62 9   Exclude diagrams 
+ This option can be used to exclude diagrams with virtual
+particles named by the user. Examples:
+1) Z>2 (excludes diagrams with more than 2 virtual Z-bosons.)
+2) Z<2 (excludes diagrams with less than 2 virtual Z-bosons.)
+3) Z=2 (excludes diagrams with 2 virtual Z-bosons.)
+4) Z!2 (keeps diagrams with only 2 virtual Z-bosons.)
+5) Z   (excludes all diagrams with Z-bosons.)
+
+  Use empty input to get the full set of diagrams.

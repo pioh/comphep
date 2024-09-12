@@ -1,0 +1,21 @@
+SM, Feynman gauge
+ Variables 
+ Name | Value       |>  Comment                                   <|
+EE    |0.31345      |Elementary charge (alpha=1/127.9, on-shell, MZ point, PDG2002)
+GG    |1.21358      |Strong coupling constant (Z pnt, alp=0.1172pm0.002  (PDG2002)
+SW    |0.48076      |sin of the Weinberg angle (MZ point -> MW=79.958GeV, PDG2002)
+s12   |0.2229       |Parameter of C-K-M matrix (PDG2002)
+s23   |0.0412       |Parameter of C-K-M matrix (PDG2002)
+s13   |0.0036       |Parameter of C-K-M matrix (PDG2002)
+MZ    |91.1876      |mass of Z boson
+wZ    |2.43631      |width of Z boson
+wW    |2.02798      |width of W boson
+Mm    |0.10566      |mass of muon
+Mtau  |1.77699      |mass of tau-lepton
+Mc    |1.65         |mass of c-quark
+Ms    |0.117        |mass of s-quark
+Mtop  |174.3        |mass of t-quark
+wtop  |1.54688      |width of t-quark
+Mb    |4.85         |mass of b-quark
+MH    |115          |mass of Higgs
+wH    |0.0061744    |width of Higgs

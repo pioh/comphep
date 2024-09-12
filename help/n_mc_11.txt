@@ -1,0 +1,14 @@
+2 5 50
+  This function launches the total cross section 
+evaluation for the reaction 2->2 using the 
+integration by means of Simpson formula. The convolution 
+of the matrix element squared with parton distribution 
+functions is not available.
+  It is possible to set the integration precision and
+to display the distribution in the cosine of the scattering 
+angle in the c.m.s., the total cross section and the 
+integrated forward-backward asymmetry dependence on any 
+parameter involved (e.g. energy).    
+   
+ 
+ 

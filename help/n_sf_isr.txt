@@ -1,0 +1,18 @@
+2 3 42
+The spectrum of initial state radiation 
+(ISR, photon radiation from the incoming 
+electrons and positrons) contains the ISR 
+scale inherent to the process under 
+consideration which should be defined by 
+the user.
+
+Beamstrahlung is the process of energy 
+loss by the incoming electron/positron
+in the field of the positron/electron 
+bunch moving in the opposite direction.  
+Beamstrahlung spectrum is an attribute of
+the LC design and depends on the bunch 
+geometry, bunch charge and the collision 
+energy.
+
+See details in the Manual. 

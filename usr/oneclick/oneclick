@@ -1,0 +1,27 @@
+#!/bin/sh
+###########################################################
+# Copyright (C) 2001-2009, CompHEP Collaboration
+###########################################################
+export LHAPDFPATH=
+export COMPHEP=chepcode
+
+if (test -f .lhapdfpath) then
+  export LHAPDFPATH=`cat .lhapdfpath`
+  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDFPATH"
+fi
+export LD_LIBRARY_PATH=$LHAPDFPATH/lib:$LD_LIBRARY_PATH
+
+if(test -x ./results/n_comphep.exe) then
+  if [ x$1 = xDEBUG ]; then
+    (export COMPHEP=$COMPHEP;export LHAPDFPATH=$LHAPDFPATH;export LD_LIBRARY_PATH=$LD_LIBRARY_PATH;ddd ./results/n_comphep.exe $2 $3)
+  else
+    if(test -f ./results/batch.dat) then
+      ./num_batch.pl -extract 1
+      mv results/session.dat .
+    fi
+    ./results/n_comphep.exe -nonexpert $1 $2
+  fi
+else
+  echo "oneclick (error): no file results/n_comphep.exe. Prepare the generator with make"
+  exit -1
+fi

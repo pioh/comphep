@@ -1,0 +1,6 @@
+6 7 60 5    Write results
+  This function creates files with symbolic results for the
+squared matrix element in REDUCE, MATHEMATICA, FORM and C 
+notations. C  codes are optimized for further numerical 
+calculations.
+  See the generated files in the subdirectory '\results'.

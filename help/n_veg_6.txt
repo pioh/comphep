@@ -1,0 +1,9 @@
+ 1 12 51 
+   After this menu call the results of integration,
+ including the histograms, are deleted and do not
+ contribute to subsequent results.
+
+   Unsatisfactory grid and bad precision results 
+ were obtained from the first Monte Carlo iterations. 
+ Reconsider 'Kinematics' and 'Regularizations' and try 
+ again.

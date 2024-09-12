@@ -1,0 +1,142 @@
+Latested news about CompHEP are available on the Web:
+          http://comphep.sinp.msu.ru
+
+Please send all you remarks to Alexander Sherstnev by e-mail:
+          sherstnv@theory.sinp.msu.ru
+
+Content:
+================================================================================
+0. Preliminary remarks and notations.
+1. Compilers
+2. Additional packages
+3. Compilation of package from source distributive.
+4. Install a user directory:
+5. Additional services are provided.
+6. Previous version incompatibilities.
+
+
+0. Preliminary remarks and notations.
+================================================================================
+
+In this document we suppose that the OS is Linux. So, if you have another 
+OS on the computer, please adopt the procedure as you need.
+
+
+Below, we use the following notations: 
+
+      XXXX - CompHEP version number; 
+      comphep-XXXX - directory where CompHEP files will live; 
+      comphep-XXXX.tgz - tar-file with sources; 
+
+The installation from binary distributive see in section 4. 
+
+
+1. Compilers and compiler configuraion
+================================================================================
+Now default compilers for CompHEP are gcc-4.x and gfortran. If you execute 
+./configure without options, it generates several files: 
+CC, CFLAGS, CLIBS, F77, F77FLAGS, FORLIBS, RANLIB, ROOTLIBS, and ROOTFLAGS. 
+ - CC and F77 contain information on compilers
+ - CFLAGS and F77FLAGS define options for the compilers
+ - CLIBS and F77LIBS contain options for linker and calls of libraries
+ - RANLIB defines index generating program (by default, ranlib)
+ - ROOTLIBS and ROOTFLGAS defines some options for linking againts ROOT (root.cern.ch)
+
+In general, there are 3 possible cases:
+1) gcc (version 4.x) and gfortran: use ./configure without extra compiler option
+2) gcc (version 3.x) and g77: use ./configure --with-gcc3 
+3) gcc (version 4.x) and g77: use ./configure --with-gcc4 and 
+   edit F77 (gfortran -> gcc) and F77LIBS (remove -lgfortran)
+
+If you would like to compile the code with -g, use ./configure --debug
+
+
+2. Additional packages
+================================================================================
+ComHEP can be built with several external packages:
+I. LHAPDF (differnt parton dansity functions)
+
+  Read doc/LHAPDF_in_CompHEP-HOWTO
+
+II. ROOT (HEP main analysis tool)
+
+  Read doc/ROOT_in_CompHEP-HOWTO
+
+III. libxml (needed for HepML)
+
+  Read doc/XML_in_CompHEP-HOWTO
+
+
+3. Compilation of package from sources.
+================================================================================
+
+1) Un-archive gzip-tar distributive archive:
+
+      tar xzvf comphep-XXXX.tgz
+
+   The directory with name comphep-XXXX will be created 
+   with all files of CompHEP distributive.
+
+2) Pass to the comphep-XXXX directory:
+
+      cd comphep-XXXX
+
+3) Launch the script configure with necessary options (see sec. 1):
+
+     ./configure
+
+4) Compile the CompHEP package:
+
+      make
+
+If the building of CompHEP is OK, then go to point 2 "Setup a user directory" 
+below.
+
+
+NOTE:
+{path_to_x-libs} and {path_to_x-includes} are included by CompHEP automatically.
+
+
+4. Setup a user directory:
+================================================================================
+
+To setup user directory you have to run
+
+      make setup WDIR=path_to_user_work_directory
+
+NOTES:
+1) The value of WDIR should point to the user
+   working directory (the default value is 
+  ../comphep_XXXX_test relatively to $COMPHEP).
+
+2) Do not use '~' (tilde) to point to home directory. 
+   Use ${HOME} variable.
+
+After installation the user directory will be created and all needed files 
+will be copied there.
+
+
+5. Additional services in make.
+================================================================================
+
+  - optimisation (compilation with the option -O3)
+       launch ./configure --optimisation
+
+  - 64-bit platform (compilation with the option -m64)
+       launch ./configure --with-m64
+
+  - print out requested compiler configuration
+       launch ./configure {other_used_options} --print
+
+  - Clean up CompHEP sources (all binaries/libraries survive):
+        make clean
+
+  - Clean up CompHEP sources completely:
+        make distclean
+
+  - make tar gzip archive of CompHEP:
+        make dist
+
+NOTE:
+  archived comphep (make dist) will be in the directory {comphep-XXXX} and will be 
+  named comphep-XXXX.tgz 

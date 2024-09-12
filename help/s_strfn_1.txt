@@ -1,0 +1,13 @@
+2 9 76          Table of structure functions
+             This table consists of two fields:
+
+1. "Name" for an identifier of the structure functions set. It may 
+   contain up to 24 characters. The first character must be a letter, 
+   others may be either letters or digits; CompHEP identifiers are 
+   sensitive to the case of characters. But any two identifiers must be
+   different after rewriting them in low case.
+   Reserved names are "i" (imaginary unit), "Sqrt2" (sqrt(2)),
+   "p1","p2","p3",... (particle momenta), "m1","m2","m3",... (Lorentz 
+   indexes of particles), G5 (the gamma-five Dirac matrix).
+
+2. "Number" is an inner index of the set.

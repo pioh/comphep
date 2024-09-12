@@ -1,0 +1,7 @@
+2 10 50
+  Ncall1 and Itmx1 are the number of integrand
+calls for one iteration and number of iterations
+for the first (preliminary) step of integration.
+The main task of this step is to find the best
+grid for the Monte Carlo integration.
+

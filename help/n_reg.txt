@@ -1,0 +1,26 @@
+2 7 75 
+  Exact (Breit-Wigner) propagators of bosons and fermions lead 
+to the following singular structures of the matrix element squared
+  1/(P^2 - Mass^2)               
+  1/(P^2 - Mass^2)^2
+  1/[ (P^2-Mass^2)^2 + (Mass*Width)^2 ],
+where P, Mass and Width are the virtual particle momentum, mass and 
+width, respectively. For the photon Mass=Width=0. 
+  For efficient Monte Carlo integration all explicit forms of P
+must be defined for a given complete set of Feynman diagrams. In the
+following calculation the phase space mappings in these variables
+are performed in order to remove the peaks of the integrand.
+  The momentum P of the intermediate virtual particle can be expressed as 
+a sum or difference of the in/out particles momenta. Examples of
+the notations for P that are accepted by the integrator program are 
+  12 in the 'Momentum' field of the table, treated as (p1+p2),
+  134 is treated as (p1-p3-p4).
+  In the 'Mass' and 'Width' fields of the table any algebraic 
+formula is accepted in CompHEP version 4. This formula can contain numbers 
+and/or identifiers participating in the "Model parameters" menu.
+  The 'Power' field of the table is the notation related to the power 
+of P in the denominator of a particle propagator. It is used to choose
+the appropriate phase space mapping (change of the integration variable).
+Acceptable values in this field are 1 and 2. If the 'Width' field is not 
+equal to '0', CompHEP uses the value 2 for the power,  ignoring the user 
+input.

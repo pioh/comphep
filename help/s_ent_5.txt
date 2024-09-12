@@ -1,0 +1,13 @@
+6 6 60 9   Keep diagrams 
+ This option can be used to keep diagrams with virtual
+particles named by the user. Examples:
+1) Z>2 (keeps diagrams with more than 2 virtual Z-boson.)
+2) Z<2 (keeps diagrams with less than 2 virtual Z-boson.)
+3) Z=2 (keeps diagrams with 2 virtual Z-boson.)
+4) Z!2 (excludes diagrams with only 2 virtual Z-boson.)
+5) Z   (keeps all diagrams with at least 1 Z-boson.)
+
+  Use empty input to get the full set of diagrams.
+
+Warning! This option works with the diagram set obtained
+         after of applying of exclude conditions.

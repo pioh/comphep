@@ -1,0 +1,15 @@
+2 7 55
+  Allows one to construct the task for a loop 
+calculation where one parameter can be changed.
+ 7. "Table size" is the number of points for the table
+ 8. "Tab.param." is the name of the variable which is
+    chosen as an argument of the table
+ 9. "Min.val."   is the minimum value of the argument
+10. "Max.val."   is the maximum value of the argument.
+  Menu records 8,9,10 will appear on the screen only if 
+"Table size" is more or equal than 2.
+  The protocols of calculations are stored in separate
+prt_# files. Besides that a common file tab_N1_N2
+will be created, where N1 and N2 are the numbers of the
+first and the last protocol files. This common file
+contains the table of results.

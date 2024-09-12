@@ -1,0 +1,21 @@
+1 6 65
+  CompHEP calculates the QCD strong coupling parameter
+as a function of the QCD parameter lambda6 and the Q^2
+scale.
+  This menu function calls the next-level menu which allows 
+the user a to set a value of lambda6 and an expression 
+for the momentum transferred Q^2.
+  The QCD strong coupling is calculated at next-to
+-next-to leading (NNLO) order (see 9.5a [*]). The value 
+depends on the number of quarks (nf) with masses less than Q. 
+The corresponding lambda_nf is calculated according to (9.7) [*].
+   The scale of Q^2 may be defined either as a constant 
+or as a squared sum of particle momenta, and in the following is
+used as an argument of the parton distribution functions.
+   If Q is defined as a constant, the corresponding value
+of alpha=GG^2/(4*PI) is shown in the next level menu.  
+   The alpha(s) plots for the region of 's' defined by the
+user can be displayed. 
+
+ [*] Review of Particle Physics, Eur.Phys.J. C15 (2000) 85
+     http://pdg.lbl.gov/2001/contents_sports.html#stanmodeletc

@@ -1,0 +1,2 @@
+3 15 70
+ Enter the momentum value of the first incoming particle.

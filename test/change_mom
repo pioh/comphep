@@ -1,0 +1,16 @@
+:
+
+goToIn="]}]]}"
+next="}]}"
+end="}{9"
+
+
+if(test $# -ne 2) then
+   echo ERROR!. $0 need 2 parameters:
+   echo "     1.  p1"
+   echo "     2.  p2"
+      exit 1
+   else
+    echo "$goToIn$1$next$2$end"
+       ./n_comphep -blind "$goToIn$1$next$2$end"
+fi 

@@ -1,0 +1,9 @@
+_SM_qQ
+ Parameters 
+ Name | Value       |> Comment                                                             <|
+GG    |1.21823      |Strong coupling (MZ point, average alpha_s=0.1181\pm0.002, PDG2000)     
+Mb    |4.700        |b-quark mass  (pole mass: 4.5-4.9, PDG2000)                             
+Mtop  |175          |t-quark mass  (pole mass, PDG2000)                                      
+MH    |120          |higgs mass                                                              
+wtop  |1.569        |t-quark width        (tree level 1->2x)                                 
+=============================================================================================
