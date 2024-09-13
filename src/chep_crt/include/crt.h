@@ -7,6 +7,7 @@
 #define __CRT_
 
 #include "X11_crt0.h"
+#include <stdio.h>
 
 extern int blind;
 extern char *inkeyString;

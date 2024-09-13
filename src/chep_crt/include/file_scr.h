@@ -4,6 +4,7 @@
 */
 #ifndef __FILE_SCR_
 #define __FILE_SCR_
+#include "service2/include/chep_limits.h"
 
 typedef struct linerec
   {
