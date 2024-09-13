@@ -50,6 +50,7 @@
 #                    2) add -v (the same as --version)
 #                    3) nice option is corrected, /binc/nice (/usr/bin/nice) is usedi nstead of tcsh nice 
 # v  1.18 31.07.2009 1) corrections in blind strings due to changes in the CompHEP GUI interface
+# v  1.19 19.12.2009 1) add options -replace/-value
 
 #####################################################################################
 # TODO
@@ -99,6 +100,8 @@ GetOptions (
            "lmix",      \$lmix,                 # list mixed subprocesses from mixed event file
            "mp=i",      \$mp,                   # set the number of parallel subprocesses
            "nice:s",    \$nnice,                # set priority for nice regime
+           "replace:s", \$replacepar,           # replace a model parameter
+           "value:s",   \$valuepar,             # new value of a model parameter (applied together with -replace)
            "verbose",   \$verbose               # print more information 
            );
 
@@ -130,8 +133,8 @@ GetOptions (
   my $Nproc = 0;
   my $Nproc_current = 0;
   my $Nsession = 1;
-  my $version = 1.17;
-  my $datestamp = "21/04/2009";
+  my $version = 1.19;
+  my $datestamp = "19/12/2009";
   my $nice = "";
 # variables for warning, error and info messages
   my $errr = "$0 (error):";
@@ -157,6 +160,10 @@ GetOptions (
 # List cross section values from protocol files (in the "prt" format).
 # The file names are taken from the hash @ARGV
   list_prt (@ARGV) if defined $lcs;
+
+###################################################################################################
+# Replace a model parameter in batch.dat sections. New value is defined with -value
+  replace_parameter_value () if defined $replacepar;
 
 ###################################################################################################
 # List cross section values from protocol files (in the "prt" format).
@@ -395,7 +402,7 @@ sub create_batch_dat {
     print $block[1];
     close(SES);
     $string=$string."]";
-COMP: system ("./n_comphep -blind $string.'}9}'");
+COMP: system ("./n_comphep -blind '$string.'}9}''");
     die "Can't run n_comphep:$@" if $@;
   }
   print "File ${opt_d}/batch.dat is created.\n";
@@ -417,7 +424,7 @@ sub run {
     if (($_ ne "cleangrid") and ($_ ne "cleanstat") and ($_ ne "clean") and 
         ($_ ne "vegas") and ($_ ne "max") and ($_ ne "evnt")) {
       print "\nUnknown command($_) in -run! \n";
-      print "Possible commands: vegas,max,evnt,cleangrid,cleanstat,clean or their compbinations divided by cammas\n";
+      print "Possible commands: vegas,max,evnt,cleangrid,cleanstat,clean or their combinations divided by commas\n";
       return;
     }
   }
@@ -497,13 +504,13 @@ sub run {
     print SES @blocks;
     close SES;
 
-    my $max_string = (length( $blocks[17]) > 50 ) ? "]]]]]$nginv]]]]}]]]]]]}]]]]}]]]}9}" : 
-                                                    "]]]]]$nginv]]]]}]]]]]]}]]]}9}";
-    my $vegas_string = "]]]]]$nginv]]]]}]]]}9}"                  ;
-    my $event_string = "]]]]]$nginv]]]]}]]]]]]}]]$ndifffrmt}9}";
-    my $cleangrid_string= "]]]]]]]]]}]]]]]}}9}"                ;
-    my $cleanstat_string= "]]]]]]]]]}]]]]}}9}"                 ;
-    my $clean_string= "]]]]]]]]]}]]]]}}]}}]}{9}"               ;
+    my $max_string = (length( $blocks[17]) > 50 ) ? "]]]]]$nginv]]]]}]]]]]]]}]]]]}]]]}9}" :
+                                                    "]]]]]$nginv]]]]}]]]]]]]}]]]}9}";
+    my $vegas_string = "]]]]]$nginv]]]]}]]]]}9}"                  ;
+    my $event_string = "]]]]]$nginv]]]]}]]]]]]]}]]$ndifffrmt}9}";
+    my $cleangrid_string= "]]]]]]]]]}]]]]]]}}9}"                ;
+    my $cleanstat_string= "]]]]]]]]]}]]]]]}}9}"                 ;
+    my $clean_string= "]]]]]]]]]}]]]]]}}]}}]}{9}"               ;
 
 # Parallel or lsf/pbs calculation mode
 # Create subdirectories for each subprocess, setup there the session.dat
@@ -793,6 +800,60 @@ sub list_batch {
 }
 
 ###################################################################################################
+sub replace_parameter_value {
+
+  if ($replacepar eq "") {
+    print "\nError: a parameter name should be set with -replace. Exit.\n";
+    exit (0);
+  }
+
+  if ($valuepar eq "") {
+    print "\nError: a parameter value should be set with -value. Exit.\n";
+    exit (0);
+  }
+
+  open(BATCH, "<$filebat") or die "Can't open $filebat for read: $!\n";
+  local $/="++++++++++++++\n";
+
+  print "List of all parameters in batch.dat:\n";
+  my $changed_batch;
+  while (<BATCH>) {
+    @blocks  = split(/\n#/,$_); 
+    $blocks[1] =~/\s(\d+)\s/g;
+    $subprocnum = $1;
+    $parameters = $blocks[5];
+    $blocks[5] = "";
+    $oldvaluepar = "";
+    foreach $parline (split(/\n/,$parameters)) {
+      if ($parline =~ /\s+([a-zA-Z0-9]*)\s+=\s+([-]*\d\.\d+E[+-]\d+)\s*/) {
+        if ($1 eq $replacepar) {
+           $parline = sprintf ("%10s = %.15E", $replacepar, $valuepar);
+           $oldvaluepar = sprintf ("%f", $2);
+        }
+      }
+      $blocks[5] .= $parline."\n";
+    }
+    foreach $bl (@blocks) {
+      if ($bl ne "") {
+        $changed_batch .= "\n#".$bl;
+      }
+    }
+    if ($oldvaluepar ne "") {
+      printf "Subprocess $subprocnum: parameter $replacepar has changed the value $oldvaluepar to $valuepar\n";
+    } else {
+      printf "Subprocess $subprocnum: parameter $replacepar not found\n";
+    }
+  }
+  close (BATCH);
+
+  move ($filebat, $filebat.".BAK");
+  open (BATCH, ">$filebat") or die "Can't open $filebat for read/write: $!\n";
+  print BATCH $changed_batch;
+  close (BATCH);
+  exit (0);
+}
+
+###################################################################################################
 sub list_prt {
   print "Listed prt files: @ARGV \n\n" ;
   my $tot_cs   = 0;
@@ -823,7 +884,7 @@ sub list_prt {
     while ($line = <PRT>) {
       if ($line =~ /\#Subprocess/) {
         chomp $line;
-	$nline = $line;
+        $nline = $line;
       }
       if ($line =~ /\s\<\s\>\s+([-]*\d+\.\d+E[+-]\d+)\s+([-]*\d+\.\d+E[+-]\d+)\s+\d+\s+.+/) {
         $cs = $1;
@@ -953,16 +1014,16 @@ sub change_cs {
       } elsif (/<init>/) { 
         $tmp .= $_;
         $tmp .= <EVTFILE>;
-	while (<EVTFILE>) {
-	  if (/\s+(\d+\.\d+E[+-]\d+)\s+(\d+\.\d+E[+-]\d+)\s+(\d+\.\d+E[+-]\d+)\s+(\d+)/) {
+        while (<EVTFILE>) {
+          if (/\s+(\d+\.\d+E[+-]\d+)\s+(\d+\.\d+E[+-]\d+)\s+(\d+\.\d+E[+-]\d+)\s+(\d+)/) {
             $tmp .= sprintf("%17.10E",$1 * $kfactor).sprintf(" %17.10E",$2 * $kfactor)."  $3 $4\n";
             $oldcs = $1;
             $newcs = $1 * $kfactor;
-	  } else {
+          } else {
             $tmp .=$_;
-	  }
-	  last if (/<\/init>/);
-	}
+          }
+          last if (/<\/init>/);
+        }
       } else {
         $tmp .=$_;
       }
