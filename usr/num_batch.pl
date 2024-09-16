@@ -51,6 +51,7 @@
 #                    3) nice option is corrected, /binc/nice (/usr/bin/nice) is usedi nstead of tcsh nice 
 # v  1.18 31.07.2009 1) corrections in blind strings due to changes in the CompHEP GUI interface
 # v  1.19 19.12.2009 1) add options -replace/-value
+# v  1.20 12.09.2024 adapted to CompHEP4.6 menu
 
 #####################################################################################
 # TODO
