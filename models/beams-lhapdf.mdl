@@ -1,18 +1,18 @@
 
  Beams 
  Name     |> Mass    <|> Content                <|> Structure Functions                  <|
-p1        |0.938      |u,d,U,D,G                 |LHA:cteq66.LHgrid(proton):10550:0        
-P1        |0.938      |u,d,U,D,G                 |LHA:cteq66.LHgrid(anti-proton):10550:0   
-p         |0.938      |u,d,U,D,s,c,S,C,G         |LHA:cteq66.LHgrid(proton):10550:0        
-P         |0.938      |u,d,U,D,s,c,S,C,G         |LHA:cteq66.LHgrid(anti-proton):10550:0   
-pb        |0.938      |u,d,U,D,s,c,S,C,b,B,G     |LHA:cteq66.LHgrid(proton):10550:0        
-Pb        |0.938      |u,d,U,D,s,c,S,C,b,B,G     |LHA:cteq66.LHgrid(anti-proton):10550:0   
-ph        |0.938      |u#,d#,U#,D#,G             |LHA:cteq66.LHgrid(proton):10550:0        
-Ph        |0.938      |u#,d#,U#,D#,G             |LHA:cteq66.LHgrid(anti-proton):10550:0   
-pbh       |0.938      |u#,d#,U#,D#,b,B,G         |LHA:cteq66.LHgrid(proton):10550:0        
-Pbh       |0.938      |u#,d#,U#,D#,b,B,G         |LHA:cteq66.LHgrid(anti-proton):10550:0   
-pq        |0.938      |q#,Q#,G                   |LHA:cteq66.LHgrid(proton):10550:0        
-Pq        |0.938      |q#,Q#,G                   |LHA:cteq66.LHgrid(anti-proton):10550:0   
+p1        |0.938      |u,d,U,D,G                 |LHA:cteq6l1(proton):0:0
+P1        |0.938      |u,d,U,D,G                 |LHA:cteq6l1(anti-proton):0:0
+p         |0.938      |u,d,U,D,s,c,S,C,G         |LHA:cteq6l1(proton):0:0
+P         |0.938      |u,d,U,D,s,c,S,C,G         |LHA:cteq6l1(anti-proton):0:0
+pb        |0.938      |u,d,U,D,s,c,S,C,b,B,G     |LHA:cteq6l1(proton):0:0
+Pb        |0.938      |u,d,U,D,s,c,S,C,b,B,G     |LHA:cteq6l1(anti-proton):0:0
+ph        |0.938      |u#,d#,U#,D#,G             |LHA:cteq6l1(proton):0:0
+Ph        |0.938      |u#,d#,U#,D#,G             |LHA:cteq6l1(anti-proton):0:0
+pbh       |0.938      |u#,d#,U#,D#,b,B,G         |LHA:cteq6l1(proton):0:0
+Pbh       |0.938      |u#,d#,U#,D#,b,B,G         |LHA:cteq6l1(anti-proton):0:0
+pq        |0.938      |q#,Q#,G                   |LHA:cteq6l1(proton):0:0
+Pq        |0.938      |q#,Q#,G                   |LHA:cteq6l1(anti-proton):0:0
 ebeam     |0.000511   |e                         |ISR(100 Beamstr.:OFF)                    
 Ebeam     |0.000511   |E                         |ISR(100 Beamstr.:OFF)                    
 gamL      |0.0        |A                         |Laser photons                            

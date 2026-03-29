@@ -147,7 +147,7 @@ double QCDLambda (void) {
 
 int QCDOrder (void) {
 #ifdef LHAPDF
-  return lhapdfqcdorder ();
+  return lhapdf6_qcdorder (0);
 #else
   return 2;
 #endif

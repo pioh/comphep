@@ -55,8 +55,7 @@ if (test -n "$SHELP" ) then
   echo './configure --debug | --with-gcc3 | --with-lhapdf | --with-libxml | --optimise | --with-root | --with-m64'
   echo '    --debug       - compilation with debugging symbols'
   echo '    --with-gcc3   - shoulf be used if your gcc version is 3.X.X, FORTRAN compiler is g77 '
-  echo '    --with-lhapdf - PDF from LHAPDF will be used. The variable LHAPDFPATH should point to '
-  echo '                     a directory with lib/liblhapdf.a (set the full path!)'
+  echo '    --with-lhapdf - PDF from LHAPDF will be used. lhapdf-config must be in PATH'
   echo '    --with-libxml - mix program will use libxml2 in order to analyze and prepare HepML code'
   echo '    --optimise    - -O3 optimisation will be used'
   echo '    --with-m64    - -m64 option will be used, it is useful at 64-bit machines'
@@ -333,11 +332,14 @@ fi
 if (test -n "$SLHAPDF") then
   LHAPDF=1
   echo -n "checking for LHAPDF...  "
-  if [ x$LHAPDFPATH = x ]; then
-    echo "  configure (err): variable LHAPDFPATH is not defined. Exit"
+  if command -v lhapdf-config >/dev/null 2>&1; then
+    LHAPDF_CFLAGS=`lhapdf-config --cflags`
+    LHAPDF_LIBS=`lhapdf-config --libs`
+    echo "found (lhapdf-config)"
+  else
+    echo "  configure (err): lhapdf-config not found. Exit"
     exit 1
   fi
-  echo "found"
 fi
 
 ################################################################
@@ -405,9 +407,9 @@ STDCFLAGS="$STDCFLAGS -DCOMPHEP"
 
 CFLAGS=""
 if (test $LHAPDF = 1) then
-  CFLAGS="$CFLAGS -DLHAPDF"
+  CFLAGS="$CFLAGS -DLHAPDF $LHAPDF_CFLAGS"
   F77FLAGS="$F77FLAGS -DLHAPDF"
-  CLIBS="-L$LHAPDFPATH/lib -lLHAPDF $CLIBS"
+  CLIBS="$LHAPDF_LIBS -lstdc++ $CLIBS"
 fi
 
 if (test $LIBXML = 1) then

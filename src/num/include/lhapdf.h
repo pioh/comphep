@@ -17,7 +17,7 @@ typedef struct lhapdfList {
 
 extern void delLhapdfList (lhapdfList * list);
 
-extern int comphepLhapdfList (char * thepath, char * indexfile, lhapdfList ** list);
+extern int comphepLhapdfList (lhapdfList ** list);
 
 /* free  memory allocated for 'list' */
 extern void delLhapdfList (lhapdfList * list);
@@ -33,17 +33,7 @@ extern double TESTlhapdfValCPYTH (double x, double q, int i); /* simpler initial
 /* interpolates data for QCD-alpha(Q)     */
 extern double lhapdf_interAlpha (double q);
 
-extern void set_QCDLambda (int set, int mem);
+extern void set_QCDLambda (int beam);
 extern double lhapdf_QCDLambda(void);
-extern void initLHAPDF (int beamnum, char * path, char * file, int set, int mem, int prt);
-extern int setLHAPDFIndexpath (longstr path);
-extern int setLHAPDFIndexpathCPYTH (longstr path);
-
-/* FORTRAN FUNCTIONS
-double evolvepdfwrapper_ (double*, double*, int*);
-double alphaspdf_ (double*);
-double getlam5wrapper_ (void);
-int numberpdfwrapper_ (void);
-void initpdfset_ (char*, int*);
- */
+extern void initLHAPDF (int beamnum, const char* setname, int mem, int prt);
 #endif

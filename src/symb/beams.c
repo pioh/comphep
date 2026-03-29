@@ -74,7 +74,7 @@ void construct_full_sf_name (int i)
 
   if (NULL != bname) {
     strcpy (beamname, bname + 1);
-    strcpy (sfname, strdup (beam[i].h.sf_name));
+    strcpy (sfname, beam[i].h.sf_name);
     len = strlen (beamname);
     beamname[len - 1] = '\0';
     sfname[strlen (beam[i].h.sf_name) - len - 1] = '\0';
@@ -82,7 +82,7 @@ void construct_full_sf_name (int i)
     trim (beamname);
     trim (sfname);
 
-    sprintf (beam[i].h.full_sf_name, "%s:%i:%i(%s)", sfname, beam[0].h.sf_set, beam[0].h.sf_mem, beamname);
+    sprintf (beam[i].h.full_sf_name, "%s:%i:%i(%s)", sfname, beam[i].h.sf_set, beam[i].h.sf_mem, beamname);
   } else {
     strcpy (beam[i].h.full_sf_name, beam[i].h.sf_name);
   }

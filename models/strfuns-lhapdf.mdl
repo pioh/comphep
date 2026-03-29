@@ -1,20 +1,10 @@
 
  Strfuns 
- Name                                   <|> Number    <|> LHAPDF number |> LHAPDF member <|
+ Name                                   <|> Number    <|> LHAPDF number <|> LHAPDF member <|
 OFF                                      |0            |0               |0                 
 WWA (m=0.000511 Ch=-1 Q=100)             |1            |0               |0                 
 Laser Photons                            |2            |0               |0                 
 ISR(100 Beamstr.:OFF)                    |3            |0               |0                 
-LHA:cteq6m.LHpdf(proton)                 |10           |10000           |0                 
-LHA:cteq6m.LHpdf(anti-proton)            |11           |10000           |0                 
-LHA:cteq6l.LHpdf(proton)                 |12           |10041           |1                 
-LHA:cteq6l.LHpdf(anti-proton)            |13           |10041           |1                 
-LHA:cteq66.LHgrid(proton)                |14           |10550           |0                 
-LHA:cteq66.LHgrid(anti-proton)           |15           |10550           |0                 
-LHA:MSTW2008lo68cl.LHgrid(proton)        |16           |21000           |0                 
-LHA:MSTW2008lo68cl.LHgrid(anti-proton)   |17           |21000           |0                 
-LHA:MSTW2008nnlo68cl.LHgrid(proton)      |18           |21200           |0                 
-LHA:MSTW2008nnlo68cl.LHgrid(anti-proton) |19           |21200           |0                 
-LHA:NNPDF10_100.LHgrid(proton)           |20           |90200           |0                 
-LHA:NNPDF10_100.LHgrid(anti-proton)      |21           |90200           |0                 
+LHA:cteq6l1(proton)                      |100          |0               |0
+LHA:cteq6l1(anti-proton)                 |101          |0               |0
 ==========================================================================================

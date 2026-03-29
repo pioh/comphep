@@ -1463,6 +1463,7 @@ readstrfuns(int check)
   while (ln)
     {
       strcpy (s, ln->line);
+      strcpy (mem, "0");
       sscanf (s, "%[^|]%*c%[^|]%*c%[^|]%*c%[^|]", name, num, set, mem);
       trim (name);
       trim (num);

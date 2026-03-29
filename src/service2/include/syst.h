@@ -16,4 +16,8 @@ extern void lShift (char *s, int l);
 extern long get_seed (char filename[]);
 extern int get_sf_info (char sf_info[], char * name, int * set, int * mem);
 
+#ifdef LHAPDF
+extern int update_lhapdf_mdl (void);
+#endif
+
 #endif
