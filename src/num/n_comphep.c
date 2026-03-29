@@ -251,7 +251,7 @@ main (int argc, char **argv) {
   f3_mess[6] = "Quit";
 #ifdef LHAPDF
   f3_key[7]  = f10_refresh_lhapdf;
-  f3_mess[7] = "LHA Upd";
+  f3_mess[7] = "LHAPDF Update";
 #endif
 
 /*  initialization of the session */

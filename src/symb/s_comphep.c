@@ -213,7 +213,7 @@ if (exitlevel == odd) { don't write chep_label,
   f3_mess[6] = "Quit";
 #ifdef LHAPDF
   f3_key[7]  = f10_refresh_lhapdf;
-  f3_mess[7] = "LHA Upd";
+  f3_mess[7] = "LHAPDF Update";
 #endif
 
   restoreent (&exitlevel);
