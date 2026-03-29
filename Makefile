@@ -278,8 +278,7 @@ setup: lhapdf
 	@chmod 744 $(WDIR)/results/diag_view
 
 ifneq ($(LHAPDF_DATADIR),)
-	@mv $(WDIR)/models/beams-lhapdf.mdl $(WDIR)/models/beams.mdl
-	@mv $(WDIR)/models/strfuns-lhapdf.mdl $(WDIR)/models/strfuns.mdl
+	@rm -f $(WDIR)/models/beams-lhapdf.mdl $(WDIR)/models/strfuns-lhapdf.mdl
 	@echo $(LHAPDF_DATADIR) > $(WDIR)/.lhapdfpath
 endif
 	@cp usr/userFun* $(WDIR)/usr/.

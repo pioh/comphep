@@ -22,7 +22,11 @@
 #include "strfun_par.h"
 #include "strfun.h"
 
+#ifdef LHAPDF
+#define MAXFUN 5
+#else
 #define MAXFUN 4
+#endif
 #define FUNLEN 40
 
 static int uprt[2];
@@ -54,16 +58,27 @@ static struct {
     p_isr__, n_isr__, info_isr__, r_isr__, b_isr__, m_isr__, i_isr__, c_isr__
   }
   ,
-#ifdef LHAPDF
-  {
-    p_lhapdf, n_lhapdf, info_lhapdf, r_lhapdf, beam_lhapdf, pdf_lhapdf, be_lhapdf, c_lhapdf
-  }
-#else
   {
     p_pdf, n_pdf, info_pdf, r_pdf, beam_pdf, pdf_pdf, be_pdf, c_pdf
   }
+#ifdef LHAPDF
+  ,
+  {
+    p_lhapdf, n_lhapdf, info_lhapdf, r_lhapdf, beam_lhapdf, pdf_lhapdf, be_lhapdf, c_lhapdf
+  }
 #endif
 };
+
+int pdfnamecmp (void) {
+  int sf0 = get_sf_num(0);
+  int sf1 = get_sf_num(1);
+  if (sf0 != sf1) return 0;
+  if (sf0 == 4) return pdf_namecmp();
+#ifdef LHAPDF
+  if (sf0 == 5) return lhapdf_namecmp();
+#endif
+  return 0;
+}
 
 static double strfun_f (int i, double x, double q) {
   int sf = get_sf_num(i - 1);

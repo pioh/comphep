@@ -305,10 +305,8 @@ double alpha_pdf (double q) {
   return interAlpha (q, pdfData + get_alphaMode() - 1);
 }
 
-#ifndef LHAPDF
-int pdfnamecmp (void) {
+int pdf_namecmp (void) {
   if (!strcmp (pdfName[0], pdfName[1]))
     return 1;
   return 0;
 }
-#endif

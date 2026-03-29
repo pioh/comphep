@@ -248,10 +248,8 @@ double alpha_lhapdf (double q) {
   return lhapdf_interAlpha (q);
 }
 
-#ifdef LHAPDF
-int pdfnamecmp (void) {
+int lhapdf_namecmp (void) {
   if (!strcmp (lhapdfName[0], lhapdfName[1]))
     return 1;
   return 0;
 }
-#endif
