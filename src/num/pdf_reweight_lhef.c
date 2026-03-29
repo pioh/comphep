@@ -58,33 +58,17 @@ int read_config (char configname[])
 
 #ifdef LHAPDF
 static int init_lhapdf (int bnum, int set, int mem, int kfcode) {
-  longstr pathtoindexfile;
-  longstr tmppath;
-  int status = setLHAPDFIndexpath (pathtoindexfile);
-  int undefined = 1;
   lhapdfList * list = NULL;
   lhapdfList * list_;
+  int status = 0;
 
-  if (!status) {
-    fprintf (stderr, "Warning! Can not find PDFsets.index\n");
-    return 0;
-  }
-  sprintf (tmppath, "%s/share/lhapdf/PDFsets/", pathtolhapdf);
-/*  fprintf (stdout, "pdf_reweighter (info): LHAPDF data path %s\n", tmppath);*/
-  comphepLhapdfList (tmppath, pathtoindexfile, &list);
+  /* In LHAPDF 6, set numbers are not used. Init with first available PDF set. */
+  comphepLhapdfList (&list);
   list_ = list;
 
-  status = 0;
-  while (list_) {
-    if (set == list_->set) {
-      if (mem == list_->mem) {
-        undefined = 0;
-        initLHAPDF (bnum, tmppath, list_->name, set, mem, kfcode);
-        status = 1;
-        break;
-      }
-    }
-    list_ = list_->next;
+  if (list_) {
+    initLHAPDF (bnum, list_->name, mem, kfcode);
+    status = 1;
   }
   if (list) {
     delLhapdfList (list);

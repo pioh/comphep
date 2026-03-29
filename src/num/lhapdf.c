@@ -5,6 +5,7 @@
 */
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "service2/include/chep_limits.h"
 #include "service2/include/syst.h"
@@ -19,10 +20,8 @@ static int curparton[2]={0,0};
 static double lambda5 = -0.999;
 static int decode[10] = {0,5,4,3,-1,-2,0,2,1,0};
 
-void makelhapdfsilent_(void);
-
-void set_QCDLambda (int set, int mem) {
-  lambda5 = lhapdfqcdlam(set, mem);
+void set_QCDLambda (int beam) {
+  lambda5 = lhapdf6_qcdlambda(beam);
 }
 
 void delLhapdfList (lhapdfList * list) {
@@ -36,128 +35,44 @@ void delLhapdfList (lhapdfList * list) {
   }
 }
 
-int comphepLhapdfList (char * thepath, char * indexfile, lhapdfList ** list) {
-  midstr s;
-  midstr file1;
+int comphepLhapdfList (lhapdfList ** list) {
+  int n, i;
   int pos = 1;
-  int set;
-  int mem;
-  int pdftyp;
-  int pdfgup;
-  int pdfsup;
-  double q2min;
-  double q2max;
-  double xmin;
-  double xmax;
 
-  FILE * f = fopen (indexfile, "r");
-  if (!f) {
-    return 0;
-  }
+  n = lhapdf6_num_pdfsets();
+  for (i = 0; i < n; i++) {
+    const char* setname = lhapdf6_pdfset_name(i);
+    if (!setname || !setname[0]) continue;
 
-  while (fgets (s, 1024, f)) {
-    int err = sscanf (s," %d %d %d %d %s %d %lf %lf %lf %lf", 
-            &set, &pdftyp, &pdfgup, &pdfsup, file1, &mem, &q2min, &q2max, &xmin, &xmax);
-
-    if (10 == err && 0 < strlen (file1)) {
+    {
       lhapdfList * new = malloc (sizeof (lhapdfList));
-
-      new->name = malloc (strlen (file1) + 1);
-      new->set = set;
-      new->mem = mem;
-      new->pathfile = malloc (strlen (thepath) + 1);
-      new->file = malloc (strlen (file1) + 1);
-
-      strcpy (new->name, file1);
-      strcpy (new->pathfile, thepath);
-      strcpy (new->file, file1);
+      new->name = malloc (strlen (setname) + 1);
+      strcpy (new->name, setname);
+      new->set = 0;
+      new->mem = 0;
+      new->pathfile = NULL;
+      new->file = NULL;
       new->position = pos;
-
       new->next = *list;
       *list = new;
       pos++;
     }
   }
-  fclose (f);
+
   return 1;
 }
 
 
-int setLHAPDFIndexpath (longstr path) {
-  FILE * f;
-  longstr tmppath;
-  int status = 0;
-
-    sprintf (tmppath, "PDFsets.index");
-  f = fopen (tmppath, "r");
-  if (f) {
-    strcpy (path, tmppath);
-    fclose(f);
-    status = 1;
-  } else {
-    sprintf (tmppath, "%s/strfun/PDFsets.index", pathtocomphep);
-    f = fopen (tmppath, "r");
-    if (f) {
-      strcpy (path, tmppath);
-      fclose(f);
-      status = 1;
-    } else {
-      sprintf (tmppath, "%s/share/lhapdf/PDFsets.index", pathtolhapdf);
-      f = fopen (tmppath, "r");
-      if (f) {
-        strcpy (path, tmppath);
-        fclose(f);
-        status = 1;
-      } else {
-        fprintf (stderr,"Warning! can not find the LHAindex-comphep.txt file\n");
-      }
-    }
-  }
-  return status;
-}
-
-
-int setLHAPDFIndexpathCPYTH (longstr path) {
-  FILE * f;
-  longstr tmppath;
-  int status = 0;
-
-  sprintf (tmppath, "PDFsets.index");
-  f = fopen (tmppath, "r");
-  if (f) {
-    strcpy (path, tmppath);
-    fclose(f);
-    status = 1;
-  } else {
-    sprintf (tmppath, "%s/share/lhapdf/PDFsets.index", pathtolhapdf);
-    f = fopen (tmppath, "r");
-    if (f) {
-      strcpy (path, tmppath);
-      fclose(f);
-      status = 1;
-    } else {
-      fprintf (stderr,"Warning! can not find the PDFsets.index file\n");
-    }
-  }
-  return status;
-}
-
-
-void initLHAPDF (int beamnum, char * path, char * file, int set, int mem, int prt) {
-  int len;
-  longstr pathfile;
+void initLHAPDF (int beamnum, const char* setname, int mem, int prt) {
 
   curparton[beamnum] = prt;
   if (21 == prt) curparton[beamnum] = 0; /* gluon */
   curparton[beamnum] += 6; /* shift in lhapdfVal according to val[-6:6] (FORTRAN) -> val[0:13] (C)*/
 
-  sprintf (pathfile, "%s/%s", path, file);
-  len = strlen (pathfile);
-  makelhapdfsilent_();
-  initpdfset(pathfile);
-  initpdf(mem);
-  set_QCDLambda(set, mem);
+  lhapdf6_initpdf(beamnum, setname, mem);
+  set_QCDLambda(beamnum);
 }
+
 
 /* return pdf value of i-th parton in a point (x,Q) 
         -6   -5   -4   -3   -2   -1   0 1 2 3 4 5 6
@@ -166,12 +81,13 @@ Parton  tbar bbar cbar sbar ubar dbar g d u s c b t
 double lhapdfVal (double x, double q, int i) {
   double val;
   double pdf[13];
+  int beam = (i < 2) ? i : 0;
 
-  evolvepdf (x,q,pdf);
+  lhapdf6_evolvepdf (beam, x, q, pdf);
   if (i < 2) {
     val = pdf[curparton[i]]/x;
   } else {
-/* CompHEP proton: (b,B) (c,C) (s,S) D U G u d 
+/* CompHEP proton: (b,B) (c,C) (s,S) D U G u d
                     2     3      4   5 6 7 8 9 */
     val = pdf[decode[i] + 6]/x;  /* shift val[-6:6] (FORTRAN) -> val[0:13] (C) */
   }
@@ -183,7 +99,7 @@ double lhapdfValCPYTH (double x, double q, int i) {
   double val = 0.;
   double pdf[13];
 
-  locevolvepdf (x, q, pdf);
+  lhapdf6_evolvepdf (0, x, q, pdf);
   if (i == 21) {
     val = pdf[6]/x;
   } else {
@@ -201,7 +117,7 @@ double TESTlhapdfValCPYTH (double x, double q, int i) {
   for (j = 0; j < 100; ++j) {
   x = 0.001 + j * 0.001;
 
-  locevolvepdf (x, q, pdf);
+  lhapdf6_evolvepdf (0, x, q, pdf);
   if (i == 21) {
     val = pdf[6]/x;
   } else {
@@ -216,8 +132,7 @@ double TESTlhapdfValCPYTH (double x, double q, int i) {
 }
 
 double lhapdf_interAlpha (double q) {
-  double res = lhapdfalphas (q);
-  return res;
+  return lhapdf6_alphas (0, q);
 }
 
 double lhapdf_QCDLambda (void) {

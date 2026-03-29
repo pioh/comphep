@@ -524,7 +524,6 @@ sub run {
       if (-e $oldprtfile) {
         system ("cp $oldprtfile ./.");
       }
-      system ("ln -s  ../LHAIndex-comphep.txt ./LHAIndex-comphep.txt");
       system ("ln -s  ../n_comphep ./n_comphep");
       system ("ln -s  ../n_comphep.exe ./n_comphep.exe") if -s "../n_comphep.exe";
       system ("mv  ../session.dat .");

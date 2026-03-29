@@ -170,6 +170,10 @@ if (exitlevel == odd) { don't write chep_label,
   sprintf (pathtohelp, "%shelp%c", pathtocomphep, f_slash);
   outputDir = "results/";
 
+#ifdef LHAPDF
+  update_lhapdf_mdl ();
+#endif
+
   sprintf (pathtoversionfile, "%sversion", pathtocomphep);
   fverion = fopen (pathtoversionfile, "r");
   if (fverion != NULL)

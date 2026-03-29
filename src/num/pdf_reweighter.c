@@ -146,14 +146,16 @@ int main (int argc, char** argv)
 
 #ifdef LHAPDF
   {
-    midstr _pathtolhapdf;
-    char * p = getenv ("LHAPDFPATH");
-    if (!p) {
-      fprintf (stderr, "pdf_reweighter (error): environment variable LHAPDFPATH is not defined\n");
-      exit (-2);
+    FILE *lf = fopen ("../.lhapdfpath", "r");
+    if (!lf) lf = fopen ("../../.lhapdfpath", "r");
+    if (lf) {
+      midstr _pathtolhapdf;
+      if (fscanf (lf, "%1023s", _pathtolhapdf) == 1) {
+        sprintf (pathtolhapdf, "%s/", _pathtolhapdf);
+        setenv ("LHAPDF_DATA_PATH", _pathtolhapdf, 0);
+      }
+      fclose (lf);
     }
-    strcpy (_pathtolhapdf, p);
-    sprintf (pathtolhapdf, "%s/", _pathtolhapdf);
   }
   pdf_reweight_lhef (config, source, target, nalphas, seed_used, error_used);
 #else

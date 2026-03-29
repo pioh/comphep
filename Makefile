@@ -23,19 +23,15 @@ CHEPDIR=.
 CC=$(shell cat CC)
 CFLAGS=$(shell cat CFLAGS)
 CLIBS=$(shell cat CLIBS)
+CLIBS_BASE=$(shell cat CLIBS_BASE 2>/dev/null || cat CLIBS)
 F77=$(shell cat F77)
 F77FLAGS=$(shell cat F77FLAGS)
 F77LIBS=$(shell cat F77LIBS)
 RANLIB=$(shell cat RANLIB)
 
-LHAPDFLIBNAME=
-LHAPDFLIBPATH=
+LHAPDF_DATADIR=$(shell cat LHAPDF_DATADIR 2>/dev/null)
 ROOTFLAGS=
 ROOTLIBS=
-ifneq (${LHAPDFPATH},)
-LHAPDFLIBNAME=LHAPDF
-LHAPDFLIBPATH=$LHAPDFPATH/lib
-endif
 ifneq (${ROOTSYS},)
 ROOTFLAGS=$(shell cat ROOTFLAGS)
 ROOTLIBS=$(shell cat ROOTLIBS)
@@ -49,7 +45,7 @@ COMPHEP_BIN_FILES=s_comphep.exe tab_view.exe archiv.exe slhasuspect.exe \
                   translator.exe cascade.exe rtupler.exe lanhep.exe \
                   oneclick.exe
 BINDIST_FILES=${COMPHEP_BIN_FILES} models help usr include lib Makefile \
-              CC CFLAGS CLIBS F77 F77FLAGS F77LIBS RANLIB ROOTFLAGS ROOTLIBS \
+              CC CFLAGS CLIBS CLIBS_BASE F77 F77FLAGS F77LIBS RANLIB ROOTFLAGS ROOTLIBS LHAPDF_DATADIR \
               launch_n_comphep configure \
               INSTALL strfun comphep32.png comphep64.png comphep128.png \
               RELEASE-NOTES README
@@ -90,10 +86,10 @@ link: compile
 	$(CC) $(CFLAGS) -o bin/translator.exe   src/num/translator.o src/num/alphas2.o -ltranls -levents -lpdf -lserv  $(CLIBS)
 	$(CC) $(CFLAGS) -o bin/cascade.exe      src/num/cascade.o                      -ltranls -levents -lpdf -lserv  $(CLIBS)
 #	$(CC) $(CFLAGS) -o bin/lanhep.exe       src/lanhep/main.o                      -llanhep                        $(CLIBS) $(F77LIBS)
-	$(CC) $(CFLAGS) -o bin/s_comphep.exe    src/symb/s_comphep.o                   -lsymb -lserv -lmssm -lexternal $(CLIBS) $(F77LIBS)
-	$(CC) $(CFLAGS) -o bin/archiv.exe       src/symb/archiv.o                      -lsymb -lserv -lmssm -lexternal $(CLIBS) $(F77LIBS)
-	$(CC) $(CFLAGS) -o bin/diag_viewer.exe  src/num/diag_viewer.o                  -lsymb -lserv -lmssm -lexternal $(CLIBS) $(F77LIBS)
-	$(CC) $(CFLAGS) -o bin/diag_viewer2.exe src/num/diag_viewer2.o                 -lsymb -lserv -lmssm -lexternal $(CLIBS) $(F77LIBS)
+	$(CC) $(CFLAGS) -o bin/s_comphep.exe    src/symb/s_comphep.o                   -lsymb -lserv -lmssm -lexternal $(CLIBS_BASE) $(F77LIBS)
+	$(CC) $(CFLAGS) -o bin/archiv.exe       src/symb/archiv.o                      -lsymb -lserv -lmssm -lexternal $(CLIBS_BASE) $(F77LIBS)
+	$(CC) $(CFLAGS) -o bin/diag_viewer.exe  src/num/diag_viewer.o                  -lsymb -lserv -lmssm -lexternal $(CLIBS_BASE) $(F77LIBS)
+	$(CC) $(CFLAGS) -o bin/diag_viewer2.exe src/num/diag_viewer2.o                 -lsymb -lserv -lmssm -lexternal $(CLIBS_BASE) $(F77LIBS)
 	$(CC) $(CFLAGS) -o bin/pdf_reweighter.exe src/num/pdf_reweighter.o             -levents -lnum -lpdf -lserv     $(CLIBS) $(F77LIBS)
 ifneq (${ROOTSYS},)
 	$(CXX) $(CFLAGS) -o bin/rtupler.exe src/num/rtuple.o -ltranls -lnum -levents -lpdf -lserv $(CLIBS) $(F77LIBS) $(ROOTLIBS)
@@ -175,7 +171,7 @@ distclean: clean execlean inclean
 	@echo "Total cleaning has been done..."
 
 inclean:
-	@rm -f CC F77 F77FLAGS CFLAGS CLIBS F77LIBS RANLIB ROOTFLAGS ROOTLIBS
+	@rm -f CC F77 F77FLAGS CFLAGS CLIBS CLIBS_BASE F77LIBS RANLIB ROOTFLAGS ROOTLIBS LHAPDF_DATADIR
 
 execlean:
 	@rm -f bin/*.exe lib/*.a
@@ -281,10 +277,10 @@ setup: lhapdf
 	@chmod 744 $(WDIR)/results/n_comphep
 	@chmod 744 $(WDIR)/results/diag_view
 
-ifneq (${LHAPDFPATH},)
+ifneq ($(LHAPDF_DATADIR),)
 	@mv $(WDIR)/models/beams-lhapdf.mdl $(WDIR)/models/beams.mdl
 	@mv $(WDIR)/models/strfuns-lhapdf.mdl $(WDIR)/models/strfuns.mdl
-	@echo ${LHAPDFPATH} > $(WDIR)/.lhapdfpath
+	@echo $(LHAPDF_DATADIR) > $(WDIR)/.lhapdfpath
 endif
 	@cp usr/userFun* $(WDIR)/usr/.
 	@cp usr/userVars* $(WDIR)/usr/.
@@ -299,10 +295,7 @@ endif
 	@echo "*****************************************************************"
 
 lhapdf:
-ifneq (${LHAPDFPATH},)
-	@rm -f lib/lib$(LHAPDFLIBNAME).a;
-	@ln -s $(LHAPDFPATH)/lib/lib$(LHAPDFLIBNAME).a lib/.
-endif
+# LHAPDF 6 is a system library, no symlinks needed
 
 oneclicksetup: lhapdf
 	@cp usr/diag_view ../results/diag_view
@@ -310,8 +303,8 @@ oneclicksetup: lhapdf
 	@chmod 744 ../results/n_comphep
 	@chmod 744 ../results/diag_view
 	@echo $(PWD) > ../.compheppath
-ifneq (${LHAPDFPATH},)
-	@echo ${LHAPDFPATH} > ../.lhapdfpath
+ifneq ($(LHAPDF_DATADIR),)
+	@echo $(LHAPDF_DATADIR) > ../.lhapdfpath
 endif
 ifneq (${ROOTSYS},)
 	@echo $(ROOTSYS) > ../.rootpath

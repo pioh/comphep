@@ -30,16 +30,15 @@ fi
 export PATH=$ROOTSYS/bin:$PATH
 export LD_LIBRARY_PATH=$ROOTSYS/lib:$LD_LIBRARY_PATH
 
-LHAPDFPATH=
+LHAPDF_DATA_PATH=
 if (test -f ../.lhapdfpath) then
-  export LHAPDFPATH=`cat ../.lhapdfpath`
-  echo "\n  $script (info): LHAPDF is used from $LHAPDFPATH"
+  export LHAPDF_DATA_PATH=`cat ../.lhapdfpath`
+  echo "\n  $script (info): LHAPDF is used from $LHAPDF_DATA_PATH"
 else if (test -f ../../.lhapdfpath) then
-  export LHAPDFPATH=`cat ../../.lhapdfpath`
-  echo "\n  $script (info): LHAPDF is used from $LHAPDFPATH"
+  export LHAPDF_DATA_PATH=`cat ../../.lhapdfpath`
+  echo "\n  $script (info): LHAPDF is used from $LHAPDF_DATA_PATH"
 fi
 fi
-export LD_LIBRARY_PATH=$LHAPDFPATH/lib:$LD_LIBRARY_PATH
 
 if (test -z $1) then
    echo "***********************************************"
