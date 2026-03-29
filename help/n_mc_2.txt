@@ -6,5 +6,8 @@ one to set:
  3. the first particle momentum 
  4. the second particle momentum 
 
-A plot for the selected structure function can be displayed by 
+A plot for the selected structure function can be displayed by
 pressing the F7 key.
+ When compiled with LHAPDF support, both built-in (PDF:) and
+LHAPDF (LHA:) structure functions are available. Press F10
+to refresh the list of available LHAPDF PDF sets.

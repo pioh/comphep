@@ -10,5 +10,10 @@ monochromatic electron/positron at a small angle,
 losses due to the multiple soft photon radiation from the initial state 
 (resumed) and radiation in the electromagnetic field of the other 
 positron/electron bunch.
-    See the Manual for details. 
+   Structure functions are shown with a prefix:
+   PDF: - built-in CompHEP distributions (CTEQ, MRS);
+   LHA: - distributions from the LHAPDF library (available when
+          CompHEP is configured with --with-lhapdf option).
+   Use F10 "LHAPDF Update" to refresh the list of LHAPDF sets.
+    See the Manual for details.
 

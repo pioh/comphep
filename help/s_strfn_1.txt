@@ -11,3 +11,8 @@
    indexes of particles), G5 (the gamma-five Dirac matrix).
 
 2. "Number" is an inner index of the set.
+
+   When compiled with LHAPDF support, structure functions with the
+   LHA: prefix use the LHAPDF library, and those with the PDF: prefix
+   are built-in CompHEP sets. Use F10 "LHAPDF Update" to refresh
+   the list after installing new PDF sets.

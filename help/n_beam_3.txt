@@ -1,0 +1,6 @@
+3 8 60
+  Select "anti-proton" if the beam particle is an
+anti-proton. The parton distribution function (PDF)
+will describe the momentum distributions of quarks
+and gluons inside the anti-proton.
+

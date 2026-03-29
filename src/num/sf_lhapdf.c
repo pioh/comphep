@@ -180,7 +180,7 @@ int pdf_lhapdf (int i, char * p_name) {
   }
 
   k = 0;
-  menu1 (35, 8, "", menustring, "", &pscr, &k);
+  menu1 (35, 8, "", menustring, "n_sf_lha", &pscr, &k);
 
   if (k) {
     int l = k - 1;
