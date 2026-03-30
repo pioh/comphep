@@ -1,5 +1,7 @@
 # Agent / LLM artifacts
 .gena/
+.claude/
+.playwright-mcp/
 *.prompt
 *.spec
 CLAUDE.md
@@ -23,3 +25,6 @@ ROOTLIBS
 LHAPDF_DATADIR
 test.c
 comphep-lhapdf6.tar.gz
+
+# Release artifacts
+dist/
