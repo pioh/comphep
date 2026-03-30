@@ -560,8 +560,8 @@ if [ "$SKIP_PUSH" != "1" ] && [ -n "$GITVERSE_TOKEN" ]; then
 
     # Package registry URLs
     PKG_BASE="https://gitverse.ru/${OWNER}/-/packages"
-    DEB_PKG_URL="${PKG_BASE}/debian/comphep/${VERSION}-1"
-    RPM_PKG_URL="${PKG_BASE}/rpm/comphep/${RPM_VERSION}"
+    DEB_PKG_URL="${PKG_BASE}/debian/comphep/${VERSION}-1?tab=packages"
+    RPM_PKG_URL="${PKG_BASE}/rpm/comphep/${VERSION}?tab=packages"
 
     BODY="## CompHEP ${VERSION}
 
@@ -593,6 +593,16 @@ sudo dnf makecache && sudo dnf install comphep
     BODY="${BODY}
 
 ### Install from binary tarball
+
+**Dependencies:** gcc, g++, gfortran, make, libX11-dev, libXext-dev
+**Optional:** LHAPDF 6 + yaml-cpp (for PDF sets)
+
+| Distro | Install dependencies |
+|--------|---------------------|
+| Debian/Ubuntu | \`sudo apt install gcc g++ gfortran make libx11-dev libxext-dev lhapdf-dev libyaml-cpp-dev\` |
+| Fedora/RHEL | \`sudo dnf install gcc gcc-c++ gcc-gfortran make libX11-devel lhapdf-devel yaml-cpp-devel\` |
+| Arch/Manjaro | \`sudo pacman -S gcc gcc-fortran libx11 make lhapdf yaml-cpp\` |
+
 \`\`\`bash
 tar xzf ${BIN_TARBALL}
 cd ${BIN_DIST_NAME}
@@ -601,6 +611,10 @@ cd ~/comphep_work && ./comphep
 \`\`\`
 
 ### Install from source
+
+**Dependencies:** gcc, g++, gfortran, make, libX11-dev, libXext-dev, perl
+**Optional:** LHAPDF 6 + yaml-cpp, ROOT, libxml2
+
 \`\`\`bash
 tar xzf comphep-*.tar.gz && cd comphep-*/
 ./configure --with-lhapdf      # optional: requires lhapdf-config in PATH
