@@ -198,14 +198,16 @@ main (int argc, char **argv) {
 
 #ifdef LHAPDF
   {
-    midstr _pathtolhapdf;
-    p = getenv ("LHAPDFPATH");
-    if (!p) {
-      fprintf (stderr, " Environment variable LHAPDFPATH is not defined.\n");
-      exit (-2);
+    FILE *lf = fopen ("../.lhapdfpath", "r");
+    if (!lf) lf = fopen ("../../.lhapdfpath", "r");
+    if (lf) {
+      midstr _pathtolhapdf;
+      if (fscanf (lf, "%1023s", _pathtolhapdf) == 1) {
+        sprintf (pathtolhapdf, "%s%c", _pathtolhapdf, d_slash);
+        setenv ("LHAPDF_DATA_PATH", _pathtolhapdf, 0);
+      }
+      fclose (lf);
     }
-    strcpy (_pathtolhapdf, p);
-    sprintf (pathtolhapdf, "%s%c", _pathtolhapdf, d_slash);
   }
 #endif
 

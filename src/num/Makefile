@@ -5,6 +5,7 @@
 .PHONY: clean all n_comphep diag_viewer mix translator oneclick
 
 CC=$(shell cat ../../CC)
+CXX=$(shell cat ../../CXX)
 CFLAGS=$(shell cat ../../CFLAGS)
 
 F77=$(shell cat ../../F77)
@@ -41,7 +42,8 @@ EXEC=diag_viewer.o diag_viewer2.o n_comphep.o mix.o translator.o \
 
 cobjects=$(OBJS1) $(OBJS2) $(OBJS3) $(OBJS4) $(OBJS5) $(OBJS6) $(EXEC)
 cppobjects=rtuple_routines.o
-fobjects=wrap.o 
+cppobjects_pdf=lhapdf6_wrapper.o
+fobjects=
 
 all: n_comphep mix translator events oneclick pdf $(EXEC)
 
@@ -57,8 +59,8 @@ mix: $(OBJS3)
 translator: $(OBJS4) $(cppobjects)
 	$(AR) -r ../../lib/libtranls.a $(OBJS4) $(cppobjects)
 
-pdf: $(OBJS5) $(fobjects)
-	$(AR) -r ../../lib/libpdf.a $(OBJS5) $(fobjects)
+pdf: $(OBJS5) $(cppobjects_pdf)
+	$(AR) -r ../../lib/libpdf.a $(OBJS5) $(cppobjects_pdf)
 
 oneclick: $(OBJS6)
 	$(AR) -r ../../lib/liboneclick.a $(OBJS6)
@@ -72,5 +74,5 @@ $(cobjects): %.o: %.c
 $(cppobjects): %.o: %.cxx
 	$(CXX) $(CFLAGS) $(ROOTFLAGS1) $(INS) -c $< -o $@
 
-$(fobjects): %.o: %.F
-	$(F77) $(F77FLAGS) $(INS) -c $<
+$(cppobjects_pdf): %.o: %.cpp
+	$(CXX) -c $(CFLAGS) $(INS) $< -o $@

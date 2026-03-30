@@ -41,14 +41,23 @@ static struct {
   int (*menu) (int, char *);
   int (*init) (int, double *, double *, char *);
   double (*val) (int, double, double);
-} strFun =
-#ifdef LHAPDF
-  {
-    p_lhapdf, n_lhapdf, info_lhapdf, r_lhapdf, beam_lhapdf, pdf_lhapdf, be_lhapdf, c_lhapdf
-  };
-#else
+} strFunPdf =
   {
     p_pdf, n_pdf, info_pdf, r_pdf, beam_pdf, pdf_pdf, be_pdf, c_pdf
+  };
+#ifdef LHAPDF
+static struct {
+  int (*myParticle) (char *);
+  void (*fullName) (int, char *, char *);
+  void (*realSTRFUN_info) (int, Str_fun_Info *);
+  int (*readName) (int, char *);
+  int (*beam_menu) (int);
+  int (*menu) (int, char *);
+  int (*init) (int, double *, double *, char *);
+  double (*val) (int, double, double);
+} strFunLha =
+  {
+    p_lhapdf, n_lhapdf, info_lhapdf, r_lhapdf, beam_lhapdf, pdf_lhapdf, be_lhapdf, c_lhapdf
   };
 #endif
 
@@ -190,31 +199,6 @@ readPDF (FILE * f)
     pdf = strstr (buff, "PDF:");
     lha = strstr (buff, "LHA:");
     PDFLIBset[i] = PDFLIBgroup[i] = 0;
-#ifdef LHAPDF
-    if (NULL != lha) {
-      strcpy (sf_txt[i], lha);
-      bname = strstr (lha, "(");
-      len = strlen (bname);
-      bname[len - 2] = '\0';
-      if (strFun.myParticle (pname[i]) && strFun.readName (i + 1, sf_txt[i]) && strFun.init (i + 1, &be, &mass, pname[i])) {
-        set_sf_num(i, 1);
-        set_sf_mass (i, mass);
-        set_sf_be (i, be);
-        set_alphaMode (1);
-      } else {
-        fprintf (stderr, "translator (warning): the event file has LHA PDF, but traslator could not find LHAPDF data\n");
-        fprintf (stderr, "                      files. So, CompHEP internal alpha_S representation will be used\n");
-      }
-    }
-    if (NULL != pdf) {
-      strcpy (sf_txt[i], pdf);
-      bname = strstr (pdf, "(");
-      len = strlen (bname);
-      bname[len - 2] = '\0';
-      fprintf (stderr, "translator (warning): the event file has internal CompHEP PDF, but traslator is compiled with\n");
-      fprintf (stderr, "                      LHAPDF support. So, CompHEP internal alpha_S representation will be used\n");
-    }
-#else
     if (NULL != pdf) {
       shortstr pdfver;
       shortstr pdfname;
@@ -228,7 +212,7 @@ readPDF (FILE * f)
       pdfver[len] = '\0';
       CERNpdf_number (pdfname, pdfver, &(PDFLIBset[i]), &(PDFLIBgroup[i]));
 
-      if (strFun.myParticle (pname[i]) && strFun.readName (i + 1, sf_txt[i]) && strFun.init (i + 1, &be, &mass, pname[i])) {
+      if (strFunPdf.myParticle (pname[i]) && strFunPdf.readName (i + 1, sf_txt[i]) && strFunPdf.init (i + 1, &be, &mass, pname[i])) {
         set_sf_num(i, 1);
         set_sf_mass (i, mass);
         set_sf_be (i, be);
@@ -238,11 +222,24 @@ readPDF (FILE * f)
         fprintf (stderr, "                      the PDF file. So, CompHEP internal alpha_S representation will be used\n");
       }
     }
+#ifdef LHAPDF
     if (NULL != lha) {
       strcpy (sf_txt[i], lha);
       bname = strstr (lha, "(");
       len = strlen (bname);
       bname[len - 2] = '\0';
+      if (strFunLha.myParticle (pname[i]) && strFunLha.readName (i + 1, sf_txt[i]) && strFunLha.init (i + 1, &be, &mass, pname[i])) {
+        set_sf_num(i, 1);
+        set_sf_mass (i, mass);
+        set_sf_be (i, be);
+        set_alphaMode (1);
+      } else {
+        fprintf (stderr, "translator (warning): the event file has LHA PDF, but traslator could not find LHAPDF data\n");
+        fprintf (stderr, "                      files. So, CompHEP internal alpha_S representation will be used\n");
+      }
+    }
+#else
+    if (NULL != lha) {
       fprintf (stderr, "translator (warning): the event file has LHA PDF, but traslator is compiled without LHAPDF\n");
       fprintf (stderr, "                      support. So, CompHEP internal alpha_S representation will be used\n");
     }
@@ -646,14 +643,29 @@ translate_calchep (const char source[], const char target[], int mixing_done)
     pbeam[1] = 1;
   } else {
     for (i = 0; i < 2; ++i) {
-      if (strFun.myParticle (pname[i]) && strFun.readName (i + 1, sf_txt[i]) && strFun.init (i + 1, &be, &pmasss, pname[i])) {
-        set_sf_num(i, 1);
-        set_sf_mass (i, pmasss);
-        set_sf_be (i, be);
-        set_alphaMode (1);
-      } else {
-        fprintf (stderr, "translator (warning): the event file has internal CompHEP PDF, but traslator could not open\n");
-        fprintf (stderr, "                      the PDF file. So, CompHEP internal alpha_S representation will be used\n");
+      int done = 0;
+      if (strstr (sf_txt[i], "PDF:")) {
+        if (strFunPdf.myParticle (pname[i]) && strFunPdf.readName (i + 1, sf_txt[i]) && strFunPdf.init (i + 1, &be, &pmasss, pname[i])) {
+          set_sf_num(i, 1);
+          set_sf_mass (i, pmasss);
+          set_sf_be (i, be);
+          set_alphaMode (1);
+          done = 1;
+        }
+      }
+#ifdef LHAPDF
+      if (!done && strstr (sf_txt[i], "LHA:")) {
+        if (strFunLha.myParticle (pname[i]) && strFunLha.readName (i + 1, sf_txt[i]) && strFunLha.init (i + 1, &be, &pmasss, pname[i])) {
+          set_sf_num(i, 1);
+          set_sf_mass (i, pmasss);
+          set_sf_be (i, be);
+          set_alphaMode (1);
+          done = 1;
+        }
+      }
+#endif
+      if (!done) {
+        fprintf (stderr, "translator (warning): could not open the PDF file. CompHEP internal alpha_S will be used\n");
       }
     }
   }

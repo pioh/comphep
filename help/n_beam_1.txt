@@ -1,0 +1,7 @@
+3 8 60
+  Select "parton" to turn off the structure function
+for this beam. The particle will be treated as an
+elementary parton (quark, anti-quark, or gluon).
+No convolution with a parton distribution function
+will be performed.
+

@@ -20,13 +20,12 @@
 #include "lhapdf.h"
 #include "sf_lhapdf.h"
 
-static int LHAPDFset[2] = {0, 0};
 static int LHAPDFmem[2] = {0, 0};
 static shortstr lhapdfName[2] = {"LHA:OFF", "LHA:OFF"};
 static shortstr lhapdfBeam[2] = {"parton", "parton"};
 
 int getLHAPDFset (int i) {
-  return LHAPDFset[i];
+  return 0;
 }
 
 int getLHAPDFmem (int i) {
@@ -41,7 +40,8 @@ int p_lhapdf (char * p_name) {
 
 void info_lhapdf (int i, Str_fun_Info * info) {
   char * name = strdup (lhapdfName[i] + 4);
-  name[strlen(name) - strlen (strchr (lhapdfName[i], '.'))] = 0;
+  char * dot = strchr (name, '.');
+  if (dot) *dot = 0; /* strip .LHpdf/.LHgrid extension if present */
 
   info->pdf_name[0] = 0;
   if (!strncmp ("H1", name, 2))      {strcpy (info->pdf_name, "H1");      strcpy (info->version, name + 2); }
@@ -56,26 +56,27 @@ void info_lhapdf (int i, Str_fun_Info * info) {
   if (!strncmp ("NNPDF", name, 5))   {strcpy (info->pdf_name, "NNPDF");   strcpy (info->version, name + 5); }
   if (!strncmp ("Alekhin", name, 7)) {strcpy (info->pdf_name, "Alekhin"); strcpy (info->version, name + 7); }
 
+  free (name);
   info->prt_mass = 0.938;
   strcpy (info->prt_name, lhapdfBeam[i]);
 
   info->N_extra_commands = 5;
   sprintf (info->extra_commands[0], "PDFid=%i", 0);
   sprintf (info->extra_commands[1], "PDFgr=%i", 0);
-  sprintf (info->extra_commands[2], "LHAPDFid=%i", LHAPDFset[i]);
-  sprintf (info->extra_commands[2], "LHAPDFmem=%i", LHAPDFmem[i]);
+  sprintf (info->extra_commands[2], "LHAPDFid=%i", 0);
+  sprintf (info->extra_commands[3], "LHAPDFmem=%i", LHAPDFmem[i]);
   info->PDFLIBset = 0;
   info->PDFLIBgroup = 0;
-  info->LHAPDFset = LHAPDFset[i];
+  info->LHAPDFset = 0;
   info->LHAPDFmember = LHAPDFmem[i];
-  snprintf (info->extra_commands[3], strlen (lhapdfName[i]) - 4 + 10, "PDFfile=\'%s\'", lhapdfName[i] + 4);
-  strcat (info->extra_commands[3], "\'");
+  snprintf (info->extra_commands[4], strlen (lhapdfName[i]) - 4 + 10, "PDFfile=\'%s\'", lhapdfName[i] + 4);
+  strcat (info->extra_commands[4], "\'");
 }
 
 
 void n_lhapdf (int i, char * beam, char * pdf) {
   if (get_sf_num(--i)) {
-      sprintf (pdf, "%s:%i:%i", lhapdfName[i], LHAPDFset[i], LHAPDFmem[i]);
+      sprintf (pdf, "%s:0:%i", lhapdfName[i], LHAPDFmem[i]);
   } else {
     strcpy (lhapdfBeam[i], "parton");
     strcpy (pdf, "LHA:OFF:0:0");
@@ -109,7 +110,6 @@ int r_lhapdf (int i, char * name) {
     extract_names (i, name);
     if (get_sf_info (lhapdfName[i], name1, &set, &mem)) {
       strcpy (lhapdfName[i], name1);
-      LHAPDFset[i] = set;
       LHAPDFmem[i] = mem;
     }
     return 1;
@@ -120,27 +120,18 @@ int r_lhapdf (int i, char * name) {
 int be_lhapdf (int i, double * be, double * mass, char * p_name) {
   int pdfcode;
   int undefined = 1;
-  int status;
-  longstr pathtoindexfile;
   lhapdfList * list = NULL;
   lhapdfList * list_;
-  longstr tmppath;
 
   pdfcode = kfpart(p_name);
-  status = setLHAPDFIndexpath (pathtoindexfile);
-  if (!status) {
-    fprintf (stderr, "Warning! Can not find LHAIndex-comphep.txt...\n");
-    return 0;
-  }
-  sprintf (tmppath, "%s/share/lhapdf/PDFsets/", pathtolhapdf);
-  comphepLhapdfList (tmppath, pathtoindexfile, &list);
+  comphepLhapdfList (&list);
   list_ = list;
 
   --i;
   while (list_) {
-    if (0 == strcmp (list_->name, lhapdfName[i]+4) && LHAPDFset[i] == list_->set && LHAPDFmem[i] == list_->mem) {
+    if (0 == strcmp (list_->name, lhapdfName[i]+4) && LHAPDFmem[i] == list_->mem) {
       undefined = 0;
-      initLHAPDF (i, tmppath, list_->name, list_->set, list_->mem, pdfcode);
+      initLHAPDF (i, list_->name, list_->mem, pdfcode);
       set_alphaMode(i + 1);
     }
     list_ = list_->next;
@@ -161,21 +152,12 @@ int be_lhapdf (int i, double * be, double * mass, char * p_name) {
 int pdf_lhapdf (int i, char * p_name) {
   int k = 0;
   int WIDTH = 42;
-  int status;
   void * pscr = NULL;
-  longstr tmppath;
-  longstr pathtoindexfile;
   char * menustring = NULL;
   lhapdfList *list = NULL;
   lhapdfList *list_ = NULL;
 
-  status = setLHAPDFIndexpath (pathtoindexfile);
-  if (!status) {
-    fprintf (stderr, "Warning! Can not find LHAIndex-comphep.txt...\n");
-    return 0;
-  }
-  sprintf (tmppath, "%s/share/lhapdf/PDFsets/", pathtolhapdf);
-  comphepLhapdfList (tmppath, pathtoindexfile, &list_);
+  comphepLhapdfList (&list_);
   if (list_){
     list = list_;
   } else {
@@ -187,31 +169,24 @@ int pdf_lhapdf (int i, char * p_name) {
   menustring[0] = WIDTH;
   menustring[1] = 0;
   for (list_ = list; list_; list_ = list_->next) {
-    if (list_->set > 99999) {
-      fprintf (stderr, "Warning! Too long PDF set number... Should be not longer then 5 symbols! Now it is %i\n", list_->set);
-      list_->set = 99999;
-    }
+    char display_name[31];
     if (list_->mem > 99999) {
       fprintf (stderr, "Warning! Too long PDF member number... Should be not longer then 5 symbols! Now it is %i\n", list_->mem);
       list_->mem = 99999;
     }
-    if (strlen(list_->name) > 23) {
-      fprintf (stderr, "Warning! Too long PDF name... Should be not longer then 23 symbols! Now it is %s\n", list_->name);
-      list_->name[23] = 0;
-    }
-    sprintf (menustring + strlen (menustring), " LHA:%-*s (%*i)  %*i", WIDTH - 19, list_->name, 5, list_->set, 4, list_->mem);
+    strncpy (display_name, list_->name, 30);
+    display_name[30] = 0;
+    sprintf (menustring + strlen (menustring), " LHA:%-*s  %*i", WIDTH - 12, display_name, 5, list_->mem);
   }
 
   k = 0;
-  menu1 (35, 8, "", menustring, "", &pscr, &k);
+  menu1 (35, 8, "", menustring, "n_sf_lha", &pscr, &k);
 
   if (k) {
     int l = k - 1;
     for (list_ = list; l; --l) list_ = list_->next;
     --i;
-    strcpy (lhapdfName[i], list_->name);
     sprintf (lhapdfName[i], "LHA:%s", list_->name);
-    LHAPDFset[i] = list_->set;
     LHAPDFmem[i] = list_->mem;
     if (!strcmp("parton", lhapdfBeam[i])) strcpy (lhapdfBeam[i], "proton");
   }
@@ -251,13 +226,11 @@ int beam_lhapdf (int i) {
   }
   if (0 == key && !strcmp("parton", lhapdfBeam[i])) {
     strcpy (lhapdfName[i], "OFF");
-    LHAPDFset[i] = 0;
     LHAPDFmem[i] = 0;
     set_sf_num(i, 0);
   }
   if (!strcmp("proton", lhapdfBeam[i]) && !strcmp("parton", previous)) {
     strcpy (lhapdfName[i], "LHA:undefined");
-    LHAPDFset[i] = 0;
     LHAPDFmem[i] = 0;
   }
   return 0;
@@ -275,10 +248,8 @@ double alpha_lhapdf (double q) {
   return lhapdf_interAlpha (q);
 }
 
-#ifdef LHAPDF
-int pdfnamecmp (void) {
+int lhapdf_namecmp (void) {
   if (!strcmp (lhapdfName[0], lhapdfName[1]))
     return 1;
   return 0;
 }
-#endif

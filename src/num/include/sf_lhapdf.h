@@ -19,5 +19,6 @@ extern double alpha_lhapdf (double q);
 extern void info_lhapdf (int i, Str_fun_Info * info);
 extern int getLHAPDFset (int i);
 extern int getLHAPDFmem (int i);
+extern int lhapdf_namecmp (void);
 
 #endif

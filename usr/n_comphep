@@ -3,7 +3,7 @@
 # Copyright (C) 2001-2009, CompHEP Collaboration
 # Author: Alexander Sherstnev 
 ###########################################################
-export LHAPDFPATH=
+export LHAPDF_DATA_PATH=
 export COMPHEP=
 
 if (test -f .compheppath) then
@@ -26,18 +26,17 @@ if (test ! -d $COMPHEP) then
 fi
 
 if (test -f ../.lhapdfpath) then
-  export LHAPDFPATH=`cat ../.lhapdfpath`
-  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDFPATH"
+  export LHAPDF_DATA_PATH=`cat ../.lhapdfpath`
+  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDF_DATA_PATH"
 else if (test -f ../../.lhapdfpath) then
-  export LHAPDFPATH=`cat ../../.lhapdfpath`
-  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDFPATH"
+  export LHAPDF_DATA_PATH=`cat ../../.lhapdfpath`
+  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDF_DATA_PATH"
 fi
 fi
-export LD_LIBRARY_PATH=$LHAPDFPATH/lib:$LD_LIBRARY_PATH
 
 if (test -x n_comphep.exe) then
   if [ x$1 = xDEBUG ]; then
-    (export COMPHEP=$COMPHEP;export LHAPDFPATH=$LHAPDFPATH;export LD_LIBRARY_PATH=$LD_LIBRARY_PATH;ddd n_comphep.exe $2 $3)
+    (export COMPHEP=$COMPHEP;export LHAPDF_DATA_PATH=$LHAPDF_DATA_PATH;ddd n_comphep.exe $2 $3)
   else
     ./n_comphep.exe $1 $2
   fi

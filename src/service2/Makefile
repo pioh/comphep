@@ -10,7 +10,8 @@ INS=-I../ -Iinclude -I$../../include
 
 OBJS=files.o paragraphs.o parser.o read_func.o sets.o tptcmac.o \
      drandXX.o lbl.o syst.o parseref.o f_c.o \
-     unix_utils.o getmem.o 4_vector.o kfcodes.o width_func.o
+     unix_utils.o getmem.o 4_vector.o kfcodes.o width_func.o \
+     lhapdf_update.o
 
 all: $(OBJS) 
 	$(AR) -r ../../lib/libserv.a $(OBJS)

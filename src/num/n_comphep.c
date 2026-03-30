@@ -22,6 +22,9 @@
 #include "width_12.h"
 #include "out_ext.h"
 #include "rw_sess.h"
+#ifdef LHAPDF
+#include "lhapdf.h"
+#endif
 
 static int oneclick = 0;
 
@@ -102,6 +105,13 @@ f9_key_prog_num (int x)
       exit (0);
     }
 }
+
+#ifdef LHAPDF
+static void f10_refresh_lhapdf (int x) {
+  update_lhapdf_mdl ();
+  messanykey (10, 10, " LHAPDF PDF list updated ");
+}
+#endif
 
 static void f4_key_prog_num (int x) {
   system (scat ("%sbin/diag_viewer.exe&", pathtocomphep));
@@ -207,15 +217,18 @@ main (int argc, char **argv) {
 
 #ifdef LHAPDF
   {
-    midstr _pathtolhapdf;
-    p = getenv ("LHAPDFPATH");
-    if (!p) {
-      fprintf (stderr, " Environment variable LHAPDFPATH is not defined.\n");
-      exit (-2);
+    FILE *lf = fopen ("../.lhapdfpath", "r");
+    if (!lf) lf = fopen ("../../.lhapdfpath", "r");
+    if (lf) {
+      midstr _pathtolhapdf;
+      if (fscanf (lf, "%1023s", _pathtolhapdf) == 1) {
+        sprintf (pathtolhapdf, "%s%c", _pathtolhapdf, d_slash);
+        setenv ("LHAPDF_DATA_PATH", _pathtolhapdf, 0);
+      }
+      fclose (lf);
     }
-    strcpy (_pathtolhapdf, p);
-    sprintf (pathtolhapdf, "%s%c", _pathtolhapdf, d_slash);
   }
+  update_lhapdf_mdl ();
 #endif
 
   {
@@ -236,6 +249,10 @@ main (int argc, char **argv) {
   f3_mess[3] = "Results";
   f3_key[6]  = f9_key_prog_num;
   f3_mess[6] = "Quit";
+#ifdef LHAPDF
+  f3_key[7]  = f10_refresh_lhapdf;
+  f3_mess[7] = "LHAPDF Update";
+#endif
 
 /*  initialization of the session */
   ComposeSubprocessString ();

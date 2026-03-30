@@ -41,6 +41,13 @@ static int c_make (char *prefix, char *suffix, int n);
 static void init_stat (int nfiletot);
 static void writestatistic (int nfiletot, int filecount);
 
+#ifdef LHAPDF
+static void f10_refresh_lhapdf (int x) {
+  update_lhapdf_mdl ();
+  messanykey (10, 10, " LHAPDF PDF list updated ");
+}
+#endif
+
 int
 main (int argc, char **argv)
 {
@@ -170,6 +177,10 @@ if (exitlevel == odd) { don't write chep_label,
   sprintf (pathtohelp, "%shelp%c", pathtocomphep, f_slash);
   outputDir = "results/";
 
+#ifdef LHAPDF
+  update_lhapdf_mdl ();
+#endif
+
   sprintf (pathtoversionfile, "%sversion", pathtocomphep);
   fverion = fopen (pathtoversionfile, "r");
   if (fverion != NULL)
@@ -200,6 +211,10 @@ if (exitlevel == odd) { don't write chep_label,
   f3_mess[5] = "UnDel";
   f3_key[6] = f9_key_prog;
   f3_mess[6] = "Quit";
+#ifdef LHAPDF
+  f3_key[7]  = f10_refresh_lhapdf;
+  f3_mess[7] = "LHAPDF Update";
+#endif
 
   restoreent (&exitlevel);
   if (!exitlevel & 1)

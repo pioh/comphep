@@ -2,18 +2,17 @@
 ###########################################################
 # Copyright (C) 2001-2009, CompHEP Collaboration
 ###########################################################
-export LHAPDFPATH=
+export LHAPDF_DATA_PATH=
 export COMPHEP=chepcode
 
 if (test -f .lhapdfpath) then
-  export LHAPDFPATH=`cat .lhapdfpath`
-  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDFPATH"
+  export LHAPDF_DATA_PATH=`cat .lhapdfpath`
+  echo "\nn_comphep (info): LHAPDF is in use from $LHAPDF_DATA_PATH"
 fi
-export LD_LIBRARY_PATH=$LHAPDFPATH/lib:$LD_LIBRARY_PATH
 
 if(test -x ./results/n_comphep.exe) then
   if [ x$1 = xDEBUG ]; then
-    (export COMPHEP=$COMPHEP;export LHAPDFPATH=$LHAPDFPATH;export LD_LIBRARY_PATH=$LD_LIBRARY_PATH;ddd ./results/n_comphep.exe $2 $3)
+    (export COMPHEP=$COMPHEP;export LHAPDF_DATA_PATH=$LHAPDF_DATA_PATH;ddd ./results/n_comphep.exe $2 $3)
   else
     if(test -f ./results/batch.dat) then
       ./num_batch.pl -extract 1

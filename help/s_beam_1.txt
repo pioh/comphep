@@ -18,8 +18,11 @@
     with particle names in the model, which you use. Otherwise, this beam 
     will not available for the model.
     
-4. "Structure functions" is a name of a structure functions which are used 
+4. "Structure functions" is a name of a structure functions which are used
    for the beam. This name has to coincide with a name from the structure
    function table. Also one can use beams without structure functions,
-   for the beams you can enter either OFF in the field, or leave this 
+   for the beams you can enter either OFF in the field, or leave this
    field empty.
+   When compiled with LHAPDF, structure functions with LHA: prefix use
+   the LHAPDF library; those with PDF: prefix are built-in CompHEP sets.
+   Press F10 to refresh the LHAPDF PDF list after installing new sets.

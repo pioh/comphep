@@ -41,7 +41,9 @@ following programs:
  F4 Diagrams: browses generated Feynman diagrams. 
  F5 Results : views and deletes CompHEP output files and renames the output
               directory. 
- F9 Quit    : quits the CompHEP session. 
+ F9 Quit    : quits the CompHEP session.
+ F10 LHAPDF Update: refreshes the list of available LHAPDF PDF sets
+              (when CompHEP is compiled with LHAPDF support).
 To call one of these programs just press the functional key or click on the
 corresponding symbol on the bottom line of the screen.
 

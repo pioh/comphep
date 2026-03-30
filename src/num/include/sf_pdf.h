@@ -17,6 +17,6 @@ extern double c_pdf (int i, double x, double q);
 extern double alpha_pdf (double q);
 
 extern void info_pdf (int i, Str_fun_Info * info);
-extern int pdfnamecmp (void);
+extern int pdf_namecmp (void);
 
 #endif

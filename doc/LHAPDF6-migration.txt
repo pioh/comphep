@@ -1,0 +1,295 @@
+#-------------------------------------------------
+# Copyright (C) 2026, CompHEP Collaboration
+#------------------------------------------------------
+
+/********************************************************************************************/
+1. Introduction.
+
+   CompHEP previously used LHAPDF version 5 for external PDF sets. LHAPDF 5 provided
+   a Fortran API (initpdfset/initpdf/evolvepdf) and used PDFsets.index for PDF set
+   enumeration. PDF data was stored in .LHpdf/.LHgrid files within a flat directory.
+
+   LHAPDF 6 is a complete rewrite of the library:
+   - Pure C++ API (no Fortran symbols exported from libLHAPDF.so)
+   - PDF sets are directories (e.g. /usr/share/LHAPDF/cteq6l1/) instead of single files
+   - No PDFsets.index -- available sets are discovered from the filesystem
+   - Set identification by name (e.g. "cteq6l1") instead of numeric ID
+   - Configuration via lhapdf-config utility
+
+   This document describes all changes made to CompHEP to support LHAPDF 6.
+
+
+/********************************************************************************************/
+2. Build system changes.
+
+   2.1. configure
+
+   The --with-lhapdf option no longer requires the LHAPDFPATH environment variable.
+   Instead, lhapdf-config must be available in PATH. The configure script now runs:
+
+     lhapdf-config --cflags   -> added to CFLAGS
+     lhapdf-config --libs     -> added to CLIBS (replaces -L$LHAPDFPATH/lib -lLHAPDF)
+     lhapdf-config --datadir  -> saved to LHAPDF_DATADIR file
+
+   Since LHAPDF 6 is a C++ library, -lstdc++ is appended to CLIBS.
+   The CXX variable (g++) is now written to a config file for compiling C++ sources.
+
+   2.2. Makefile
+
+   The Makefile no longer creates a symlink lib/libLHAPDF.a -> $LHAPDFPATH/lib/.
+   LHAPDF 6 is expected to be installed as a system library.
+   The "lhapdf:" target is now a no-op.
+
+   During "make setup", the LHAPDF data directory (from lhapdf-config --datadir)
+   is written to $(WDIR)/.lhapdfpath instead of $LHAPDFPATH.
+
+   2.3. src/num/Makefile
+
+   The Fortran object wrap.o is removed. A new C++ object lhapdf6_wrapper.o is added
+   to the pdf library (libpdf.a). It is compiled with $(CXX) from a .cpp source.
+
+   2.4. CLIBS_BASE split
+
+   The configure script now saves two versions of linker flags:
+     CLIBS      -- full flags including LHAPDF (-lLHAPDF -lstdc++ -lyaml-cpp)
+     CLIBS_BASE -- base flags WITHOUT LHAPDF libraries
+
+   Symbolic binaries (s_comphep via src/symb/) are linked with CLIBS_BASE because
+   they do not call LHAPDF directly (they only call update_lhapdf_mdl() from
+   libserv, which uses pure C filesystem operations). Numerical binaries (n_comphep
+   via src/num/) are linked with the full CLIBS including LHAPDF.
+
+   This avoids requiring libLHAPDF.so at link time for symbolic-stage programs.
+
+   2.5. src/service2/Makefile
+
+   The file src/service2/Makefile was updated to compile lhapdf_update.o
+   (from lhapdf_update.c) and add it to libserv.a.
+
+
+/********************************************************************************************/
+3. Code changes.
+
+   3.1. wrap.F removed
+
+   The Fortran wrapper (src/num/wrap.F) has been deleted. It contained Fortran
+   subroutines that called LHAPDF 5 Fortran API (initpdfset_, initpdf_, evolvepdf_,
+   getlam5_, etc.). These are not available in LHAPDF 6.
+
+   3.2. lhapdf6_wrapper.cpp (new file)
+
+   A new C++ shim (src/num/lhapdf6_wrapper.cpp) provides extern "C" functions
+   callable from CompHEP C code:
+
+     void   lhapdf6_initpdf(int beam, const char* setname, int member)
+     void   lhapdf6_evolvepdf(int beam, double x, double Q, double* pdf)
+     double lhapdf6_alphas(int beam, double Q)
+     double lhapdf6_qcdlambda(int beam)
+     int    lhapdf6_qcdorder(int beam)
+     int    lhapdf6_num_pdfsets(void)
+     const char* lhapdf6_pdfset_name(int i)
+     int    lhapdf6_num_members(const char* setname)
+     void   lhapdf6_cleanup(void)
+
+   Internally it uses the native LHAPDF 6 C++ API: LHAPDF::mkPDF(), pdf->xfxQ(),
+   pdf->alphasQ(), LHAPDF::availablePDFSets(), LHAPDF::getPDFSet().
+
+   Two PDF objects are maintained (one per beam), matching CompHEP's two-beam design.
+
+   3.3. clhapdf.h
+
+   The header include/clhapdf.h was rewritten. It previously used cfortran.h macros
+   to declare Fortran bindings. Now it contains plain C prototypes for the functions
+   exported by lhapdf6_wrapper.cpp (listed above).
+
+   3.4. lhapdf.c
+
+   Major changes in src/num/lhapdf.c:
+   - comphepLhapdfList() no longer parses PDFsets.index; it calls
+     lhapdf6_num_pdfsets() and lhapdf6_pdfset_name(i) to enumerate available sets.
+   - initLHAPDF() calls lhapdf6_initpdf(beam, setname, member) directly.
+   - lhapdfVal() calls lhapdf6_evolvepdf(beam, x, q, pdf).
+   - lhapdf_interAlpha() calls lhapdf6_alphas(beam, q).
+   - set_QCDLambda() calls lhapdf6_qcdlambda(beam).
+   - setLHAPDFIndexpath() removed (no index file in LHAPDF 6).
+   - The old update_lhapdf_list() function was removed (dead code after
+     update_lhapdf_mdl() was added in service2).
+
+   3.5. sf_lhapdf.c
+
+   The structure function interface (src/num/sf_lhapdf.c) was simplified:
+   - LHAPDFset[] array removed (no numeric set IDs in LHAPDF 6).
+   - be_lhapdf() no longer searches for PDFsets.index; calls comphepLhapdfList()
+     and initLHAPDF() with the new signature.
+   - pdf_lhapdf() builds the PDF selection menu from lhapdf6_* functions.
+
+   3.6. alphas2.c
+
+   Calls to Fortran wrapper functions (lhapdfqcdlam, lhapdfalphas, lhapdfqcdorder)
+   replaced with calls to lhapdf6_qcdlambda(), lhapdf6_alphas(), lhapdf6_qcdorder().
+
+   3.7. lhapdf_update.c (new file)
+
+   A new pure-C module (src/service2/lhapdf_update.c, 287 lines) implements
+   update_lhapdf_mdl(). This function scans the LHAPDF data directory for
+   installed PDF sets and updates strfuns.mdl and beams.mdl model files.
+
+   It is placed in libserv.a (not libpdf.a) so that symbolic-stage programs
+   (s_comphep) can call it without linking against libLHAPDF.so.
+   The prototype is declared in src/service2/include/syst.h.
+
+   3.8. n_comphep.c
+
+   - F10 key bound to refresh the LHAPDF PDF list (calls update_lhapdf_mdl()).
+   - At startup, reads .lhapdfpath file instead of LHAPDFPATH environment variable.
+   - Calls update_lhapdf_mdl() on initialization for both strfuns and beams.
+
+   3.9. s_comphep.c
+
+   - At startup, calls update_lhapdf_mdl() to ensure strfuns.mdl and beams.mdl
+     are up to date with installed LHAPDF sets before symbolic calculations begin.
+
+   3.10. Symbolic module fixes
+
+   - src/symb/beams.c: bug fix in construct_full_sf_name() — used beam[0]
+     for both beams instead of beam[i]; also fixed strdup memory leak.
+   - src/symb/read_mdl.c: defense-in-depth — default mem="0" before sscanf
+     so that malformed LHA entries do not read uninitialized data.
+
+   3.11. symb_batch.pl
+
+   - Bug fix: used $strfun1 for both strfun_1 and strfun_2 output;
+     now correctly uses $strfun2 for strfun_2.
+
+
+/********************************************************************************************/
+4. PDF naming format.
+
+   LHAPDF 5 format:
+     LHA:cteq6m.LHpdf(proton):10000:0
+     ^   ^             ^       ^     ^
+     |   filename      beam    set#  member#
+
+   LHAPDF 6 format:
+     LHA:cteq6l1(proton):0:0
+     ^   ^       ^       ^ ^
+     |   setname beam    0 member#
+
+   Key differences:
+   - Set name without file extension (.LHpdf/.LHgrid removed)
+   - First numeric field is always 0 (no global set numbering in LHAPDF 6)
+   - Member number is the second numeric field (typically 0 for central value)
+
+   The beam type (proton/anti-proton) is enclosed in parentheses as before.
+
+
+/********************************************************************************************/
+5. Model files.
+
+   5.1. strfuns-lhapdf.mdl
+
+   The template models/strfuns-lhapdf.mdl was updated for LHAPDF 6 format.
+   Default entries use cteq6l1 instead of cteq6m.LHpdf with numeric set IDs.
+   Built-in PDFs (PDF:...) and non-LHAPDF structure functions (OFF, WWA, Laser,
+   ISR) are preserved unchanged.
+
+   5.2. beams-lhapdf.mdl
+
+   The template models/beams-lhapdf.mdl was updated. All proton/anti-proton
+   beam definitions now reference LHA:cteq6l1(proton):0:0 and
+   LHA:cteq6l1(anti-proton):0:0 instead of the old LHAPDF 5 format.
+
+
+/********************************************************************************************/
+6. Runtime.
+
+   6.1. LHAPDF data path
+
+   The LHAPDFPATH environment variable is no longer used by any CompHEP binary.
+   Instead, "make setup" writes the LHAPDF data directory (from lhapdf-config
+   --datadir) into the file $(WDIR)/.lhapdfpath.
+
+   At startup, n_comphep and other binaries (translator, rtuple, oneclick,
+   diag_viewer, pdf_reweight_lhef, pdf_reweighter) read .lhapdfpath from the
+   working directory or its parent. The value is passed to LHAPDF via the
+   LHAPDF_DATA_PATH environment variable set at runtime.
+
+   6.2. Automatic PDF list update
+
+   Both comphep (s_comphep, symbolic stage) and n_comphep (numerical stage)
+   call update_lhapdf_mdl() at startup to scan available LHAPDF sets and
+   update strfuns.mdl and beams.mdl model files. This means newly installed
+   PDF sets appear automatically without manual configuration.
+
+   6.3. F10 key -- manual refresh
+
+   Pressing F10 in n_comphep triggers a manual refresh of the LHAPDF PDF list.
+   This is useful if PDF sets are installed while n_comphep is running.
+
+   6.4. Batch scripts
+
+   The usr/ scripts (n_comphep, rtupler, oneclick/oneclick, oneclick/configure)
+   now read .lhapdfpath and set LHAPDF_DATA_PATH before launching executables.
+   They also use lhapdf-config --datadir as a fallback.
+   The LHAPDFPATH variable is no longer referenced in any script.
+
+
+/********************************************************************************************/
+7. Files changed (38 files, +898 -706 lines).
+
+   New files:
+     .gitignore                   -- ignore build artifacts and .gena/ agent files
+     src/num/lhapdf6_wrapper.cpp  -- C++ shim for LHAPDF 6 native API
+     src/service2/lhapdf_update.c -- pure-C LHAPDF directory scanner, update_lhapdf_mdl()
+     doc/LHAPDF6-migration.txt    -- this migration guide
+     comphep-lhapdf6.tar.gz       -- distribution archive with all sources
+
+   Deleted files:
+     src/num/wrap.F               -- Fortran wrapper for LHAPDF 5 (replaced by C++ shim)
+     strfun/PDFsets.index         -- obsolete LHAPDF 5 set index (173 lines)
+     doc/LHAPDF_in_CompHEP-HOWTO  -- obsolete LHAPDF 5 howto (60 lines)
+
+   Modified files:
+     configure                    -- use lhapdf-config, write CXX, LHAPDF_DATADIR, CLIBS_BASE
+     Makefile                     -- remove LHAPDFPATH/symlink, use LHAPDF_DATADIR
+     src/num/Makefile             -- add lhapdf6_wrapper.o, remove wrap.o, add CXX
+     src/service2/Makefile        -- add lhapdf_update.o to libserv.a
+     src/service2/include/syst.h  -- declare update_lhapdf_mdl() prototype
+     src/num/include/clhapdf.h    -- C prototypes for lhapdf6_wrapper instead of cfortran.h
+     src/num/include/lhapdf.h     -- updated function signatures
+     src/num/lhapdf.c             -- use lhapdf6_* API, remove PDFsets.index parsing
+     src/num/sf_lhapdf.c          -- new naming format, remove set number, bug fixes
+     src/num/alphas2.c            -- use lhapdf6_qcdlambda/alphas/qcdorder
+     src/num/n_comphep.c          -- F10 binding, read .lhapdfpath, call update_lhapdf_mdl()
+     src/num/translator.c         -- read .lhapdfpath instead of LHAPDFPATH env
+     src/num/rtuple.c             -- read .lhapdfpath instead of LHAPDFPATH env
+     src/num/oneclick.c           -- read .lhapdfpath instead of LHAPDFPATH env
+     src/num/diag_viewer.c        -- read .lhapdfpath instead of LHAPDFPATH env
+     src/num/diag_viewer2.c       -- read .lhapdfpath instead of LHAPDFPATH env
+     src/num/pdf_reweight_lhef.c  -- read .lhapdfpath instead of LHAPDFPATH env
+     src/num/pdf_reweighter.c     -- read .lhapdfpath instead of LHAPDFPATH env
+     src/symb/s_comphep.c         -- call update_lhapdf_mdl() at startup
+     src/symb/beams.c             -- bug fix: beam[i] instead of beam[0], fix strdup leak
+     src/symb/read_mdl.c          -- defense: default mem="0" before sscanf
+     models/strfuns-lhapdf.mdl    -- LHAPDF 6 naming format, header fix
+     models/beams-lhapdf.mdl      -- LHAPDF 6 naming format
+     usr/n_comphep                -- use lhapdf-config, set LHAPDF_DATA_PATH
+     usr/rtupler                  -- use lhapdf-config, set LHAPDF_DATA_PATH
+     usr/oneclick/oneclick        -- use lhapdf-config, set LHAPDF_DATA_PATH
+     usr/oneclick/configure       -- use lhapdf-config, set LHAPDF_DATA_PATH
+     usr/auto_batch.pl            -- remove LHAPDFPATH reference
+     usr/num_batch.pl             -- remove LHAPDFPATH reference
+     usr/symb_batch.pl            -- bug fix: use $strfun2 for strfun_2 output
+
+
+/********************************************************************************************/
+8. Summary of build/install steps (LHAPDF 6).
+
+   Prerequisites: LHAPDF 6 installed, lhapdf-config in PATH.
+
+   1. ./configure --with-lhapdf
+   2. make
+   3. make setup WDIR=/path/to/working/directory
+
+   Step 3 writes .lhapdfpath into WDIR and installs LHAPDF-aware model files.
+   No LHAPDFPATH environment variable needed.

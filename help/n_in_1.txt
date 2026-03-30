@@ -5,5 +5,7 @@ The name of the activated distribution is displayed in the corresponding
 menu. "Momentum distribution OFF" selection  means that the convolution of 
 the matrix element squared with a distribution function will be not 
 performed.
-  The user can display a plot for the distribution by pressing 
+  The user can display a plot for the distribution by pressing
 the F7 key.
+  For PDF: and LHA: distributions, select the beam type (proton or
+anti-proton) before choosing the PDF set.

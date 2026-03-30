@@ -1,0 +1,25 @@
+# Agent / LLM artifacts
+.gena/
+*.prompt
+*.spec
+CLAUDE.md
+
+# Build artifacts
+*.o
+*.a
+*.exe
+a.out
+CC
+CXX
+CFLAGS
+CLIBS
+CLIBS_BASE
+F77
+F77FLAGS
+F77LIBS
+RANLIB
+ROOTFLAGS
+ROOTLIBS
+LHAPDF_DATADIR
+test.c
+comphep-lhapdf6.tar.gz

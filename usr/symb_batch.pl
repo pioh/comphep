@@ -257,7 +257,7 @@ sub form_safefile {
     print SAF "#strfun_1 OFF\n";
   }
   if (defined $strfun2) {
-    print SAF "#strfun_2 $strfun1\n";
+    print SAF "#strfun_2 $strfun2\n";
   } else {
     print SAF "#strfun_2 OFF\n";
   }

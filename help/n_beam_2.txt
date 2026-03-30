@@ -1,0 +1,6 @@
+3 8 60
+  Select "proton" if the beam particle is a proton.
+The parton distribution function (PDF) will describe
+the momentum distributions of quarks and gluons
+inside the proton.
+

@@ -1,0 +1,10 @@
+3 7 68
+  Select the LHAPDF PDF set to use for this beam.
+The list shows all PDF sets installed in the LHAPDF data
+directory. Each entry displays:
+  LHA:<set_name>  <member_number>
+where <set_name> is the LHAPDF set name and <member_number>
+is the PDF member (0 for the central value, >0 for error sets).
+  Use F10 "LHAPDF Update" to refresh this list after
+installing new PDF sets via the "lhapdf" command-line tool.
+
